@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<aside th:fragment="menu" id="layout-menu"
+		class="layout-menu menu-vertical menu bg-menu-theme">
+		<div class="app-brand demo">
+			<a href="index.html" class="app-brand-link"> <span
+				class="app-brand-logo demo"> <img
+					th:src="@{/user/images/logo.png}" width="50px" />
+			</span> <span class="demo">THPT</span>
+			</a> <a href="javascript:void(0);"
+				class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+				<i class="bx bx-chevron-left bx-sm align-middle"></i>
+			</a>
+		</div>
+
+		<div class="menu-inner-shadow"></div>
+
+		<ul class="menu-inner py-1">
+			<!-- Trang chủ -->
+			<li class="menu-item active"><a th:href="@{/admin}"
+				class="menu-link"> <i
+					class="menu-icon tf-icons bx bx-home-circle"></i>
+					<div data-i18n="Analytics">Trang chủ</div>
+			</a></li>
+
+			<!-- Giáo viên -->
+			<li class="menu-item"><a th:href="@{/admin/giao-vien}"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Giáo viên</div>
+			</a></li>
+
+			<!-- Học sinh -->
+			<li class="menu-item"><a href="javascript:void(0);"
+				class="menu-link menu-toggle"> <i
+					class="menu-icon tf-icons bx bx-data"></i>
+					<div data-i18n="Layouts">Học sinh</div>
+			</a>
+
+				<ul class="menu-sub">
+					<li class="menu-item"><a th:href="@{/admin/lop/10}"
+						class="menu-link">
+							<div data-i18n="Without menu">Khối 10</div>
+					</a></li>
+					<li class="menu-item"><a th:href="@{/admin/lop/11}"
+						class="menu-link">
+							<div data-i18n="Without navbar">Khối 11</div>
+					</a></li>
+					<li class="menu-item"><a th:href="@{/admin/lop/12}"
+						class="menu-link">
+							<div data-i18n="Without navbar">Khối 12</div>
+					</a></li>
+				</ul></li>
+
+			<!-- Môn học -->
+			<li class="menu-item"><a th:href="@{/admin/mon-hoc/}"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Môn học</div>
+			</a></li>
+			
+			<!-- Điểm -->
+			<li class="menu-item"><a th:href="@{/admin/diem}"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Quản lý điểm</div>
+			</a></li>
+
+			<!--  Công văn -->
+			<li class="menu-item"><a href="javascript:void(0);"
+				class="menu-link menu-toggle"> <i
+					class="menu-icon tf-icons bx bx-food-menu"></i>
+					<div data-i18n="Layouts">Công văn</div>
+			</a>
+
+				<ul class="menu-sub">
+					<li class="menu-item"><a th:href="@{/admin/cong-van}"
+						class="menu-link">
+							<div data-i18n="Without menu">Trường</div>
+					</a></li>
+					<li class="menu-item"><a th:href="@{/admin/cong-van}"
+						class="menu-link">
+							<div data-i18n="Without navbar">Sở GD&ĐT</div>
+					</a></li>
+				</ul></li>
+
+			<!--  Tài liệu -->
+			<li class="menu-item"><a href="javascript:void(0);"
+				class="menu-link menu-toggle"> <i
+					class="menu-icon tf-icons bx bx-file-find"></i>
+					<div data-i18n="Layouts">Tài liệu</div>
+			</a>
+
+				<ul class="menu-sub">
+					<li class="menu-item"><a href="layouts-without-menu.html"
+						class="menu-link">
+							<div data-i18n="Without menu">Đề kiểm tra</div>
+					</a></li>
+					<li class="menu-item"><a href="layouts-without-navbar.html"
+						class="menu-link">
+							<div data-i18n="Without navbar">Đề thi</div>
+					</a></li>
+				</ul></li>
+
+			<!-- Bài viết -->
+			<li class="menu-item"><a href="cards-basic.html"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-notepad"></i>
+					<div data-i18n="Analytics">Bài viết của GV&HS</div>
+			</a></li>
+
+			<li class="menu-header small text-uppercase"><span
+				class="menu-header-text">Cá nhân</span></li>
+			<li class="menu-item"><a href="ui-typography.html"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-bell"></i>
+					<div data-i18n="Account Settings">Thông báo</div>
+			</a></li>
+			<li class="menu-item"><a href="javascript:void(0);"
+				class="menu-link"> <i
+					class="menu-icon tf-icons bx bx-message-rounded-dots"></i>
+					<div data-i18n="Account Settings">Tin nhắn</div>
+			</a></li>
+			<li class="menu-item"><a href="javascript:void(0);"
+				class="menu-link menu-toggle"> <i
+					class="menu-icon tf-icons bx bx-user"></i>
+					<div data-i18n="Authentications">Tài khoản</div>
+			</a>
+				<ul class="menu-sub">
+					<li class="menu-item"><a
+						href="pages-account-settings-account.html" class="menu-link"
+						target="_blank">
+							<div data-i18n="Basic">Thông tin cá nhân</div>
+					</a></li>
+					<li class="menu-item"><a href="auth-register-basic.html"
+						class="menu-link" target="_blank">
+							<div data-i18n="Basic">Đăng xuất</div>
+					</a></li>
+				</ul></li>
+		</ul>
+	</aside>
+</body>
+</html>

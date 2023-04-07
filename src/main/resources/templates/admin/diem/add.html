@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+<title>THPT Đông Thụy Anh</title>
+
+<meta name="description" content="" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon"
+	href="../assets/img/favicon/favicon.ico" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/fonts/boxicons.css}" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" th:href="@{/admin/assets/vendor/css/core.css}"
+	class="template-customizer-core-css" />
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/css/theme-default.css}"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" th:href="@{/admin/assets/css/demo.css}" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+<!-- Helpers -->
+<script th:src="@{/admin/assets/vendor/js/helpers.js}"></script>
+
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script th:src="@{/admin/assets/js/config.js}"></script>
+</head>
+
+<body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+			<div th:replace="~{/admin/fragments/menu :: menu}"></div>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
+				<div th:replace="~{/admin/fragments/navbar :: navbar}"></div>
+				<!-- / Navbar -->
+
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
+					<!-- Content -->
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">Điểm </span>
+						</h4>
+						<th:block th:if="${msg != null}">
+							<div class="alert alert-success" role="alert" th:text="${msg}"></div>
+						</th:block>
+
+						<div class="row">
+							<div class="col-xl">
+								<div class="card mb-4">
+									<div class="card-body">
+										<div class="row mb-3">
+											<div class="col mb-0">
+												<label for="defaultSelect" class="form-label">lớp</label> <select
+													id="selectLop" class="form-select">
+													<option value="">Chọn lớp</option>
+													<option th:each="lop : ${lops}" th:value="${lop.tenLop}"
+														th:text="${lop.tenLop}" th:selected="${lop.tenLop == tenLop}"></option>
+												</select>
+											</div>
+											<div class="col mb-0">
+												<label for="defaultSelect" class="form-label">Môn
+													học</label> <select id="selectMon" class="form-select">
+													<option value="">Chọn môn học</option>
+													<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+														th:text="${mh.tenMon}" th:selected="${mh.maMon == maMon}"></option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<th:block th:if="${tenLop != null && maMon != null}">
+							<form
+								th:action="@{/admin/diem/saveOrUpdate/{tenLop}/{maMon}(tenLop=${tenLop},maMon=${maMon})}"
+								method="post" th:object="${diemDTO}">
+								<div class="card">
+									<div class="table-responsive text-nowrap">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>No.</th>
+													<th>Họ tên</th>
+													<th>Điểm miệng</th>
+													<th>Điểm 15'</th>
+													<th>Điểm giữa kỳ</th>
+													<th>Điểm cuối kỳ</th>
+													<th>Điểm TB</th>
+												</tr>
+											</thead>
+											<tbody class="table-border-bottom-0">
+												<tr th:each="item, itemStat : *{diemModels}">
+
+													<td><span th:text="${itemStat.index + 1}"></span> <input
+														type="hidden"
+														th:field="*{diemModels[__${itemStat.index}__].maHS}"
+														class="form-control" /> <input type="hidden"
+														th:field="*{diemModels[__${itemStat.index}__].maMon}"
+														class="form-control" /></td>
+													<td><span
+														th:text="*{diemModels[__${itemStat.index}__].hoTen}">
+													</span> <input type="hidden"
+														th:field="*{diemModels[__${itemStat.index}__].hoTen}"
+														class="form-control" /></td>
+													<td><input type="number"
+														th:field="*{diemModels[__${itemStat.index}__].diemMieng}"
+														class="form-control" /></td>
+													<td><input type="number"
+														th:field="*{diemModels[__${itemStat.index}__].diemTX1}"
+														class="form-control" /></td>
+													<td><input type="number"
+														th:field="*{diemModels[__${itemStat.index}__].diemTX2}"
+														class="form-control" /></td>
+													<td><input type="number"
+														th:field="*{diemModels[__${itemStat.index}__].diemThi}"
+														class="form-control" /></td>
+													<td><input
+														th:value="${#numbers.formatDecimal(diemDTO.diemModels[__${itemStat.index}__].diemTB,1,2,'POINT')}" disabled/>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-info mt-3">Nhập
+									điểm</button>
+							</form>
+
+							<!-- Contextual Classes -->
+
+
+							<!-- Pagination -->
+							<div class="mt-3 d-flex justify-content-center">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item"><a
+											th:href="${currentPage == 1} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${currentPage-1}}"
+											class="page-link" aria-label="Previous"> <span
+												aria-hidden="true">&laquo;</span>
+										</a></li>
+										<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
+											<li class="page-item"><a class="page-link"
+												th:href="@{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${index}}"
+												th:text="${index}"></a></li>
+										</th:block>
+										<li class="page-item"><a class="page-link"
+											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${currentPage+1}}"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</ul>
+								</nav>
+							</div>
+							<!-- End pagination -->
+						</th:block>
+					</div>
+					<!-- / Content -->
+
+					<!-- Footer -->
+					<div th:replace="~{/admin/fragments/footer :: footer}"></div>
+					<!-- / Footer -->
+
+					<div class="content-backdrop fade"></div>
+				</div>
+				<!-- Content wrapper -->
+			</div>
+			<!-- / Layout page -->
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
+	<!-- / Layout wrapper -->
+
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/core.js -->
+	<script th:src="@{/admin/assets/vendor/libs/jquery/jquery.js}"></script>
+	<script th:src="@{/admin/assets/vendor/libs/popper/popper.js}"></script>
+	<script th:src="@{/admin/assets/vendor/js/bootstrap.js}"></script>
+	<script
+		th:src="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<script th:src="@{/admin/assets/vendor/js/menu.js}"></script>
+	<!-- end build -->
+
+	<!-- Vendors JS -->
+	<script th:src="@{/admin/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+	<!-- Main JS -->
+	<script th:src="@{/admin/assets/js/main.js}"></script>
+
+	<!-- Page JS -->
+	<script th:src="@{/admin/assets/js/dashboards-analytics.js}"></script>
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#selectLop').change(function() {
+				if($('#selectLop').val() != "" && $('#selectMon').val() != ""){
+					location.href = "http://localhost:8088/admin/diem/"+$('#selectLop').val() + "/" + $('#selectMon').val();
+				}
+			});
+			$('#selectMon').change(function() {
+				if($('#selectLop').val() != "" && $('#selectMon').val() != ""){
+					location.href = "http://localhost:8088/admin/diem/"+$('#selectLop').val() + "/" + $('#selectMon').val();
+				}
+			});
+		});
+	</script>
+</body>
+</html>

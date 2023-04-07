@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="header">
+		<!-- Modal -->
+	    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+	            <div class="modal-content">
+	                <button type="button" class="close text-right p-2" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <div class="modal-body customer-box">
+	                    <!-- Nav tabs -->
+	                    <ul class="nav nav-tabs">
+	                        <li><a class="active" href="#Login" data-toggle="tab">ĐĂNG NHẬP</a></li>
+	                        <li><a href="#Registration" data-toggle="tab">ĐĂNG KÝ</a></li>
+	                    </ul>
+	                    <!-- Tab panes -->
+	                    <div class="tab-content">
+	                        <div class="tab-pane active" id="Login">
+	                            <form role="form" class="form-horizontal">
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" id="email1" placeholder="Email" type="text">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" id="exampleInputPassword1" placeholder="Password"
+	                                            type="password">
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-sm-10">
+	                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
+	                                            Đăng Nhập
+	                                        </button>
+	                                        <a class="for-pwd" href="javascript:;">Quên mật khẩu?</a>
+	                                    </div>
+	                                </div>
+	                            </form>
+	                        </div>
+	                        <div class="tab-pane" id="Registration">
+	                            <form role="form" class="form-horizontal">
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" placeholder="Name" type="text">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" id="email" placeholder="Email" type="email">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" id="mobile" placeholder="Mobile" type="email">
+	                                    </div>
+	                                </div>
+	                                <div class="form-group">
+	                                    <div class="col-sm-12">
+	                                        <input class="form-control" id="password" placeholder="Password"
+	                                            type="password">
+	                                    </div>
+	                                </div>
+	                                <div class="row">
+	                                    <div class="col-sm-10">
+	                                        <button type="button" class="btn btn-light btn-radius btn-brd grd1">
+	                                            Save &amp; Continue
+	                                        </button>
+	                                        <button type="button" class="btn btn-light btn-radius btn-brd grd1">
+	                                            Cancel</button>
+	                                    </div>
+	                                </div>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	
+	    <!-- LOADER -->
+	    <div id="preloader">
+	        <div class="loader-container">
+	            <div class="progress-br float shadow">
+	                <div class="progress__item"></div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- END LOADER -->
+	
+	    <!-- Start header -->
+	    <header class="top-navbar">
+	        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	            <div class="container-fluid">
+	                <a class="navbar-brand" th:href="@{/}">
+	                    <img th:src="@{/user/images/logo.png}" alt="" />
+	                </a>
+	                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host"
+	                    aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                    <span class="icon-bar"></span>
+	                </button>
+	                <div class="collapse navbar-collapse" id="navbars-host">
+	                    <ul class="navbar-nav ml-auto">
+	                        <li class="nav-item active"><a class="nav-link" th:href="@{/}">Giới thiệu</a></li>
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Cơ cấu
+	                                tổ chức</a>
+	                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+	                                <a class="dropdown-item" href="course-grid-2.html">Tổ văn phòng</a>
+	                                <a class="dropdown-item" href="course-grid-3.html">Ban giám hiệu</a>
+	                                <a class="dropdown-item" href="teachers.html">Tổ chuyên môn</a>
+	                                <a class="dropdown-item" href="course-grid-4.html">Đoàn thanh niên</a>
+	                                <a class="dropdown-item" href="course-grid-4.html">Ban đại diện cha mẹ học sinh</a>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item"><a class="nav-link" th:href="@{/user/thoi-khoa-bieu}">Thời khóa biểu</a></li>
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Tin tức
+	                                - sự kiện</a>
+	                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+	                                <a class="dropdown-item" th:href="@{/user/tin-tuc-1}">Hoạt động đoàn thể</a>
+	                                <a class="dropdown-item" th:href="@{/user/tin-tuc-2}">Thi và tuyển sinh</a>
+	                                <a class="dropdown-item"  th:href="@{/user/tin-tuc-3}">Bài viết của GV-HS</a>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item dropdown">
+	                            <a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Tài
+	                                nguyên</a>
+	                            <div class="dropdown-menu" aria-labelledby="dropdown-a">
+	                                <a class="dropdown-item" th:href="@{/user/ket-qua-kt-thi}">Kết quả kiểm tra - thi</a>
+	                                <a class="dropdown-item" th:href="@{/user/thu-vien-bai-giang}">Thư viện bài giảng</a>
+	                                <a class="dropdown-item" th:href="@{/user/thu-vien-thi}">Thư viện đề thi</a>
+	                                <a class="dropdown-item" th:href="@{/user/tai-lieu}">Tài liệu tham khảo</a>
+	                            </div>
+	                        </li>
+	                        <li class="nav-item"><a class="nav-link" th:href="@{/user/lien-he}">Liên hệ</a></li>
+	                    </ul>
+	                    <ul class="nav navbar-nav navbar-right">
+	                        <li><a class="hover-btn-new log orange" href="#" data-toggle="modal"
+	                                data-target="#login"><span>Đăng Nhập</span></a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </nav>
+	    </header>
+	    <!-- End header -->
+	</div>
+</body>
+</html>
