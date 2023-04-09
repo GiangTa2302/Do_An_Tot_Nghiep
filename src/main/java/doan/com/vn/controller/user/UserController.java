@@ -7,14 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("user")
 public class UserController {
-    @GetMapping("/ke-hoach-giao-duc")
-    public String kehoachgd() {
-        return "user/thoi-khoa-bieu";
-    }
     
-    @GetMapping("/thu-vien-bai-giang")
-    public String tvbaigiang() {
-        return "user/thu-vien-bai-giang";
+    @GetMapping("/thoi-khoa-bieu")
+    public String tkb() {
+        return "user/thoi-khoa-bieu";
     }
     
     @GetMapping("/thu-vien-thi")
@@ -45,11 +41,6 @@ public class UserController {
     @GetMapping("/blog")
     public String blog() {
         return "user/blog";
-    }
-    
-    @GetMapping("/ket-qua-kt-thi")
-    public String ketquakt() {
-        return "user/ket-qua-kt-thi";
     }
     
     @GetMapping("/tai-lieu")

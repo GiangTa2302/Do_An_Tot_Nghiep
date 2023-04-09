@@ -64,7 +64,7 @@ public class HocSinhController {
 
     @GetMapping("/{tenLop}")
     public String list(@PathVariable String tenLop,
-            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
             Model model) {
         Pageable pageable = PageRequest.of(pageIndex - 1, 10, Sort.by(Sort.Direction.ASC, "ten"));
         Page<HocSinh> hsPage = hocSinhRepository.findAllStudentByClass(tenLop,

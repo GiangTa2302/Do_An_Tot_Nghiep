@@ -20,7 +20,7 @@ public class DanToc extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_dan_toc")
-    private int maDanToc;
+    private Integer maDanToc;
     
     @Column(name = "ten_dan_toc", columnDefinition = "NVARCHAR(100)")
     private String tenDanToc;

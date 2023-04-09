@@ -12,8 +12,8 @@ public class MonHocModel {
     private String tenMon;
     
     @Positive(message = "Số tiết lý thuyết > 0")
-    private int soTietLT;
+    private Integer soTietLT;
     
     @PositiveOrZero(message = "Số tiết thực hành >= 0")
-    private int soTietTH;
+    private Integer soTietTH;
 }

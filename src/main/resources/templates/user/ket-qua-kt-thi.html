@@ -11,10 +11,6 @@
 <!-- Site Metas -->
 <title>THPT Đông Thụy Anh</title>
 
-<!-- Site Icons -->
-<script src="https://kit.fontawesome.com/bcf4f0ec7d.js"
-	crossorigin="anonymous"></script>
-
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
 <!-- Site CSS -->
@@ -27,7 +23,7 @@
 <link rel="stylesheet" th:href="@{/user/css/custom.css}">
 
 <!-- Modernizer for Portfolio -->
-<script th:src="@{user/js/modernizer.js}"></script>
+<script th:src="@{/user/js/modernizer.js}"></script>
 
 </head>
 <body class="host_version">
@@ -41,196 +37,270 @@
 			<hr class="invis">
 
 			<div class="row">
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_1.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
+				<div class="col-2">
+					<div class="list-group" id="list-tab" role="tablist">
+						<th:block th:if="${diemModels == null && msg2 == null}">
+							<a class="list-group-item list-group-item-action active"
+								id="list-home-list" data-toggle="list" href="#list-home"
+								role="tab" aria-controls="home">Kết quả kiểm tra</a>
+							<a class="list-group-item list-group-item-action"
+								id="list-profile-list" data-toggle="list" href="#list-profile"
+								role="tab" aria-controls="profile">Kết quả thi</a>
+						</th:block>
+						<th:block th:if="${diemModels != null || msg2 != null}">
+							<a class="list-group-item list-group-item-action"
+								id="list-home-list" data-toggle="list" href="#list-home"
+								role="tab" aria-controls="home">Kết quả kiểm tra</a>
+							<a class="list-group-item list-group-item-action active"
+								id="list-profile-list" data-toggle="list" href="#list-profile"
+								role="tab" aria-controls="profile">Kết quả thi</a>
+						</th:block>
 					</div>
 				</div>
-				<!-- end col -->
 
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_2.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
+				<div class="col-10">
+					<div class="tab-content" id="nav-tabContent">
+						<th:block th:if="${diemModels == null && msg2 == null}">
+							<!-- Điểm kiểm tra -->
+							<div class="tab-pane fade show active" id="list-home"
+								role="tabpanel" aria-labelledby="list-home-list">
+								<form th:action="@{/user/ket-qua-kt}" method="post"
+									th:object="${diemKTModel}">
+									<div class="row">
+										<div class="col-4">
+											<input type="text" class="form-control" th:field="*{maHS}"
+												placeholder="Mã học sinh"> <small
+												class="text-danger" th:if="${#fields.hasErrors('maHS')}"
+												th:errors="*{maHS}"></small>
+										</div>
+										<div class="col-4">
+											<select class="custom-select" th:field="*{maMon}">
+												<option value="" selected>Mã môn</option>
+												<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+													th:text="${mh.tenMon}"></option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('maMon')}" th:errors="*{maMon}"></small>
+										</div>
+										<div class="col-2">
+											<select class="custom-select" th:field="*{hocKy}">
+												<option value="1" selected>Học kỳ I</option>
+												<option value="2" selected>Học kỳ II</option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('hocKy')}" th:errors="*{hocKy}"></small>
+										</div>
+										<div class="col-2">
+											<button type="submit" class="btn btn-outline-primary">
+												<i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<div th:if="${msg1 != null}" class="alert alert-danger mt-3"
+									role="alert" th:text="${msg1}"></div>
+								<hr class="hr3">
+
+
+								<th:block th:if="${diemKT != null}" th:object="${diemKT}">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">Họ và tên</th>
+												<th scope="col">Điểm miệng</th>
+												<th scope="col">Điểm 15'</th>
+												<th scope="col">Điểm giữa kỳ</th>
+												<th scope="col">Điểm thi</th>
+												<th scope="col">Điểm TB</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row"><span th:text="*{hoTen}"></span></th>
+												<td><span th:text="*{diemMieng}"></span></td>
+												<td><span th:text="*{diemTX1}"></span></td>
+												<td><span th:text="*{diemTX2}"></span></td>
+												<td><span th:text="*{diemThi}"></span></td>
+												<td><span th:text="*{diemTB}"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</th:block>
 							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
+							<!-- Điểm thi -->
+							<div class="tab-pane fade" id="list-profile"
+								role="tabpanel" aria-labelledby="list-profile-list">
+
+								<form th:action="@{/user/ket-qua-thi}" method="post"
+									th:object="${diemThiModel}">
+									<div class="row">
+										<div class="col-4">
+											<input type="text" class="form-control" th:field="*{maHS}"
+												placeholder="Mã học sinh"> <small
+												class="text-danger" th:if="${#fields.hasErrors('maHS')}"
+												th:errors="*{maHS}"></small>
+										</div>
+										<div class="col-2">
+											<select class="custom-select" th:field="*{hocKy}">
+												<option value="1" selected>Học kỳ I</option>
+												<option value="2" selected>Học kỳ II</option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('hocKy')}" th:errors="*{hocKy}"></small>
+										</div>
+										<div class="col-2">
+											<button type="submit" class="btn btn-outline-primary">
+												<i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<div th:if="${msg2 != null}" class="alert alert-danger mt-3"
+									role="alert" th:text="${msg2}"></div>
+								<hr class="hr3">
+
+
+								<th:block th:if="${diemModels != null}">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">Họ và tên</th>
+												<th><span th:text="${hoTen}"></span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="diem, itemStat : *{diemModels}"
+												th:object="${diem}">
+												<th scope="row"><span th:text="*{maMon}"></span></th>
+												<td><span th:text="*{diemThi}"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</th:block>
 							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
+							
+						</th:block>
+
+						<th:block th:if="${diemModels != null || msg2 != null}">
+							<!-- Điểm kiểm tra -->
+							<div class="tab-pane fade" id="list-home" role="tabpanel"
+								aria-labelledby="list-home-list">
+								<form th:action="@{/user/ket-qua-kt}" method="post"
+									th:object="${diemKTModel}">
+									<div class="row">
+										<div class="col-4">
+											<input type="text" class="form-control" th:field="*{maHS}"
+												placeholder="Mã học sinh"> <small
+												class="text-danger" th:if="${#fields.hasErrors('maHS')}"
+												th:errors="*{maHS}"></small>
+										</div>
+										<div class="col-4">
+											<select class="custom-select" th:field="*{maMon}">
+												<option value="" selected>Mã môn</option>
+												<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+													th:text="${mh.tenMon}"></option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('maMon')}" th:errors="*{maMon}"></small>
+										</div>
+										<div class="col-2">
+											<select class="custom-select" th:field="*{hocKy}">
+												<option value="1" selected>Học kỳ I</option>
+												<option value="2" selected>Học kỳ II</option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('hocKy')}" th:errors="*{hocKy}"></small>
+										</div>
+										<div class="col-2">
+											<button type="submit" class="btn btn-outline-primary">
+												<i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<div th:if="${msg1 != null}" class="alert alert-danger mt-3"
+									role="alert" th:text="${msg1}"></div>
+								<hr class="hr3">
+
+
+								<th:block th:if="${diemKT != null}" th:object="${diemKT}">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">Họ và tên</th>
+												<th scope="col">Điểm miệng</th>
+												<th scope="col">Điểm 15'</th>
+												<th scope="col">Điểm giữa kỳ</th>
+												<th scope="col">Điểm thi</th>
+												<th scope="col">Điểm TB</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row"><span th:text="*{hoTen}"></span></th>
+												<td><span th:text="*{diemMieng}"></span></td>
+												<td><span th:text="*{diemTX1}"></span></td>
+												<td><span th:text="*{diemTX2}"></span></td>
+												<td><span th:text="*{diemThi}"></span></td>
+												<td><span th:text="*{diemTB}"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</th:block>
+							</div>
+							<!-- Điểm thi -->
+							<div class="tab-pane fade show active" id="list-profile"
+								role="tabpanel" aria-labelledby="list-profile-list">
+
+								<form th:action="@{/user/ket-qua-thi}" method="post"
+									th:object="${diemThiModel}">
+									<div class="row">
+										<div class="col-4">
+											<input type="text" class="form-control" th:field="*{maHS}"
+												placeholder="Mã học sinh"> <small
+												class="text-danger" th:if="${#fields.hasErrors('maHS')}"
+												th:errors="*{maHS}"></small>
+										</div>
+										<div class="col-2">
+											<select class="custom-select" th:field="*{hocKy}">
+												<option value="1" selected>Học kỳ I</option>
+												<option value="2" selected>Học kỳ II</option>
+											</select> <small class="text-danger"
+												th:if="${#fields.hasErrors('hocKy')}" th:errors="*{hocKy}"></small>
+										</div>
+										<div class="col-2">
+											<button type="submit" class="btn btn-outline-primary">
+												<i class="fa-solid fa-magnifying-glass"></i> Tìm kiếm
+											</button>
+										</div>
+									</div>
+								</form>
+
+								<div th:if="${msg2 != null}" class="alert alert-danger mt-3"
+									role="alert" th:text="${msg2}"></div>
+								<hr class="hr3">
+								<th:block th:if="${diemModels != null}">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">Họ và tên</th>
+												<th><span th:text="${hoTen}"></span></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="diem, itemStat : *{diemModels}"
+												th:object="${diem}">
+												<th scope="row"><span th:text="*{maMon}"></span></th>
+												<td><span th:text="*{diemThi}"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</th:block>
+							</div>
+							
+						</th:block>
 					</div>
 				</div>
-				<!-- end col -->
 			</div>
-			<!-- end row -->
 
-			<hr class="hr3">
-
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_3.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_4.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-			</div>
-			<!-- end row -->
-
-			<hr class="hr3">
-
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_5.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-6 col-md-6 col-12">
-					<div class="course-item">
-						<div class="image-blog">
-							<img src="images/blog_6.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="course-br">
-							<div class="course-title">
-								<h2>
-									<a href="#" title="">Thời khóa biểu năm học mới 2019-2020</a>
-								</h2>
-							</div>
-							<div class="course-desc">
-								<p>
-									<i class="fa-regular fa-clock"></i> 18/03/2020
-								</p>
-								<p>TKB năm học 2019-2020, thực hiện từ 16/3/2020</p>
-							</div>
-						</div>
-						<div class="course-meta-bot">
-							<ul>
-								<li><i class="fa fa-calendar" aria-hidden="true"></i> 6
-									Month</li>
-								<li><i class="fa fa-users" aria-hidden="true"></i> 56
-									Student</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-			</div>
-			<!-- end row -->
 		</div>
 		<!-- end container -->
 	</div>
@@ -248,6 +318,5 @@
 	<script th:src="@{/user/js/all.js}"></script>
 	<!-- ALL PLUGINS -->
 	<script th:src="@{/user/js/custom.js}"></script>
-
 </body>
 </html>

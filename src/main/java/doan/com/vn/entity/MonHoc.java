@@ -32,10 +32,10 @@ public class MonHoc extends Base {
     private String tenMon;
     
     @Column(name = "so_tiet_lt")
-    private int soTietLT;
+    private Integer soTietLT;
     
     @Column(name = "so_tiet_th")
-    private int soTietTH;
+    private Integer soTietTH;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "monHoc")
     private Set<Diem> diems;

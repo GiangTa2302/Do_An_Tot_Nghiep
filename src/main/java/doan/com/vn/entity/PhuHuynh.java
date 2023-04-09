@@ -32,7 +32,7 @@ public class PhuHuynh extends Base {
     private String tenPH;
     
     @Column(name = "nam_sinh")
-    private int namSinh;
+    private Integer namSinh;
     
     @Column(name = "nghe_nghiep", columnDefinition = "NVARCHAR(200)")
     private String ngheNghiep;

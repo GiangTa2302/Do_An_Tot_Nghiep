@@ -59,7 +59,7 @@ public class GiaoVienController {
     }
 
     @GetMapping("")
-    public String list(@RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
+    public String list(@RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
             Model model) {
         Pageable pageable = PageRequest.of(pageIndex - 1, 10);
         Page<GiaoVien> gvPages = giaoVienRepository.findByDeletedFalse(pageable);
@@ -133,8 +133,8 @@ public class GiaoVienController {
     @PostMapping("/edit/{maGV}")
     public String edit(@PathVariable String maGV,
             @Valid @ModelAttribute("gvModel") GiaoVienModel gvModel,
-            @RequestParam("image") MultipartFile file,
             BindingResult result, RedirectAttributes redirectAttributes,
+            @RequestParam("image") MultipartFile file,
             Model model) throws IOException {
         if (result.hasErrors()) {
             return "admin/giao-vien/edit";

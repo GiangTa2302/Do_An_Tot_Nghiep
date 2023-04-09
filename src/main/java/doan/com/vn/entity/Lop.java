@@ -26,10 +26,10 @@ public class Lop extends Base {
     private String namHoc;
     
     @Column(name = "ten_khoi")
-    private int tenKhoi;
+    private Integer tenKhoi;
     
     @Column(name = "si_so")
-    private int siSo;
+    private Integer siSo;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "lop")
     private Set<HocSinh> hocSinhs;

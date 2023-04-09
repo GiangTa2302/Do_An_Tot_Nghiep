@@ -51,7 +51,7 @@ public class GiaoVienModel {
     @NotEmpty(message = "Nation cannot be empty.")
     private String tonGiao;
     
-    private int maDanToc;
+    private Integer maDanToc;
     
-    private int maBan;
+    private Integer maBan;
 }

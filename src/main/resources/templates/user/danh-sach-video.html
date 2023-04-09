@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">Home / Danh sách video</div>
+			<hr class="invis">
+
+
+			<div class="row">
+				<th:block th:each="item : ${danhSachVideos}" th:object="${item}">
+					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+						<div class="post-media wow fadeIn">
+							<img
+								th:src="@{'https://img.youtube.com/vi/'+*{urlVideo}+'/hqdefault.jpg'}"
+								alt="" class="img-fluid">
+							<div class="message-box">
+								<h4 th:text="*{tenVideo}"></h4>
+
+								<a th:href="@{'https://youtu.be/'+*{urlVideo}}"
+									class="hover-btn-new orange"><span>Xem ngay</span></a>
+							</div>
+						</div>
+						<!-- end media -->
+					</div>
+					<!-- end col -->
+				</th:block>
+			</div>
+
+			<div class="d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link"
+							th:href="${currentPage == 1} ? '' : @{'/user/danh-sach-video/'+${maBG}+'?pageIndex='+${currentPage-1}}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								<span class="sr-only">Previous</span>
+						</a></li>
+						<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
+							<li class="page-item"><a class="page-link"
+								th:href="@{'/user/danh-sach-video/'+${maBG}+'?pageIndex='+${index}}"
+								th:text="${index}"></a></li>
+						</th:block>
+						<li class="page-item"><a class="page-link"
+							th:href="${currentPage == totalPages} ? '' : @{'/user/danh-sach-video/'+${maBG}+'?pageIndex='+${currentPage+1}}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+								class="sr-only">Next</span>
+						</a></li>
+					</ul>
+				</nav>
+			</div>
+			<!-- end row -->
+
+
+			<div class="row">
+				<div class="col-lg-9 blog-post-single">
+
+					<div class="blog-comments">
+						<h4>
+							Bình Luận (<span th:text="${blModels.size}"></span>)
+						</h4>
+						<th:block th:each="bl :${blModels}" th:object="${bl}">
+							<div id="comment-blog">
+								<ul class="comment-list">
+									<li class="comment">
+										<div class="avatar">
+											<img alt="" th:src="@{/user/images/avatar-01.jpg}"
+												class="avatar">
+										</div>
+										<div class="comment-container">
+											<h5 class="comment-author">
+												<a href="#" th:text="*{account}"></a>
+											</h5>
+											<div class="comment-meta">
+												<a href="#" class="comment-date link-style1"
+													th:text="${#dates.format(bl.createdDate, 'dd-MM-yyyy')}"></a>
+
+											</div>
+											<div class="comment-body">
+												<p th:text="*{noiDung}"></p>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</th:block>
+					</div>
+
+
+					<div class="comments-form">
+						<h4>Để lại bình luận</h4>
+						<div class="comment-form-main">
+							<form th:action="@{/user/binh-luan/{maBG}(maBG=${maBG})}"
+								method="post" th:object="${blModel}">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<input class="form-control" placeholder="Account" type="text"
+												th:field="*{account}" /> <small class="text-danger"
+												th:if="${#fields.hasErrors('account')}"
+												th:errors="*{account}"></small>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea th:field="*{noiDung}" class="form-control"
+												placeholder="Nội dung bình luận" cols="30" rows="2"></textarea>
+											<small class="text-danger"
+												th:if="${#fields.hasErrors('noiDung')}"
+												th:errors="*{noiDung}"></small>
+										</div>
+									</div>
+									<div class="col-md-12 post-btn">
+										<button type="submit" class="hover-btn-new orange">
+											<span>Gửi bình luận</span>
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+
+</body>
+
+</html>

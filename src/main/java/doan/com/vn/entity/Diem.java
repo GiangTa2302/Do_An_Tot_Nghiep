@@ -42,8 +42,6 @@ public class Diem extends Base{
     @Column(name = "diem_thi")
     private float diemThi;
     
-    @Column(name = "hoc_ky")
-    private int hocKy;
     
     public float diemTB() {
         return ((diemMieng + diemTX1 + diemTX2*2)/4 + diemThi*2)/2;

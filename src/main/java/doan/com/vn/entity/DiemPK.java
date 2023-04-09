@@ -28,10 +28,13 @@ public class DiemPK implements Serializable{
 
     @Column(name = "ma_mon")
     private String maMon;
+    
+    @Column(name = "hoc_ky")
+    private Integer hocKy;
 
     @Override
     public int hashCode() {
-        return Objects.hash(maHS, maMon);
+        return Objects.hash(hocKy, maHS, maMon);
     }
 
     @Override
@@ -43,7 +46,7 @@ public class DiemPK implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         DiemPK other = (DiemPK) obj;
-        return Objects.equals(maHS, other.maHS)
+        return hocKy == other.hocKy && Objects.equals(maHS, other.maHS)
                 && Objects.equals(maMon, other.maMon);
     }
 

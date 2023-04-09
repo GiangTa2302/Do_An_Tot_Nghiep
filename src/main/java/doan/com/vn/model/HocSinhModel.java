@@ -52,7 +52,7 @@ public class HocSinhModel {
     private String tenPH;
     
     @Positive(message = "Năm sinh không được để trống.")
-    private int namSinh;
+    private Integer namSinh;
     
     @NotEmpty(message = "Nghề nghiệp không được để trống.")
     private String ngheNghiep;
@@ -63,12 +63,12 @@ public class HocSinhModel {
     @NotEmpty(message = "Điện thoại phụ huynh không được để trống.")
     private String dienThoai;
     
-    private int maDanToc;
+    private Integer maDanToc;
     
     @NotEmpty(message = "Mã thẻ BHYT không được để trống.")
     private String maThe;
     
-    private int maHL;
+    private Integer maHL;
     
     public HocSinhModel(String tenLop) {
         this.tenLop = tenLop;

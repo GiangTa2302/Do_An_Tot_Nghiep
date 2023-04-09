@@ -20,7 +20,7 @@ public class HocLuc extends Base {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ma_hl")
-    private int maHL;
+    private Integer maHL;
     
     @Column(name = "ten_hl")
     private String tenHL;

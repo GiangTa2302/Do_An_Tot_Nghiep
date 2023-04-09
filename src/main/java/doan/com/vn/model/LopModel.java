@@ -1,7 +1,6 @@
 package doan.com.vn.model;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +18,10 @@ public class LopModel {
     @NotEmpty(message = "Năm học không được để trống.")
     private String namHoc;
     
-    private int tenKhoi;
+    private Integer tenKhoi;
     
-    private int siSo;
+    private Integer siSo;
     
-    @NotNull(message = "Giáo viên không được để trống.")
+    @NotEmpty(message = "Giáo viên không được để trống.")
     private String maGV;
 }

@@ -58,10 +58,11 @@ public class DiemController {
         return lopRepository.findByDeletedFalse();
     }
 
-    @GetMapping({ "", "/{tenLop}/{maMon}" })
+    @GetMapping({ "", "/{tenLop}/{maMon}/{hocKy}" })
     public String showDiem(
             @PathVariable(value = "tenLop", required = false) String tenLop,
             @PathVariable(value = "maMon", required = false) String maMon,
+            @PathVariable(value = "hocKy", required = false) Integer hocKy,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
             Model model) {
 
@@ -76,16 +77,17 @@ public class DiemController {
         model.addAttribute("totalItems", hsPage.getTotalElements());
         model.addAttribute("tenLop", tenLop);
         model.addAttribute("maMon", maMon);
+        model.addAttribute("hocKy", hocKy == null ? 1 : hocKy);
 
         DiemCreationDTO diemDTO = new DiemCreationDTO();
         Optional<Diem> diem = null;
         DiemModel diemModel = null;
 
         for (HocSinh hs : hocSinhs) {
-            DiemPK diemPK = new DiemPK(hs.getMaHS(), maMon);
+            DiemPK diemPK = new DiemPK(hs.getMaHS(), maMon, hocKy);
             diem = diemRepository.findById(diemPK);
             diemModel = new DiemModel(hs.getMaHS(), maMon,
-                    hs.getHodem() + " " + hs.getTen());
+                    hs.getHodem() + " " + hs.getTen(), hocKy);
             if (diem.isPresent()) {
                 BeanUtils.copyProperties(diem.get(), diemModel);
             }
@@ -97,16 +99,17 @@ public class DiemController {
         return "admin/diem/add";
     }
 
-    @PostMapping("/saveOrUpdate/{tenLop}/{maMon}")
-    public String saveOrUpdate(@PathVariable String tenLop,
+    @PostMapping("/saveOrUpdate/{tenLop}/{maMon}/{hocKy}")
+    public String saveOrUpdate(@PathVariable(value = "tenLop") String tenLop,
             @PathVariable(value = "maMon") String maMon,
+            @PathVariable(value = "hocKy") Integer hocKy,
             @ModelAttribute("diemDTO") DiemCreationDTO diemDTO,
             RedirectAttributes redirectAttributes) {
         Diem diemU = null;
         List<Diem> diems = new ArrayList<Diem>();
 
         for (DiemModel dm : diemDTO.getDiemModels()) {
-            DiemPK diemPK = new DiemPK(dm.getMaHS(), maMon);
+            DiemPK diemPK = new DiemPK(dm.getMaHS(), maMon, hocKy);
             diemU = new Diem();
             diemU.setId(diemPK);
             diemU.setMonHoc(monHocRepository.findById(maMon).get());
@@ -118,6 +121,6 @@ public class DiemController {
         diemRepository.saveAll(diems);
         redirectAttributes.addFlashAttribute("msg", "Nhập điểm thành công.");
 
-        return "redirect:/admin/diem/" + tenLop + "/" + maMon;
+        return "redirect:/admin/diem/" + tenLop + "/" + maMon + "/" + hocKy;
     }
 }
