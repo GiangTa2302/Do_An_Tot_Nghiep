@@ -17,11 +17,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper=false)
 public class Diem extends Base{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @EmbeddedId
     private DiemPK id;
     
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @MapsId("tenLop")
+    @MapsId("maHS")
     @JoinColumn(name = "ma_hs")
     private HocSinh hocSinh;
     

@@ -13,11 +13,6 @@ public class UserController {
         return "user/thoi-khoa-bieu";
     }
     
-    @GetMapping("/thu-vien-thi")
-    public String tvthi() {
-        return "user/thu-vien-thi";
-    }
-    
     @GetMapping("/lien-he")
     public String lienhe() {
         return "user/lien-he";
@@ -33,9 +28,10 @@ public class UserController {
         return "user/tin-tuc-2";
     }
     
-    @GetMapping("/tin-tuc-3")
-    public String tintuc3() {
-        return "user/tin-tuc-3";
+    @GetMapping("/chi-tiet-tuyen-sinh")
+    public String chitiet() {
+        
+        return "user/chi-tiet-tuyen-sinh";
     }
     
     @GetMapping("/blog")

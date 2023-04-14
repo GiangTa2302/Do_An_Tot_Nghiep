@@ -1,14 +1,10 @@
 package doan.com.vn.entity;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -20,6 +16,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class MonHoc extends Base {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "mh-generator", 
       parameters = @Parameter(name = "prefix", value = "MH"), 
@@ -36,10 +37,4 @@ public class MonHoc extends Base {
     
     @Column(name = "so_tiet_th")
     private Integer soTietTH;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monHoc")
-    private Set<Diem> diems;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "monHoc")
-    private Set<GiaoVien> giaoViens;
 }

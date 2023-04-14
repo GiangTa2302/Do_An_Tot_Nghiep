@@ -22,6 +22,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class GiaoVien extends Person{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "gv-generator", 
       parameters = @Parameter(name = "prefix", value = "GV"), 

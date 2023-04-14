@@ -18,6 +18,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class Lop extends Base {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "ten_lop")
     private String tenLop;

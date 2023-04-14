@@ -70,7 +70,6 @@
 					class="menu-icon tf-icons bx bx-food-menu"></i>
 					<div data-i18n="Layouts">Công văn</div>
 			</a>
-
 				<ul class="menu-sub">
 					<li class="menu-item"><a th:href="@{/admin/cong-van}"
 						class="menu-link">
@@ -88,20 +87,20 @@
 					class="menu-icon tf-icons bx bx-file-find"></i>
 					<div data-i18n="Layouts">Tài liệu</div>
 			</a>
-
 				<ul class="menu-sub">
-					<li class="menu-item"><a href="layouts-without-menu.html"
+					<li class="menu-item"><a th:href="@{/admin/de?loaiDe=0}"
 						class="menu-link">
 							<div data-i18n="Without menu">Đề kiểm tra</div>
 					</a></li>
-					<li class="menu-item"><a href="layouts-without-navbar.html"
+					<li class="menu-item"><a th:href="@{/admin/de?loaiDe=1}"
 						class="menu-link">
 							<div data-i18n="Without navbar">Đề thi</div>
 					</a></li>
-				</ul></li>
+				</ul>
+			</li>
 
 			<!-- Bài viết -->
-			<li class="menu-item"><a href="cards-basic.html"
+			<li class="menu-item"><a th:href="@{/admin/bai-viet}"
 				class="menu-link"> <i class="menu-icon tf-icons bx bx-notepad"></i>
 					<div data-i18n="Analytics">Bài viết của GV&HS</div>
 			</a></li>

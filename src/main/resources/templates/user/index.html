@@ -1,366 +1,429 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<!-- Basic -->
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-	<!-- Mobile Metas -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- Site Metas -->
-	<title>THPT Đông Thụy Anh</title>
-	
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
-	<!-- Site CSS -->
-	<link rel="stylesheet" th:href="@{/user/css/style.css}">
-	<!-- ALL VERSION CSS -->
-	<link rel="stylesheet" th:href="@{/user/css/versions.css}">
-	<!-- Responsive CSS -->
-	<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
-	<!-- Custom CSS -->
-	<link rel="stylesheet" th:href="@{/user/css/custom.css}">
-	
-	<!-- Modernizer for Portfolio -->
-	<script th:src="@{/user/js/modernizer.js}"></script>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
 
 </head>
 
 <body class="host_version">
 
-    <div th:replace="~{/user/fragments/header :: header}"></div>
+	<div th:replace="~{/user/fragments/header :: header}"></div>
 
-    <!-- start slider -->
-    <div id="carouselExampleControls" class="carousel slide bs-slider box-slider" data-ride="carousel"
-        data-pause="hover" data-interval="false">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="1"></li>
-            <li data-target="#carouselExampleControls" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-                <div id="home" class="first-section" style="background-image:url('/user/images/bia1.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-right">
-                                    <div class="big-tagline">
-                                        <h2>Trường THPT Đông Thụy Anh</h2>
-                                        <p class="lead">Một địa chỉ - Một niềm tin</p>
-                                        <a href="#" class="hover-btn-new" style="color:white;"><span>Thông tin liên hệ</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <div class="carousel-item">
-                <div id="home" class="first-section" style="background-image:url('/user/images/bia2.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-left">
-                                    <div class="big-tagline">
-                                        <h2 data-animation="animated zoomInRight">Trường THPT Đông Thụy Anh</h2>
-                                        <p class="lead" data-animation="animated fadeInLeft">Một địa chỉ - Một niềm tin
-                                        </p>
-                                        <a href="#" class="hover-btn-new" style="color:white;"><span>Thông tin liên hệ</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <div class="carousel-item">
-                <div id="home" class="first-section" style="background-image:url('/user/images/bia3.jpg');">
-                    <div class="dtab">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 text-center">
-                                    <div class="big-tagline">
-                                        <h2 data-animation="animated zoomInRight">Trường THPT Đông Thụy Anh</h2>
-                                        <p class="lead" data-animation="animated fadeInLeft">Một địa chỉ - Một niềm tin
-                                        </p>
-                                        <a href="#" class="hover-btn-new" style="color:white;"><span>Thông tin liên hệ</span></a>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end container -->
-                    </div>
-                </div><!-- end section -->
-            </div>
-            <!-- Left Control -->
-            <a style="background-color:inherit !important;" class="new-effect carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="fa fa-angle-left" aria-hidden="true"></span>
-            </a>
+	<!-- start slider -->
+	<div id="carouselExampleControls"
+		class="carousel slide bs-slider box-slider" data-ride="carousel"
+		data-pause="hover" data-interval="false">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleControls" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleControls" data-slide-to="1"></li>
+			<li data-target="#carouselExampleControls" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<div class="carousel-item active">
+				<div id="home" class="first-section"
+					style="background-image: url('/user/images/bia1.jpg');">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-right">
+									<div class="big-tagline">
+										<h2>Trường THPT Đông Thụy Anh</h2>
+										<p class="lead">Một địa chỉ - Một niềm tin</p>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end container -->
+					</div>
+				</div>
+				<!-- end section -->
+			</div>
+			<div class="carousel-item">
+				<div id="home" class="first-section"
+					style="background-image: url('/user/images/bia2.jpg');">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-left">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight">Trường THPT
+											Đông Thụy Anh</h2>
+										<p class="lead" data-animation="animated fadeInLeft">Một
+											địa chỉ - Một niềm tin</p>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end container -->
+					</div>
+				</div>
+				<!-- end section -->
+			</div>
+			<div class="carousel-item">
+				<div id="home" class="first-section"
+					style="background-image: url('/user/images/bia3.jpg');">
+					<div class="dtab">
+						<div class="container">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 text-center">
+									<div class="big-tagline">
+										<h2 data-animation="animated zoomInRight">Trường THPT
+											Đông Thụy Anh</h2>
+										<p class="lead" data-animation="animated fadeInLeft">Một
+											địa chỉ - Một niềm tin</p>
+										</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end container -->
+					</div>
+				</div>
+				<!-- end section -->
+			</div>
+			<!-- Left Control -->
+			<a style="background-color: inherit !important;"
+				class="new-effect carousel-control-prev"
+				href="#carouselExampleControls" role="button" data-slide="prev">
+				<span class="fa fa-angle-left" aria-hidden="true"></span>
+			</a>
 
-            <!-- Right Control -->
-            <a style="background-color:inherit !important;" class="new-effect carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="fa fa-angle-right" aria-hidden="true"></span>
-            </a>
-        </div>
-    </div>
-    <!-- end slider -->
+			<!-- Right Control -->
+			<a style="background-color: inherit !important;"
+				class="new-effect carousel-control-next"
+				href="#carouselExampleControls" role="button" data-slide="next">
+				<span class="fa fa-angle-right" aria-hidden="true"></span>
+			</a>
+		</div>
+	</div>
+	<!-- end slider -->
 
-    <div id="overviews" class="section wb">
-        <div class="container">
-        	<div class="lead">Home</div>
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">Home</div>
 			<hr class="invis">
-            <div class="section-title row text-left">
-                <div class="col-md-8 offset-md-2">
-                    <h3 class="text-center">GIỚI THIỆU</h3>
-                    <p>
-                        <b>1. Mô hình hoạt động:</b> Chất lượng cao
-                    </p>
-                    <p>
-                        <b>2. Đội ngũ giáo viên:</b> 100% giáo viên tốt nghiệp Đại học trong đó 15% có trình độ Thạc sĩ.
-                        100% giáo viên có năng lực chuyên môn vững vàng, có kinh nghiệm ôn thi học sinh giỏi; phẩm chất
-                        đạo đức tốt, tâm huyết với nghề, có phong cách ứng xử thân thiện với học sinh và phụ huynh học
-                        sinh.
-                    </p>
-                    <p>
-                        <b>3. Mục tiêu đào tạo:</b>
-                    <ul>
-                        <li>Xây dựng nhà trường thành một đơn vị giáo dục chất lượng cao.</li>
-                        <li>Giúp học sinh phát triển toàn diện về đạo đức và trí tuệ, thể chất, thẩm mỹ và các kỹ năng
-                            cơ bản, phát triển năng lực cá nhân, tính năng động, sáng tạo, ý chí vươn lên và khả năng
-                            thích ứng cao.</li>
-                        <li>Trang bị kiến thức cơ bản theo tiêu chuẩn kiến thức của Bộ GD-ĐT, đảm bảo đạt điểm cao trong
-                            các kì thi học sinh giỏi, thi THPT Quốc gia.</li>
-                    </ul>
-                    </p>
-                    <p>
-                        <b>4. Phương châm giáo dục:</b>
-                    <ul>
-                        <li>Quan tâm giáo dục toàn diện: kết hợp giáo dục kiến thức chuẩn với coi trọng giáo dục đạo
-                            đức, rèn luyện kĩ năng thực hành, kĩ năng sống, tổ chức các hoạt động giáo dục ngoài giờ lên
-                            lớp, ngoại khóa và bồi dưỡng học sinh có năng khiếu.</li>
-                        <li>Phát huy tính tích cực, chủ động, sáng tạo của học sinh: Khơi dậy và hun đúc cho mỗi ý tưởng
-                            sáng tạo, mỗi khả năng tiềm ẩn của các em, tăng cường khả năng thuyết trình, làm việc độc
-                            lập, làm việc theo nhóm để mỗi học sinh được thành công trong học tập và cuộc sống.</li>
-                        <li>Quan tâm đến vấn đề tâm lý học đường thông qua việc phối hợp với các trung tâm tư vấn tâm lý
-                            giáo dục giúp các em học sinh có tâm thế học tập thân thiện, tự tin, thoải mái và hiệu quả.
-                        </li>
-                    </ul>
-                    </p>
-                    <p>
-                        <b>5. Phương thức hoạt động của trường:</b>
-                    <p>*Hoạt động dạy và học:</p>
-                    <ul>
-                        <li>Thực hiện phương pháp giáo dục và dạy học tiên tiến với sự hỗ trợ tối ưu của trang thiết bị
-                            hiện đại. Tích cực đổi mới phương pháp giảng dạy và đào tạo phù hợp với mô hình đào tạo chất
-                            lượng cao; Bố trí sắp xếp thời khóa biểu hợp lý đảm bảo thời lượng cho các buổi học, tiết
-                            học tự chọn, nâng cao, ngoại khoá chuyên đề</li>
-                        <li>Tổ chức học theo phòng học bộ môn, học trên mạng;</li>
-                        <li>Chỉ đạo khai thác, sử dụng có hiệu quả trang thiết bị phòng thí nghiệm, thực hành.</li>
-                    </ul>
-                    <p>*Hoạt động giáo dục toàn diện:</p>
-                    <ul>
-                        <li>Thực hiện các Kế hoạch</li>
-                        <li>Chương trình theo hướng dẫn của nhiệm vụ năm học các ngày kỉ niệm, ngày lễ lớn trong năm,
-                            sinh hoạt chủ đề…</li>
-                        <li>Tăng cường các hoạt động Đoàn </li>
-                        <li>Tăng cường các hoạt động giao lưu bằng nhiều hình thức như: Thi đấu thể thao, biểu diễn văn
-                            nghệ, thi hùng biện, thi học sinh thanh lịch…</li>
-                        <li>Tăng cường hoạt động của đội ngũ giáo viên chủ nhiệm, giáo viên bộ môn, các tổ chức xã hội,
-                            giao lưu các hoạt động văn hoá, văn nghệ, thể dục thể thao.</li>
-                    </ul>
-                    </p>
-                </div>
-            </div><!-- end title -->
+			<div class="section-title row text-left">
+				<div class="col-md-8 offset-md-2">
+					<h3 class="text-center">GIỚI THIỆU</h3>
+					<p>
+						<b>1. Mô hình hoạt động:</b> Chất lượng cao
+					</p>
+					<p>
+						<b>2. Đội ngũ giáo viên:</b> 100% giáo viên tốt nghiệp Đại học
+						trong đó 15% có trình độ Thạc sĩ. 100% giáo viên có năng lực
+						chuyên môn vững vàng, có kinh nghiệm ôn thi học sinh giỏi; phẩm
+						chất đạo đức tốt, tâm huyết với nghề, có phong cách ứng xử thân
+						thiện với học sinh và phụ huynh học sinh.
+					</p>
+					<p>
+						<b>3. Mục tiêu đào tạo:</b>
+					<ul>
+						<li>Xây dựng nhà trường thành một đơn vị giáo dục chất lượng
+							cao.</li>
+						<li>Giúp học sinh phát triển toàn diện về đạo đức và trí tuệ,
+							thể chất, thẩm mỹ và các kỹ năng cơ bản, phát triển năng lực cá
+							nhân, tính năng động, sáng tạo, ý chí vươn lên và khả năng thích
+							ứng cao.</li>
+						<li>Trang bị kiến thức cơ bản theo tiêu chuẩn kiến thức của
+							Bộ GD-ĐT, đảm bảo đạt điểm cao trong các kì thi học sinh giỏi,
+							thi THPT Quốc gia.</li>
+					</ul>
+					</p>
+					<p>
+						<b>4. Phương châm giáo dục:</b>
+					<ul>
+						<li>Quan tâm giáo dục toàn diện: kết hợp giáo dục kiến thức
+							chuẩn với coi trọng giáo dục đạo đức, rèn luyện kĩ năng thực
+							hành, kĩ năng sống, tổ chức các hoạt động giáo dục ngoài giờ lên
+							lớp, ngoại khóa và bồi dưỡng học sinh có năng khiếu.</li>
+						<li>Phát huy tính tích cực, chủ động, sáng tạo của học sinh:
+							Khơi dậy và hun đúc cho mỗi ý tưởng sáng tạo, mỗi khả năng tiềm
+							ẩn của các em, tăng cường khả năng thuyết trình, làm việc độc
+							lập, làm việc theo nhóm để mỗi học sinh được thành công trong học
+							tập và cuộc sống.</li>
+						<li>Quan tâm đến vấn đề tâm lý học đường thông qua việc phối
+							hợp với các trung tâm tư vấn tâm lý giáo dục giúp các em học sinh
+							có tâm thế học tập thân thiện, tự tin, thoải mái và hiệu quả.</li>
+					</ul>
+					</p>
+					<p>
+						<b>5. Phương thức hoạt động của trường:</b>
+					<p>*Hoạt động dạy và học:</p>
+					<ul>
+						<li>Thực hiện phương pháp giáo dục và dạy học tiên tiến với
+							sự hỗ trợ tối ưu của trang thiết bị hiện đại. Tích cực đổi mới
+							phương pháp giảng dạy và đào tạo phù hợp với mô hình đào tạo chất
+							lượng cao; Bố trí sắp xếp thời khóa biểu hợp lý đảm bảo thời
+							lượng cho các buổi học, tiết học tự chọn, nâng cao, ngoại khoá
+							chuyên đề</li>
+						<li>Tổ chức học theo phòng học bộ môn, học trên mạng;</li>
+						<li>Chỉ đạo khai thác, sử dụng có hiệu quả trang thiết bị
+							phòng thí nghiệm, thực hành.</li>
+					</ul>
+					<p>*Hoạt động giáo dục toàn diện:</p>
+					<ul>
+						<li>Thực hiện các Kế hoạch</li>
+						<li>Chương trình theo hướng dẫn của nhiệm vụ năm học các ngày
+							kỉ niệm, ngày lễ lớn trong năm, sinh hoạt chủ đề…</li>
+						<li>Tăng cường các hoạt động Đoàn</li>
+						<li>Tăng cường các hoạt động giao lưu bằng nhiều hình thức
+							như: Thi đấu thể thao, biểu diễn văn nghệ, thi hùng biện, thi học
+							sinh thanh lịch…</li>
+						<li>Tăng cường hoạt động của đội ngũ giáo viên chủ nhiệm,
+							giáo viên bộ môn, các tổ chức xã hội, giao lưu các hoạt động văn
+							hoá, văn nghệ, thể dục thể thao.</li>
+					</ul>
+					</p>
+				</div>
+			</div>
+			<!-- end title -->
 
-            <div class="row align-items-center">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="message-box">
-                        <h2>Một địa chỉ - Một niềm tin</h2>
-                        <p>Trường THPT Đông Thụy Anh nay ( trường cấp 3 Thụy Anh xưa) được thành lập vào tháng 9 năm
-                            1965
-                            tại Thôn Trà Hồi- Xã Thụy Bình- Huyện Thụy Anh( nay là huyện Thái Thụy)trong những năm tháng
-                            Đế
-                            quốc Mỹ đánh phá miền Bắc ác liệt. Ban đầu, cơ sở vật chất của trường còn đơn sơ, mộc mạc
-                            với 4
-                            phòng học mái rạ, vách đất và 10 gian nhà nhỏ làm khu văn phòng, nhà ở cho 16 giáo viên và
-                            nhà
-                            ăn tập thể.
-                        </p>
-                        <a href="#" class="hover-btn-new orange"><span>Thông tin chi tiết</span></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
+			<div class="row align-items-center">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+					<div class="message-box">
+						<h2>Một địa chỉ - Một niềm tin</h2>
+						<p>Trường THPT Đông Thụy Anh nay ( trường cấp 3 Thụy Anh xưa)
+							được thành lập vào tháng 9 năm 1965 tại Thôn Trà Hồi- Xã Thụy
+							Bình- Huyện Thụy Anh( nay là huyện Thái Thụy)trong những năm
+							tháng Đế quốc Mỹ đánh phá miền Bắc ác liệt. Ban đầu, cơ sở vật
+							chất của trường còn đơn sơ, mộc mạc với 4 phòng học mái rạ, vách
+							đất và 10 gian nhà nhỏ làm khu văn phòng, nhà ở cho 16 giáo viên
+							và nhà ăn tập thể.</p>
+						<a href="#" class="hover-btn-new orange"><span>Thông
+								tin chi tiết</span></a>
+					</div>
+					<!-- end messagebox -->
+				</div>
+				<!-- end col -->
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <img th:src="@{/user/images/about_02.jpg}" alt="" class="img-fluid img-rounded">
-                    </div><!-- end media -->
-                </div><!-- end col -->
-            </div>
-            <div class="row align-items-center">
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="post-media wow fadeIn">
-                        <img th:src="@{/user/images/about_03.jpg}" alt="" class="img-fluid img-rounded">
-                    </div><!-- end media -->
-                </div><!-- end col -->
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+					<div class="post-media wow fadeIn">
+						<img th:src="@{/user/images/about_02.jpg}" alt=""
+							class="img-fluid img-rounded">
+					</div>
+					<!-- end media -->
+				</div>
+				<!-- end col -->
+			</div>
+			<div class="row align-items-center">
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+					<div class="post-media wow fadeIn">
+						<img th:src="@{/user/images/about_03.jpg}" alt=""
+							class="img-fluid img-rounded">
+					</div>
+					<!-- end media -->
+				</div>
+				<!-- end col -->
 
-                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                    <div class="message-box">
-                        <h2>Chất lượng giảng dạy</h2>
-                        <p>Trường THPT Đông Thụy Anh nổi tiếng với chất lượng đào tạo học sinh với những thành tích vô
-                            cùng nổi bật cả trong giảng dạy và học tập. Trường luôn có đội ngũ giáo viên giảng dạy có
-                            thâm niên nên nhiều kinh nghiệm, vững vàng chuyên môn .Khi tuyển thế hệ giáo viên mới,
-                            trường lựa chọn rất kỹ lưỡng.</p>
+				<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+					<div class="message-box">
+						<h2>Chất lượng giảng dạy</h2>
+						<p>Trường THPT Đông Thụy Anh nổi tiếng với chất lượng đào tạo
+							học sinh với những thành tích vô cùng nổi bật cả trong giảng dạy
+							và học tập. Trường luôn có đội ngũ giáo viên giảng dạy có thâm
+							niên nên nhiều kinh nghiệm, vững vàng chuyên môn .Khi tuyển thế
+							hệ giáo viên mới, trường lựa chọn rất kỹ lưỡng.</p>
 
-                        <p>Bên cạnh đó, trường luôn xây dựng môi trường học thân thiện và học sinh tích cực, tạo điều
-                            kiện cho học sinh có cơ hội học tập tốt nhất. Vì thế, có rất nhiều cuộc thi học sinh giỏi
-                            được tổ chức tại trường THPT Đông Thụy Anh và trường đã đào tạo được rất nhiều thế hệ học
-                            sinh tài năng.</p>
+						<p>Bên cạnh đó, trường luôn xây dựng môi trường học thân thiện
+							và học sinh tích cực, tạo điều kiện cho học sinh có cơ hội học
+							tập tốt nhất. Vì thế, có rất nhiều cuộc thi học sinh giỏi được tổ
+							chức tại trường THPT Đông Thụy Anh và trường đã đào tạo được rất
+							nhiều thế hệ học sinh tài năng.</p>
 
-                        <a href="#" class="hover-btn-new orange"><span>Thông tin chi tiết</span></a>
-                    </div><!-- end messagebox -->
-                </div><!-- end col -->
+						<a href="#" class="hover-btn-new orange"><span>Thông
+								tin chi tiết</span></a>
+					</div>
+					<!-- end messagebox -->
+				</div>
+				<!-- end col -->
 
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
 
-    <div id="plan" class="section lb">
-        <div class="container">
-            <div class="section-title text-center">
-                <h3 class="text-uppercase">Văn bản mới</h3>
-            </div>
-            <!-- end title -->
+	<div id="plan" class="section lb">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3 class="text-uppercase">Văn bản mới</h3>
+			</div>
+			<!-- end title -->
 
-            <div class="row">
-                <div class="col-md-6 offset-md-3">
-                    <div class="message-box">
-                        <ul class="nav nav-pills nav-stacked" id="myTabs">
-                            <li><a class="active" href="#tab1" data-toggle="pill">SỞ GD&ĐT</a></li>
-                            <li><a href="#tab2" data-toggle="pill">TRƯỜNG</a></li>
-                        </ul>
-                    </div>
-                </div><!-- end col -->
-            </div>
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="message-box">
+						<ul class="nav nav-pills nav-stacked" id="myTabs">
+							<li><a class="active" href="#tab1" data-toggle="pill">SỞ
+									GD&ĐT</a></li>
+							<li><a href="#tab2" data-toggle="pill">TRƯỜNG</a></li>
+						</ul>
+					</div>
+				</div>
+				<!-- end col -->
+			</div>
 
-            <hr class="invis">
+			<hr class="invis">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tab-content">
-                        <div class="tab-pane active fade show" id="tab1">
-                            <div class="row text-center">
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Đơn xin xét tuyển đợt 2, Kỳ thi tuyển sinh lớp 10 THPT năm
-                                                    học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="tab-content">
+						<div class="tab-pane active fade show" id="tab1">
+							<div class="row text-center">
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Đơn xin xét tuyển đợt 2, Kỳ thi
+													tuyển sinh lớp 10 THPT năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Hướng dẫn thu, nộp hố sơ đăng ký dự thi và xét tuyển Kỳ
-                                                    thi tuyển sinh vào lớp 10 trường THPT công lập năm học
-                                                    2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Hướng dẫn thu, nộp hố sơ đăng ký
+													dự thi và xét tuyển Kỳ thi tuyển sinh vào lớp 10 trường
+													THPT công lập năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end pane -->
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end pane -->
 
-                        <div class="tab-pane fade" id="tab2">
-                            <div class="row text-center">
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+						<div class="tab-pane fade" id="tab2">
+							<div class="row text-center">
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
 
-                                <div class="col-md-4">
-                                    <div class="pricing-table pricing-table-highlighted">
-                                        <div class="pricing-table-features">
-                                            <a href="#"><span>Việc đề xuất danh sách thí sinh trúng tuyển đợt 2 Kỳ thi
-                                                    tuyển sinh lớp 10 THPT công lập, năm học 2021-2022</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end row -->
-                        </div><!-- end pane -->
-                    </div><!-- end content -->
-                </div><!-- end col -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </div><!-- end section -->
+								<div class="col-md-4">
+									<div class="pricing-table pricing-table-highlighted">
+										<div class="pricing-table-features">
+											<a href="#"><span>Việc đề xuất danh sách thí sinh
+													trúng tuyển đợt 2 Kỳ thi tuyển sinh lớp 10 THPT công lập,
+													năm học 2021-2022</span></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row -->
+						</div>
+						<!-- end pane -->
+					</div>
+					<!-- end content -->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
 
-    <!-- start footer -->
-    <div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
 	<!-- end footer -->
 
-    <a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
 
-    <!-- ALL JS FILES -->
-    <script th:src="@{/user/js/all.js}"></script>
-    <!-- ALL PLUGINS -->
-    <script th:src="@{/user/js/custom.js}"></script>
-    <script th:src="@{/user/js/timeline.min.js}"></script>
-    <script>
-        timeline(document.querySelectorAll('.timeline'), {
-            forceVerticalMode: 700,
-            mode: 'horizontal',
-            verticalStartPosition: 'left',
-            visibleItems: 4
-        });
-    </script>
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+	<script th:src="@{/user/js/timeline.min.js}"></script>
+	<script>
+		timeline(document.querySelectorAll('.timeline'), {
+			forceVerticalMode : 700,
+			mode : 'horizontal',
+			verticalStartPosition : 'left',
+			visibleItems : 4
+		});
+	</script>
 </body>
 
 </html>

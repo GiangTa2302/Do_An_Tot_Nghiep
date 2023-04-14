@@ -39,7 +39,7 @@
 
 			<div class="row">
 				<th:block th:each="item : ${danhSachVideos}" th:object="${item}">
-					<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+					<div class="col-xl col-lg col-md-12 col-sm-12">
 						<div class="post-media wow fadeIn">
 							<img
 								th:src="@{'https://img.youtube.com/vi/'+*{urlVideo}+'/hqdefault.jpg'}"

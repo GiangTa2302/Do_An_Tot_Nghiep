@@ -29,6 +29,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class HocSinh extends Person{
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "hs-generator", 
       parameters = @Parameter(name = "prefix", value = "HS"), 

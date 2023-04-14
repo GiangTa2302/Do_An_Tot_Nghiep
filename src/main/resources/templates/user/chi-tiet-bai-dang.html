@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+	<!-- End header -->
+
+	<div id="overviews" class="section wb">
+
+		<div class="container">
+			<div class="lead">Home / Bài viết của GV-HS / Chi tiết</div>
+			<hr class="invis">
+
+			<div class="row">
+				<div class="col-lg blog-post-single">
+
+					<th:block th:object="${baiVietModel}">
+						<div class="blog-item">
+							<div class="post-content">
+								<div class="meta-info-blog">
+									<span><i class="fa fa-calendar"></i> <a href="#"
+										th:text="${#dates.format(baiVietModel.createdDate, 'dd-MM-yyyy')}"></a>
+									</span>
+								</div>
+								<div class="blog-title">
+									<h2>
+										<a href="#" th:text="*{tieuDe}">perferendis doloribus
+											asperiores.</a>
+									</h2>
+								</div>
+								<div class="blog-desc">
+									<p th:text="*{noiDung}"></p>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="blog-author">
+							<div class="author-bio">
+								<h3 class="author_name">
+									<a href="#" th:text="*{account}"></a>
+								</h3>
+								<h5>
+									CEO at <a href="#">SmartEDU</a>
+								</h5>
+								<p class="author_det">Lorem ipsum dolor sit amet,
+									consectetur adip, sed do eiusmod tempor incididunt ut aut
+									reiciendise voluptat maiores alias consequaturs aut perferendis
+									doloribus omnis saperet docendi nec, eos ea alii molestiae
+									aliquand.</p>
+							</div>
+							<div class="author-desc">
+								<img src="/user/images/author.jpg" alt="about author">
+								<ul class="author-social">
+									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+									<li><a href="#"><i class="fa fa-skype"></i></a></li>
+								</ul>
+							</div>
+						</div>
+
+					</th:block>
+				</div>
+			</div>
+			<!-- end row -->
+
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+
+</body>
+</html>

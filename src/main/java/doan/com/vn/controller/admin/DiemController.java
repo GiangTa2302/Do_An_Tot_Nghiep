@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import doan.com.vn.dto.DiemCreationDTO;
 import doan.com.vn.entity.Diem;
 import doan.com.vn.entity.DiemPK;
 import doan.com.vn.entity.HocSinh;
 import doan.com.vn.entity.Lop;
 import doan.com.vn.entity.MonHoc;
-import doan.com.vn.model.DiemCreationDTO;
 import doan.com.vn.model.DiemModel;
 import doan.com.vn.repository.DiemRepository;
 import doan.com.vn.repository.HocSinhRepository;

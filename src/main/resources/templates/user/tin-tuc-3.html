@@ -36,190 +36,58 @@
 		<div class="container">
 			<div class="lead">Home / Bài viết của GV-HS</div>
 			<hr class="invis">
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_1.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">Thư chúc mừng ngày nhà giáo Việt Nam
-									20/11 của Hiệu trưởng</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Nhân dịp ngày Nhà giáo Việt Nam 20/11, Hiệu trưởng trường
-								THPT Đông Thụy Anh gửi thư chúc mừng , sau đây là nội dung thư:
-							</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Chi
-									tiết</span></a>
+			<form th:action="@{/user/tin-tuc-3/dang-bai}" method="get">
+				<button type="submit" class="btn btn-info">Đăng bài</button>
+			</form>
+			<div class="row mt-3">
+				<th:block th:each="item : ${bvModels}" th:object="${item}">
+					<div class="col-lg-4 col-md-6 col-12">
+						<div class="blog-item">
+							<div class="blog-title">
+								<h2>
+									<a th:href="@{/user/tin-tuc-3/chi-tiet/{maBV}(maBV=*{maBV})}"
+										th:text="*{tieuDe}"></a>
+								</h2>
+								<span><i class="fa fa-calendar"></i> <a href="#"
+									th:text="${#dates.format(item.createdDate, 'dd-MM-yyyy')}"></a>
+								</span>
+							</div>
+							<div class="blog-desc">
+								<p class="text-truncate" th:text="*{noiDung}"></p>
+							</div>
+							<div class="blog-button">
+								<a class="hover-btn-new orange"
+									th:href="@{/user/tin-tuc-3/chi-tiet/{maBV}(maBV=*{maBV})}"><span>Chi
+										tiết</span></a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_2.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">Thư chúc mừng ngày nhà giáo Việt Nam
-									20/11 của Hiệu trưởng</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Nhân dịp ngày Nhà giáo Việt Nam 20/11, Hiệu trưởng trường
-								THPT Đông Thụy Anh gửi thư chúc mừng , sau đây là nội dung thư:
-							</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Chi
-									tiết</span></a>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_3.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">Thư chúc mừng ngày nhà giáo Việt Nam
-									20/11 của Hiệu trưởng</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Nhân dịp ngày Nhà giáo Việt Nam 20/11, Hiệu trưởng trường
-								THPT Đông Thụy Anh gửi thư chúc mừng , sau đây là nội dung thư:
-							</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Chi
-									tiết</span></a>
-						</div>
-					</div>
-				</div>
+				</th:block>
 				<!-- end col -->
 			</div>
 			<!-- end row -->
 
-			<hr class="hr3">
-
-			<div class="row">
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_4.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">perferendis doloribus asperiores.</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no
-								quo maiorum intel ogrets geuiat operts elicata libere avisse id
-								cumlegebat, liber regione eu sit....</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Read
-									More</span></a>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_5.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">perferendis doloribus asperiores.</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no
-								quo maiorum intel ogrets geuiat operts elicata libere avisse id
-								cumlegebat, liber regione eu sit....</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Read
-									More</span></a>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-4 col-md-6 col-12">
-					<div class="blog-item">
-						<div class="image-blog">
-							<img src="images/blog_6.jpg" alt="" class="img-fluid">
-						</div>
-						<div class="meta-info-blog">
-							<span><i class="fa fa-calendar"></i> <a href="#">May
-									11, 2015</a> </span> <span><i class="fa fa-tag"></i> <a href="#">News</a>
-							</span> <span><i class="fa fa-comments"></i> <a href="#">12
-									Comments</a></span>
-						</div>
-						<div class="blog-title">
-							<h2>
-								<a href="#" title="">perferendis doloribus asperiores.</a>
-							</h2>
-						</div>
-						<div class="blog-desc">
-							<p>Lorem ipsum door sit amet, fugiat deicata avise id cum, no
-								quo maiorum intel ogrets geuiat operts elicata libere avisse id
-								cumlegebat, liber regione eu sit....</p>
-						</div>
-						<div class="blog-button">
-							<a class="hover-btn-new orange" href="#"><span>Read
-									More</span></a>
-						</div>
-					</div>
-				</div>
-				<!-- end col -->
+			<div class="d-flex justify-content-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link"
+							th:href="${currentPage == 1} ? '' : @{'/user/tin-tuc-3?pageIndex='+${currentPage-1}}"
+							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								<span class="sr-only">Previous</span>
+						</a></li>
+						<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
+							<li class="page-item"><a class="page-link"
+								th:href="@{'/user/tin-tuc-3?pageIndex='+${index}}"
+								th:text="${index}"></a></li>
+						</th:block>
+						<li class="page-item"><a class="page-link"
+							th:href="${currentPage == totalPages} ? '' : @{'/user/tin-tuc-3?pageIndex='+${currentPage+1}}"
+							aria-label="Next"> <span aria-hidden="true">&raquo;</span> <span
+								class="sr-only">Next</span>
+						</a></li>
+					</ul>
+				</nav>
 			</div>
-			<!-- end row -->
 		</div>
 		<!-- end container -->
 	</div>

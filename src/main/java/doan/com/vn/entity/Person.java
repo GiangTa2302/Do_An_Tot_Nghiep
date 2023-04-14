@@ -12,6 +12,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class Person extends Base {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "ho_dem", columnDefinition = "NVARCHAR(200)")
     private String hodem;
     

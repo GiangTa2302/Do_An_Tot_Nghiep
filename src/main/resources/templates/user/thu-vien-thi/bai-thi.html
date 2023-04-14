@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">Home / Thư viện đề / Làm bài</div>
+			<hr class="invis">
+			<div th:if="${msg!=null}" class="alert alert-danger" role="alert"
+				th:text="${msg}"></div>
+			<input id="thoiGian" type="hidden" th:value="${thoiGian}">
+			<div class="h1 text-right" id="timer">
+				<strong id="minutes">-</strong>:<strong id="seconds">-</strong>
+			</div>
+
+			<form id="myForm" th:action="@{/user/ket-qua}" method="post"
+				th:object="${dapAnDTO}">
+				<th:block th:each="da, iStat : *{daHSModels}">
+					<div class="row">
+						<div class="col-12">
+							Câu <span th:text="${iStat.index + 1}"></span>: <span
+								th:text="*{daHSModels[__${iStat.index}__].deBai}"></span>
+						</div>
+
+						<div th:each="da : *{daHSModels[__${iStat.index}__].dapAns}"
+							class="col-6">
+							<input type="radio"
+								th:field="*{daHSModels[__${iStat.index}__].dapAn}"
+								th:value="${da.maDA}"> <span th:text="${da.maDA}"></span>.
+							<span th:text="${da.noiDung}"></span>
+						</div>
+						<input type="hidden"
+							th:field="*{daHSModels[__${iStat.index}__].dapAnDung}">
+					</div>
+					<!-- end row -->
+					<hr class="hr3">
+				</th:block>
+				<button type="submit" class="btn btn-primary">Nộp bài</button>
+			</form>
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+	<script>
+		var tg = Number(document.getElementById("thoiGian").value);
+
+		var time = tg * 60, start = Date.now(), mins = document
+				.getElementById('minutes'), secs = document
+				.getElementById('seconds'), timer;
+
+		function countdown() {
+			var timeleft = Math.max(0, time - (Date.now() - start) / 1000), m = Math
+					.floor(timeleft / 60), s = Math.floor(timeleft % 60);
+
+			mins.firstChild.nodeValue = m;
+			secs.firstChild.nodeValue = s;
+
+			if (timeleft == 0){
+				clearInterval(timer);
+				document.getElementById("myForm").submit();
+			}
+				
+		}
+
+		timer = setInterval(countdown, 200);
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">Home / Thư viện đề</div>
+			<hr class="invis">
+			<div class="row">
+				<div class="col-2">
+					<div class="list-group" id="list-tab" role="tablist">
+						<a class="list-group-item list-group-item-action active"
+							id="list-home-list" data-toggle="list" href="#de-thi" role="tab"
+							aria-controls="home">Đề thi</a> <a
+							class="list-group-item list-group-item-action"
+							id="list-profile-list" data-toggle="list" href="#de-kiem-tra"
+							role="tab" aria-controls="profile">Đề kiểm tra</a>
+					</div>
+				</div>
+				<div class="col-10">
+					<div class="tab-content" id="nav-tabContent">
+						<div class="tab-pane fade show active" id="de-thi" role="tabpanel"
+							aria-labelledby="list-home-list">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Môn học</th>
+										<th scope="col">Xem thêm</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="mh, iStat :${monHocs}" th:object="${mh}">
+										<th scope="row"><span th:text="${iStat.index + 1}"></span></th>
+										<td><a th:href="@{'/user/danh-sach-de/'+*{maMon}+'?loaiDe=1'}" th:text="*{tenMon}"></a></td>
+										<td><a th:href="@{'/user/danh-sach-de/'+*{maMon}+'?loaiDe=1'}">Xem thêm</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="tab-pane fade" id="de-kiem-tra" role="tabpanel"
+							aria-labelledby="list-profile-list">
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Môn học</th>
+										<th scope="col">Xem thêm</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="mh, iStat :${monHocs}" th:object="${mh}">
+										<th scope="row"><span th:text="${iStat.index + 1}"></span></th>
+										<td><a th:href="@{'/user/danh-sach-de/'+*{maMon}+'?loaiDe=0'}" th:text="*{tenMon}"></a></td>
+										<td><a th:href="@{'/user/danh-sach-de/'+*{maMon}+'?loaiDe=0'}">Xem thêm</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end row -->
+
+			<hr class="hr3">
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+
+</body>
+
+</html>

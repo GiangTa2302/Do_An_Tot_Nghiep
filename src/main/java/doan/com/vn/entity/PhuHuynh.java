@@ -20,6 +20,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class PhuHuynh extends Base {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "ph-generator", 
       parameters = @Parameter(name = "prefix", value = "PH"), 

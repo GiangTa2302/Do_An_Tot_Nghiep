@@ -18,6 +18,11 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class CongVan extends Base {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GenericGenerator(name = "cv-generator", 
       parameters = @Parameter(name = "prefix", value = "CV"), 

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+<title>THPT Đông Thụy Anh</title>
+
+<meta name="description" content="" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon"
+	href="../assets/img/favicon/favicon.ico" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/fonts/boxicons.css}" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" th:href="@{/admin/assets/vendor/css/core.css}"
+	class="template-customizer-core-css" />
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/css/theme-default.css}"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" th:href="@{/admin/assets/css/demo.css}" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/admin/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+<!-- Helpers -->
+<script th:src="@{/admin/assets/vendor/js/helpers.js}"></script>
+
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script th:src="@{/admin/assets/js/config.js}"></script>
+</head>
+
+<body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+			<div th:replace="~{/admin/fragments/menu :: menu}"></div>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
+				<div th:replace="~{/admin/fragments/navbar :: navbar}"></div>
+				<!-- / Navbar -->
+
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
+					<!-- Content -->
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span th:if="${loaiDe}" class="text-muted fw-light">Đề thi</span>
+							<span th:unless="${loaiDe}" class="text-muted fw-light">Đề
+								kiểm tra</span>
+						</h4>
+						<th:block th:if="${msg != null}">
+							<div class="alert alert-success" role="alert" th:text="${msg}"></div>
+						</th:block>
+
+						<div class="row">
+							<div class="col-xl">
+								<div class="card mb-4">
+									<div class="card-body">
+										<div class="row mb-3">
+											<form th:action="@{/admin/de/tao-de}" method="post"
+												th:object="${de}">
+												<div class="col mb-0">
+													<label class="mt-1">Thời gian làm bài</label> <select
+														th:field="*{thoiGian}" class="form-select">
+														<option th:value="15">15 phút</option>
+														<option th:value="30">30 phút</option>
+														<option th:value="45">45 phút</option>
+														<option th:value="60">60 phút</option>
+														<option th:value="90">90 phút</option>
+														<option th:value="120">120 phút</option>
+													</select>
+												</div>
+												<div class="col mb-0">
+													<label class="mt-1">Số câu</label> <input type="number"
+														class="form-control" th:field="*{soCau}" />
+												</div>
+												<div class="col mb-0">
+													<label for="defaultSelect" class="form-label">Môn
+														học</label> <select th:field="*{maMon}" class="form-select">
+														<option value="">Chọn môn học</option>
+														<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+															th:text="${mh.tenMon}"></option>
+													</select>
+												</div>
+												<button type="submit" class="btn btn-primary mt-3">Tạo
+													đề</button>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- / Content -->
+
+					<!-- Footer -->
+					<div th:replace="~{/admin/fragments/footer :: footer}"></div>
+					<!-- / Footer -->
+
+					<div class="content-backdrop fade"></div>
+				</div>
+				<!-- Content wrapper -->
+			</div>
+			<!-- / Layout page -->
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
+	<!-- / Layout wrapper -->
+
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/core.js -->
+	<script th:src="@{/admin/assets/vendor/libs/jquery/jquery.js}"></script>
+	<script th:src="@{/admin/assets/vendor/libs/popper/popper.js}"></script>
+	<script th:src="@{/admin/assets/vendor/js/bootstrap.js}"></script>
+	<script
+		th:src="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<script th:src="@{/admin/assets/vendor/js/menu.js}"></script>
+	<!-- end build -->
+
+	<!-- Vendors JS -->
+	<script th:src="@{/admin/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+	<!-- Main JS -->
+	<script th:src="@{/admin/assets/js/main.js}"></script>
+
+	<!-- Page JS -->
+	<script th:src="@{/admin/assets/js/dashboards-analytics.js}"></script>
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">Home / Bài viết của GV-HS / Đăng bài</div>
+			<hr class="invis">
+
+			<div class="row">
+				<div class="col-lg blog-post-single">
+					<div class="text-danger" th:if="${msg != null}" th:text="${msg}"></div>
+					<form action="" method="post" th:object="${bvModel}" >
+						<div class="row">
+							<div class="col-md-4">
+								<div class="form-group">
+									<input class="form-control" placeholder="Account" th:field="*{account}" type="text" />
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" placeholder="Tiêu đề bài viết" th:field="*{tieuDe}" type="text" />
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<textarea th:field="*{noiDung}" class="form-control" placeholder="Nội dung bài viết"
+										cols="30" rows="20"></textarea>
+								</div>
+							</div>
+							<div class="col-md-12 post-btn">
+								<button type="submit" class="hover-btn-new orange">
+									<span>Gửi bài viết</span>
+								</button>
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+
+</body>
+
+</html>

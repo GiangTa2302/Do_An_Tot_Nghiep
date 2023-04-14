@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<!-- Basic -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Site Metas -->
+<title>THPT Đông Thụy Anh</title>
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" th:href="@{/user/css/bootstrap.min.css}">
+<!-- Site CSS -->
+<link rel="stylesheet" th:href="@{/user/css/style.css}">
+<!-- ALL VERSION CSS -->
+<link rel="stylesheet" th:href="@{/user/css/versions.css}">
+<!-- Responsive CSS -->
+<link rel="stylesheet" th:href="@{/user/css/responsive.css}">
+<!-- Custom CSS -->
+<link rel="stylesheet" th:href="@{/user/css/custom.css}">
+
+<!-- Modernizer for Portfolio -->
+<script th:src="@{/user/js/modernizer.js}"></script>
+
+</head>
+
+<body class="host_version">
+
+	<div th:replace="~{/user/fragments/header :: header}"></div>
+
+	<div id="overviews" class="section wb">
+		<div class="container">
+			<div class="lead">
+				Home / Thư viện đề / <span th:if="${loaiDe}">Đề kiểm tra</span> <span
+					th:unless="${loaiDe}">Đề thi</span>
+			</div>
+			<hr class="invis">
+			<div class="row">
+				<div th:if="${msg!=null}" class="alert alert-danger" role="alert" th:text="${msg}"></div>
+				<div th:if="${des.size == 0}" class="alert alert-warning text-center"
+					role="alert">
+					<span th:text="${tenMon}"></span> chưa có đề!!!
+				</div>
+				<th:block th:unless="${des.size == 0}">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Tên môn</th>
+								<th scope="col">Số câu</th>
+								<th scope="col">Thời gian</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="de : ${des}" th:object="${de}">
+								<td scope="row"><span th:text="${tenMon}"></span></td>
+								<td><span th:text="*{soCau}"></span></td>
+								<td><span th:text="*{thoiGian + ' phút'}"></span></td>
+								<td>
+									<a th:href="@{/user/lam-bai/{maDe}(maDe=*{maDe})}">Làm bài</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</th:block>
+			</div>
+			<!-- end row -->
+
+			<hr class="hr3">
+		</div>
+		<!-- end container -->
+	</div>
+	<!-- end section -->
+
+	<!-- start footer -->
+	<div th:replace="~{/user/fragments/footer :: footer}"></div>
+	<!-- end footer -->
+
+	<a href="#" id="scroll-to-top" class="dmtop global-radius"><i
+		class="fa fa-angle-up"></i></a>
+
+	<!-- ALL JS FILES -->
+	<script th:src="@{/user/js/all.js}"></script>
+	<!-- ALL PLUGINS -->
+	<script th:src="@{/user/js/custom.js}"></script>
+
+</body>
+
+</html>

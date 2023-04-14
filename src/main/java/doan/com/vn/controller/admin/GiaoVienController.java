@@ -37,8 +37,9 @@ import doan.com.vn.repository.GiaoVienRepository;
 @Controller
 @RequestMapping("admin/giao-vien")
 public class GiaoVienController {
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/images";
-    
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
+            + "/src/main/resources/static/images";
+
     @Autowired
     private GiaoVienRepository giaoVienRepository;
 
@@ -59,12 +60,14 @@ public class GiaoVienController {
     }
 
     @GetMapping("")
-    public String list(@RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
+    public String list(
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
             Model model) {
         Pageable pageable = PageRequest.of(pageIndex - 1, 10);
-        Page<GiaoVien> gvPages = giaoVienRepository.findByDeletedFalse(pageable);
+        Page<GiaoVien> gvPages = giaoVienRepository
+                .findByDeletedFalse(pageable);
         List<GiaoVien> giaoViens = gvPages.getContent();
-        
+
         model.addAttribute("giaoViens", giaoViens);
         model.addAttribute("currentPage", pageIndex);
         model.addAttribute("totalPages", gvPages.getTotalPages());
@@ -75,7 +78,7 @@ public class GiaoVienController {
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        
+
         model.addAttribute("gvModel", new GiaoVienModel());
         return "admin/giao-vien/add";
     }
@@ -88,7 +91,7 @@ public class GiaoVienController {
         if (result.hasErrors()) {
             return "admin/giao-vien/add";
         }
-        
+
         GiaoVien giaoVien = new GiaoVien();
 
         BeanUtils.copyProperties(gvModel, giaoVien);
@@ -97,10 +100,11 @@ public class GiaoVienController {
         Ban ban = banRepository.findById(gvModel.getMaBan()).get();
         giaoVien.setDanToc(danToc);
         giaoVien.setBan(ban);
-        
-        if(!file.isEmpty()) {
+
+        if (!file.isEmpty()) {
             StringBuilder fileNames = new StringBuilder();
-            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY,
+                    file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename());
             Files.write(fileNameAndPath, file.getBytes());
             giaoVien.setAnhGV(fileNames.toString());
@@ -134,8 +138,8 @@ public class GiaoVienController {
     public String edit(@PathVariable String maGV,
             @Valid @ModelAttribute("gvModel") GiaoVienModel gvModel,
             BindingResult result, RedirectAttributes redirectAttributes,
-            @RequestParam("image") MultipartFile file,
-            Model model) throws IOException {
+            @RequestParam("image") MultipartFile file, Model model)
+            throws IOException {
         if (result.hasErrors()) {
             return "admin/giao-vien/edit";
         }
@@ -147,10 +151,11 @@ public class GiaoVienController {
         Ban ban = banRepository.findById(gvModel.getMaBan()).get();
         giaoVien.setDanToc(danToc);
         giaoVien.setBan(ban);
-        
-        if(!file.isEmpty()) {
+
+        if (!file.isEmpty()) {
             StringBuilder fileNames = new StringBuilder();
-            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY,
+                    file.getOriginalFilename());
             fileNames.append(file.getOriginalFilename());
             Files.write(fileNameAndPath, file.getBytes());
             giaoVien.setAnhGV(fileNames.toString());
@@ -164,7 +169,8 @@ public class GiaoVienController {
     }
 
     @GetMapping("/delete/{maGV}")
-    public String xoaGV(@PathVariable String maGV, RedirectAttributes redirectAttributes) {
+    public String xoaGV(@PathVariable String maGV,
+            RedirectAttributes redirectAttributes) {
         GiaoVien giaoVien = giaoVienRepository.findById(maGV).get();
         giaoVien.setDeleted(true);
         giaoVienRepository.save(giaoVien);
