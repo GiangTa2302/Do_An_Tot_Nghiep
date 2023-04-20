@@ -20,4 +20,13 @@ public class DiemCreationDTO {
         this.diemModels = diemModels;
     }
     
+    public double diemTBC() {
+        double tbc = 0;
+        for (DiemModel diemModel : diemModels) {
+            tbc += diemModel.diemTB();
+        }
+        tbc = tbc / diemModels.size();
+        
+        return Math.round(tbc * 100.0) / 100.0;
+    }
 }

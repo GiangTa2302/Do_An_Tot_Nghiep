@@ -1,6 +1,8 @@
 package doan.com.vn.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,13 +28,18 @@ import doan.com.vn.entity.DanToc;
 import doan.com.vn.entity.HocSinh;
 import doan.com.vn.entity.Lop;
 import doan.com.vn.entity.PhuHuynh;
+import doan.com.vn.entity.Role;
 import doan.com.vn.entity.TheBHYT;
+import doan.com.vn.entity.User;
 import doan.com.vn.model.HocSinhModel;
 import doan.com.vn.repository.DanTocRepository;
 import doan.com.vn.repository.HocSinhRepository;
 import doan.com.vn.repository.LopRepository;
 import doan.com.vn.repository.PhuHuynhRepository;
+import doan.com.vn.repository.RoleRepository;
 import doan.com.vn.repository.TheBHYTRepository;
+import doan.com.vn.repository.UserRepository;
+import doan.com.vn.utils.RoleName;
 
 @Controller
 @RequestMapping("/admin/hoc-sinh")
@@ -51,6 +59,15 @@ public class HocSinhController {
 
     @Autowired
     private TheBHYTRepository bhytRepository;
+    
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @ModelAttribute("danTocs")
     private List<DanToc> getAllDT() {
@@ -108,7 +125,21 @@ public class HocSinhController {
         hocSinh.setPhuHuynh(phuHuynh);
         hocSinh.setTheBHYT(theBHYT);
         hocSinh.setLop(lopRepository.findById(hsModel.getTenLop()).get());
-        hocSinhRepository.save(hocSinh);
+        hocSinhRepository.save(hocSinh);        
+        hocSinhRepository.flush();
+        
+        String encodePass = passwordEncoder.encode( hocSinh.getMaHS() + "12345@");
+        User user = new User(hocSinh.getMaHS(), encodePass,
+                hocSinh.getMaHS() + "@edu.com");
+        Optional<Role> roleOptional = roleRepository.findByRoleName(RoleName.STUDENT);
+        Role role = null;
+        if (roleOptional.isPresent()) {
+            role = roleOptional.get();
+        } else {
+            role = new Role(RoleName.STUDENT);            
+        }
+        user.setRoles(Set.of(role));
+        userRepository.save(user);
 
         redirectAttributes.addFlashAttribute("msg",
                 "Thêm học sinh thành công!");

@@ -10,10 +10,6 @@
 
 <meta name="description" content="" />
 
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon"
-	href="../assets/img/favicon/favicon.ico" />
-
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -23,29 +19,34 @@
 
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet"
-	th:href="@{/admin/assets/vendor/fonts/boxicons.css}" />
+	th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
 
 <!-- Core CSS -->
-<link rel="stylesheet" th:href="@{/admin/assets/vendor/css/core.css}"
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/css/core.css}"
 	class="template-customizer-core-css" />
 <link rel="stylesheet"
-	th:href="@{/admin/assets/vendor/css/theme-default.css}"
+	th:href="@{/ad/assets/vendor/css/theme-default.css}"
 	class="template-customizer-theme-css" />
-<link rel="stylesheet" th:href="@{/admin/assets/css/demo.css}" />
+<link rel="stylesheet" th:href="@{/ad/assets/css/demo.css}" />
 
 <!-- Vendors CSS -->
 <link rel="stylesheet"
-	th:href="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+	th:href="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
 
 <link rel="stylesheet"
-	th:href="@{/admin/assets/vendor/libs/apex-charts/apex-charts.css}" />
+	th:href="@{/ad/assets/vendor/libs/apex-charts/apex-charts.css}" />
 
 <!-- Helpers -->
-<script th:src="@{/admin/assets/vendor/js/helpers.js}"></script>
+<script th:src="@{/ad/assets/vendor/js/helpers.js}"></script>
 
 <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-<script th:src="@{/admin/assets/js/config.js}"></script>
+<script th:src="@{/ad/assets/js/config.js}"></script>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 </head>
 
 <body>
@@ -76,8 +77,10 @@
 							<div class="col-xl">
 								<div class="card mb-4">
 									<div class="card-body">
-										<form th:action="@{/admin/giao-vien/edit/{maGV}(maGV=${maGV})}" method="post"
-											th:object="${gvModel}" enctype="multipart/form-data">
+										<form
+											th:action="@{/admin/giao-vien/edit/{maGV}(maGV=${maGV})}"
+											method="post" th:object="${gvModel}"
+											enctype="multipart/form-data">
 											<div class="row mb-3">
 												<div class="col mb-0">
 													<label class="mt-1">Họ đệm</label> <input type="text"
@@ -105,7 +108,7 @@
 													<div class="mt-2">
 														<input class="form-check-input " type="radio" th:value="0"
 															th:field="*{gioiTinh}" /> <label
-															class="form-check-label">Nam</label> <input
+															class="form-check-label">Nam</label> &nbsp; &nbsp; <input
 															class="form-check-input " type="radio" th:value="1"
 															th:field="*{gioiTinh}" /> <label
 															class="form-check-label">Nữ</label> <small
@@ -118,16 +121,15 @@
 											<div class="row mb-3">
 												<div class="col mb-0">
 													<label class="mt-1">Điện thoại</label> <input type="text"
-														class="form-control" th:field="*{dienThoai}" />
-													<small class="text-danger"
+														class="form-control" th:field="*{dienThoai}" /> <small
+														class="text-danger"
 														th:if="${#fields.hasErrors('dienThoai')}"
 														th:errors="*{dienThoai}"></small>
 												</div>
 												<div class="col mb-0">
-													<label class="mt-1">Ảnh</label> 
-													<img alt="" th:src="@{'/images/'+*{anhGV}}" class="d-block rounded mb-1" height="100" width="100">
-													<input type="file"
-														class="form-control" id="fileImage" name="image" accept="image/png, image/jpg"/>
+													<label class="mt-1">Ảnh</label> <input type="file"
+														class="form-control" name="image"
+														accept="image/png, image/jpg" />
 												</div>
 											</div>
 											<div class="row mb-3">
@@ -176,20 +178,32 @@
 											<div class="row mb-3">
 												<div class="col mb-0">
 													<label class="mt-1">Học vấn</label> <input type="text"
-														class="form-control" th:field="*{hocVan}" />
-														<small class="text-danger"
-													th:if="${#fields.hasErrors('hocVan')}"
-													th:errors="*{hocVan}"></small>
-												</div>
-												<div class="col mb-0">
-													<label class="mt-1">Ban</label> <select
-														class="form-select" th:field="*{maBan}">
-														<option th:each="item : ${bans}"
-															th:value="${item.maBan}" th:text="${item.tenBan}"></option>
-													</select>
+														class="form-control" th:field="*{hocVan}" /> <small
+														class="text-danger" th:if="${#fields.hasErrors('hocVan')}"
+														th:errors="*{hocVan}"></small>
 												</div>
 											</div>
-											<button type="submit" class="btn btn-primary">Cập nhật</button>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Môn học</label> <select
+														class="form-select" th:field="*{maMon}">
+														<option th:each="item : ${monHocs}"
+															th:value="${item.maMon}" th:text="${item.tenMon}"></option>
+													</select>
+												</div>
+												<!-- 
+												<div class="col mb-0">
+													<label class="mt-1">Lớp</label> <br /> <select
+														th:field="*{lops}" class="select-lop" multiple
+														data-live-search="true" style="width: 100%;">
+														<option th:each="item : ${lops}" th:value="${item.tenLop}"
+															th:text="${item.tenLop}"></option>
+													</select>
+												</div>
+												 -->
+											</div>
+											<button type="submit" class="btn btn-primary">Cập
+												nhật</button>
 										</form>
 									</div>
 								</div>
@@ -215,33 +229,46 @@
 	<!-- / Layout wrapper -->
 
 	<!-- Core JS -->
-	<!-- build:js assets/vendor/js/core.js -->
+	<!-- build:js assets/vendor/js/core.js 
 	<script th:src="@{/admin/assets/vendor/libs/jquery/jquery.js}"></script>
-	<script th:src="@{/admin/assets/vendor/libs/popper/popper.js}"></script>
+	
 	<script th:src="@{/admin/assets/vendor/js/bootstrap.js}"></script>
+	-->
+	<script th:src="@{/ad/assets/vendor/libs/popper/popper.js}"></script>
 	<script
-		th:src="@{/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
-	<script th:src="@{/admin/assets/vendor/js/menu.js}"></script>
+	<script
+		th:src="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<script th:src="@{/ad/assets/vendor/js/menu.js}"></script>
 	<!-- end build -->
 
 	<!-- Vendors JS -->
-	<script th:src="@{/admin/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+	<script th:src="@{/ad/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
 
 	<!-- Main JS -->
-	<script th:src="@{/admin/assets/js/main.js}"></script>
+	<script th:src="@{/ad/assets/js/main.js}"></script>
 
 	<!-- Page JS -->
-	<script th:src="@{/admin/assets/js/dashboards-analytics.js}"></script>
+	<script th:src="@{/ad/assets/js/dashboards-analytics.js}"></script>
 
 	<!-- Address API -->
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
 		integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script th:src="@{/admin/js/address.js}"></script>
+	<script th:src="@{/ad/js/address.js}"></script>
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+	<script>
+		$('.select-lop').selectpicker();
+	</script>
 </body>
 </html>

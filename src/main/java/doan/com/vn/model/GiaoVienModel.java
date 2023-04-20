@@ -1,6 +1,7 @@
 package doan.com.vn.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -53,5 +54,7 @@ public class GiaoVienModel {
     
     private Integer maDanToc;
     
-    private Integer maBan;
+    private String maMon;
+    
+    private List<String> lops;
 }

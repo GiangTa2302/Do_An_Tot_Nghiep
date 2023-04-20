@@ -7,5 +7,5 @@ import doan.com.vn.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String>{
-
+    User findByUsername(String account);
 }

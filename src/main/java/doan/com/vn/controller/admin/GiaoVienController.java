@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,13 +30,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import doan.com.vn.entity.Ban;
 import doan.com.vn.entity.DanToc;
 import doan.com.vn.entity.GiaoVien;
+import doan.com.vn.entity.Lop;
+import doan.com.vn.entity.MonHoc;
+import doan.com.vn.entity.Role;
+import doan.com.vn.entity.User;
 import doan.com.vn.model.GiaoVienModel;
-import doan.com.vn.repository.BanRepository;
 import doan.com.vn.repository.DanTocRepository;
 import doan.com.vn.repository.GiaoVienRepository;
+import doan.com.vn.repository.LopRepository;
+import doan.com.vn.repository.MonHocRepository;
+import doan.com.vn.repository.RoleRepository;
+import doan.com.vn.repository.UserRepository;
+import doan.com.vn.utils.RoleName;
 
 @Controller
 @RequestMapping("admin/giao-vien")
@@ -47,16 +58,33 @@ public class GiaoVienController {
     private DanTocRepository danTocRepository;
 
     @Autowired
-    private BanRepository banRepository;
+    private UserRepository userRepository;
 
-    @ModelAttribute("bans")
-    private List<Ban> getAllBan() {
-        return banRepository.findAll();
-    }
+    @Autowired
+    private RoleRepository roleRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private MonHocRepository monHocRepository;
+
+    @Autowired
+    private LopRepository lopRepository;
 
     @ModelAttribute("danTocs")
     private List<DanToc> getAllDT() {
         return danTocRepository.findAll();
+    }
+
+    @ModelAttribute("monHocs")
+    private List<MonHoc> getAllMH() {
+        return monHocRepository.findAll();
+    }
+
+    @ModelAttribute("lops")
+    private List<Lop> getAllLop() {
+        return lopRepository.findAll();
     }
 
     @GetMapping("")
@@ -97,9 +125,21 @@ public class GiaoVienController {
         BeanUtils.copyProperties(gvModel, giaoVien);
 
         DanToc danToc = danTocRepository.findById(gvModel.getMaDanToc()).get();
-        Ban ban = banRepository.findById(gvModel.getMaBan()).get();
         giaoVien.setDanToc(danToc);
-        giaoVien.setBan(ban);
+
+        MonHoc monHoc = monHocRepository.findById(gvModel.getMaMon()).get();
+        giaoVien.setMonHoc(monHoc);
+
+        List<String> tenLops = gvModel.getLops();
+        List<Lop> lops = new ArrayList<Lop>();
+        Lop lop = null;
+        for (String tenLop : tenLops) {
+            lop = lopRepository.findById(tenLop).get();
+            lop.setGiaoViens(List.of(giaoVien));
+            lops.add(lop);
+        }
+
+        giaoVien.setLops(lops);
 
         if (!file.isEmpty()) {
             StringBuilder fileNames = new StringBuilder();
@@ -112,6 +152,21 @@ public class GiaoVienController {
         giaoVien.setCreatedDate(new Date());
 
         giaoVienRepository.save(giaoVien);
+        giaoVienRepository.flush();
+        
+        String encodePass = passwordEncoder.encode(giaoVien.getMaGV() + "12345@");
+
+        User user = new User(giaoVien.getMaGV(), encodePass,
+                giaoVien.getMaGV() + "@edu.com");
+        Optional<Role> roleOptional = roleRepository.findByRoleName(RoleName.TEACHER);
+        Role role = null;
+        if (roleOptional.isPresent()) {
+            role = roleOptional.get();
+        } else {
+            role = new Role(RoleName.TEACHER);            
+        }
+        user.setRoles(Set.of(role));
+        userRepository.save(user);
 
         redirectAttributes.addFlashAttribute("msg",
                 "Thêm giáo viên thành công!");
@@ -126,7 +181,6 @@ public class GiaoVienController {
 
         BeanUtils.copyProperties(giaoVien, gvModel);
         gvModel.setMaDanToc(giaoVien.getDanToc().getMaDanToc());
-        gvModel.setMaBan(giaoVien.getBan().getMaBan());
 
         model.addAttribute("gvModel", gvModel);
         model.addAttribute("maGV", maGV);
@@ -148,9 +202,21 @@ public class GiaoVienController {
         BeanUtils.copyProperties(gvModel, giaoVien);
 
         DanToc danToc = danTocRepository.findById(gvModel.getMaDanToc()).get();
-        Ban ban = banRepository.findById(gvModel.getMaBan()).get();
         giaoVien.setDanToc(danToc);
-        giaoVien.setBan(ban);
+
+        MonHoc monHoc = monHocRepository.findById(gvModel.getMaMon()).get();
+        giaoVien.setMonHoc(monHoc);
+
+//        List<String> tenLops = gvModel.getLops();
+//        List<Lop> lops = giaoVien.getLops();
+//        Lop lop = null;
+//        for (String tenLop : tenLops) {
+//            lop = lopRepository.findById(tenLop).get();
+//            lop.setGiaoViens(List.of(giaoVien));
+//            lops.add(lop);
+//        }
+//        
+//        giaoVien.setLops(lops);
 
         if (!file.isEmpty()) {
             StringBuilder fileNames = new StringBuilder();
@@ -174,7 +240,7 @@ public class GiaoVienController {
         GiaoVien giaoVien = giaoVienRepository.findById(maGV).get();
         giaoVien.setDeleted(true);
         giaoVienRepository.save(giaoVien);
-//        giaoVienRepository.deleteById(maGV);
+
         redirectAttributes.addFlashAttribute("msg",
                 "Xóa giáo viên thành công!");
         return "redirect:/admin/giao-vien";

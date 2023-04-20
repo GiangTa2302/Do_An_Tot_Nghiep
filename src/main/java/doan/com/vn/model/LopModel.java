@@ -22,6 +22,5 @@ public class LopModel {
     
     private Integer siSo;
     
-    @NotEmpty(message = "Giáo viên không được để trống.")
     private String maGV;
 }

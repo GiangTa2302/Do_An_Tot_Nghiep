@@ -12,15 +12,10 @@ import doan.com.vn.entity.DanToc;
 import doan.com.vn.repository.DanTocRepository;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
     @Autowired
     private DanTocRepository danTocRepository;
-    
-    @GetMapping("")
-    public String adminPage() {
-        return "admin/index";
-    }
     
     @GetMapping("api/dan-toc")
     @ResponseBody

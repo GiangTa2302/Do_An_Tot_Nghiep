@@ -77,7 +77,7 @@ public class BaiGiangController {
         for(BinhLuan bl : binhLuans) {
             blModel = new BinhLuanModel();
             BeanUtils.copyProperties(bl, blModel);
-            blModel.setAccount(bl.getUser().getAccount());
+            blModel.setAccount(bl.getUser().getUsername());
             
             blModels.add(blModel);
         }

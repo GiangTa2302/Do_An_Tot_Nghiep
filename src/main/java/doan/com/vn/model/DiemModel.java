@@ -38,6 +38,6 @@ public class DiemModel {
     }
     
     public float diemTB() {
-        return ((diemMieng + diemTX1 + diemTX2*2)/4 + diemThi*2)/2;
+        return (diemMieng + diemTX1 + diemTX2 + diemThi*2)/5;
     }
 }

@@ -1,5 +1,6 @@
 package doan.com.vn.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -42,4 +44,7 @@ public class Lop extends Base {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_gv", referencedColumnName = "ma_gv")
     private GiaoVien giaoVien;
+    
+    @ManyToMany(mappedBy = "lops")
+    private List<GiaoVien> giaoViens;
 }

@@ -494,11 +494,11 @@
     incomeChartConfig = {
       series: [
         {
-          data: [24, 21, 30, 22, 42, 26, 35, 29]
+          data: [5, 38],
         }
       ],
       chart: {
-        height: 215,
+        height: 200,
         parentHeightOffset: 0,
         parentWidthOffset: 0,
         toolbar: {
@@ -558,7 +558,7 @@
         }
       },
       xaxis: {
-        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: thangDiem,
         axisBorder: {
           show: false
         },

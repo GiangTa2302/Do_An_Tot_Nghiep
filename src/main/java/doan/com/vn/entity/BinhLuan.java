@@ -32,7 +32,7 @@ public class BinhLuan extends Base{
     private String noiDung;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "account", referencedColumnName = "account")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
     
     @ManyToOne(fetch = FetchType.LAZY)

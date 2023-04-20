@@ -47,8 +47,14 @@ public class Diem extends Base{
     @Column(name = "diem_thi")
     private float diemThi;
     
-    
     public float diemTB() {
         return ((diemMieng + diemTX1 + diemTX2*2)/4 + diemThi*2)/2;
+    }
+
+    @Override
+    public String toString() {
+        return "Diem [diemTX1=" + diemTX1 + ", diemMieng="
+                + diemMieng + ", diemTX2=" + diemTX2 + ", diemThi=" + diemThi
+                + "]";
     }
 }

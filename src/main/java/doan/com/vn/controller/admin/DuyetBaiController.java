@@ -24,11 +24,6 @@ public class DuyetBaiController {
     @Autowired
     private BaiVietRepository baiVietRepository;
     
-    @GetMapping("/cong-van")
-    public String listCV() {
-        return "admin/cong-van/list";
-    }
-    
     @GetMapping("/bai-viet")
     public String listBV(
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,

@@ -30,13 +30,13 @@ public class BaiViet extends Base {
     @Column(name = "tieu_de", columnDefinition = "NVARCHAR(1000)")
     private String tieuDe;
     
-    @Column(name = "noi_dung", columnDefinition = "NVARCHAR(10000)")
+    @Column(name = "noi_dung", columnDefinition = "NVARCHAR(4000)")
     private String noiDung;
     
     @Column(name = "trang_thai")
     private boolean trangThai;
     
     @ManyToOne
-    @JoinColumn(name = "account", referencedColumnName = "account")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
 }

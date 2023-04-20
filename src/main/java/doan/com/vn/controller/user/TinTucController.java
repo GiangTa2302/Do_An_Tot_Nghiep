@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import doan.com.vn.entity.BaiViet;
@@ -26,13 +25,28 @@ import doan.com.vn.repository.BaiVietRepository;
 import doan.com.vn.repository.UserRepository;
 
 @Controller
-@RequestMapping("/user")
 public class TinTucController {
     @Autowired
     private BaiVietRepository baiVietRepository;
     
     @Autowired
     private UserRepository userRepository;
+    
+    @GetMapping("/tin-tuc-1")
+    public String tintuc1() {
+        return "user/tin-tuc-1";
+    }
+    
+    @GetMapping("/tin-tuc-2")
+    public String tintuc2() {
+        return "user/tin-tuc-2";
+    }
+    
+    @GetMapping("/chi-tiet-tuyen-sinh")
+    public String chitiet() {
+        
+        return "user/chi-tiet-tuyen-sinh";
+    }
     
     @GetMapping("/tin-tuc-3")
     public String tintuc3(
@@ -48,7 +62,7 @@ public class TinTucController {
         for(BaiViet bv : baiViets) {
             bvModel = new BaiVietModel();
             BeanUtils.copyProperties(bv, bvModel);
-            bvModel.setAccount(bv.getUser().getAccount());
+            bvModel.setAccount(bv.getUser().getUsername());
             
             bvModels.add(bvModel);
         }
@@ -69,7 +83,7 @@ public class TinTucController {
         if(bvOptional.isPresent()) {
             BaiVietModel baiVietModel = new BaiVietModel();
             BeanUtils.copyProperties(bvOptional.get(), baiVietModel);
-            baiVietModel.setAccount(bvOptional.get().getUser().getAccount());
+            baiVietModel.setAccount(bvOptional.get().getUser().getUsername());
             model.addAttribute("baiVietModel", baiVietModel);
         }else {
             model.addAttribute("baiVietModel", new BaiVietModel());
@@ -78,14 +92,14 @@ public class TinTucController {
         return "user/chi-tiet-bai-dang";
     }
     
-    @GetMapping("/tin-tuc-3/dang-bai")
+    @GetMapping("/user/tin-tuc-3/dang-bai")
     public String dangbai(
             Model model) {
         model.addAttribute("bvModel", new BaiVietModel());
         return "user/dang-bai";
     }
     
-    @PostMapping("/tin-tuc-3/dang-bai")
+    @PostMapping("/user/tin-tuc-3/dang-bai")
     public String dangbai(
             @ModelAttribute BaiVietModel bvModel,
             Model model) {
@@ -102,6 +116,6 @@ public class TinTucController {
         baiViet.setCreatedDate(new Date());
         baiVietRepository.save(baiViet);
         
-        return "redirect:/user/tin-tuc-3";
+        return "redirect:/tin-tuc-3";
     }
 }
