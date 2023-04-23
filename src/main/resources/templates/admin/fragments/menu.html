@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<aside th:fragment="menu" id="layout-menu"
 		class="layout-menu menu-vertical menu bg-menu-theme">
@@ -25,18 +26,60 @@
 			</a></li>
 
 			<!-- Giáo viên -->
-			<li class="menu-item"><a th:href="@{/admin/giao-vien}"
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a th:href="@{/admin/giao-vien}"
 				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
 					<div data-i18n="Analytics">Giáo viên</div>
 			</a></li>
 
 			<!-- Học sinh -->
-			<li class="menu-item"><a href="javascript:void(0);"
-				class="menu-link menu-toggle"> <i
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
+				href="javascript:void(0);" class="menu-link menu-toggle"> <i
 					class="menu-icon tf-icons bx bx-data"></i>
 					<div data-i18n="Layouts">Học sinh</div>
 			</a>
 
+				<ul class="menu-sub">
+					<li class="menu-item"><a th:href="@{/admin/hoc-sinh?khoi=10}"
+						class="menu-link">
+							<div data-i18n="Without menu">Khối 10</div>
+					</a></li>
+					<li class="menu-item"><a th:href="@{/admin/hoc-sinh?khoi=11}"
+						class="menu-link">
+							<div data-i18n="Without navbar">Khối 11</div>
+					</a></li>
+					<li class="menu-item"><a th:href="@{/admin/hoc-sinh?khoi=12}"
+						class="menu-link">
+							<div data-i18n="Without navbar">Khối 12</div>
+					</a></li>
+				</ul></li>
+
+			<!-- Môn học -->
+			<li class="menu-item"><a th:href="@{/admin/mon-hoc/}"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Môn học</div>
+			</a></li>
+
+			<!-- Điểm -->
+			<li sec:authorize="hasAuthority('TEACHER')" class="menu-item"><a
+				sec:authorize="isAuthenticated()"
+				th:href="@{/admin/diem(username=${#authentication.name})}"
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Quản lý điểm</div>
+			</a></li>
+
+
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
+				th:href="@{/admin/diem/}" class="menu-link"> <i
+					class="menu-icon tf-icons bx bx-group"></i>
+					<div data-i18n="Analytics">Quản lý điểm</div>
+			</a></li>
+
+			<!-- Lớp -->
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
+				href="javascript:void(0);" class="menu-link menu-toggle"> <i
+					class="menu-icon tf-icons bx bx-data"></i>
+					<div data-i18n="Layouts">Quản lý lớp</div>
+			</a>
 				<ul class="menu-sub">
 					<li class="menu-item"><a th:href="@{/admin/lop/10}"
 						class="menu-link">
@@ -52,16 +95,11 @@
 					</a></li>
 				</ul></li>
 
-			<!-- Môn học -->
-			<li class="menu-item"><a th:href="@{/admin/mon-hoc/}"
+			<li sec:authorize="hasAuthority('TEACHER')" class="menu-item"><a
+				sec:authorize="isAuthenticated()"
+				th:href="@{/admin/diem/quan-ly-lop(username=${#authentication.name})}"
 				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
-					<div data-i18n="Analytics">Môn học</div>
-			</a></li>
-			
-			<!-- Điểm -->
-			<li class="menu-item"><a th:href="@{/admin/diem}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
-					<div data-i18n="Analytics">Quản lý điểm</div>
+					<div data-i18n="Analytics">Quản lý lớp</div>
 			</a></li>
 
 			<!--  Tài liệu -->
@@ -79,12 +117,12 @@
 						class="menu-link">
 							<div data-i18n="Without navbar">Đề thi</div>
 					</a></li>
-				</ul>
-			</li>
+				</ul></li>
 
 			<!-- Bài viết -->
-			<li class="menu-item"><a th:href="@{/admin/bai-viet}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-notepad"></i>
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
+				th:href="@{/admin/bai-viet}" class="menu-link"> <i
+					class="menu-icon tf-icons bx bx-notepad"></i>
 					<div data-i18n="Analytics">Bài viết của GV&HS</div>
 			</a></li>
 

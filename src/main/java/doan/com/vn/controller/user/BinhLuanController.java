@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import doan.com.vn.entity.BaiGiang;
@@ -39,7 +40,8 @@ public class BinhLuanController {
     @PostMapping("/binh-luan/{maBG}")
     public String postBL(
             @PathVariable Integer maBG,
-            @Valid @ModelAttribute BinhLuanModel blModel,
+            @RequestParam String username,
+            @Valid @ModelAttribute("blModel") BinhLuanModel blModel,
             BindingResult result,
             RedirectAttributes redirectAttributes,
             Model model) {
@@ -47,7 +49,7 @@ public class BinhLuanController {
             return "user/danh-sach-video";
         }
         
-        Optional<User> user = userRepository.findById(blModel.getAccount());
+        Optional<User> user = userRepository.findById(username);
         Optional<BaiGiang> bg = baiGiangRepository.findById(maBG);
         if(!user.isPresent()) {
             redirectAttributes.addFlashAttribute("error", "Account không tồn tại");

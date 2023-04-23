@@ -51,7 +51,7 @@ public class DoAnApplication {
 //            String encodePass = passwordEncoder.encode(user1.getPassword());
 //            user1.setPassword(encodePass);
 //            user1.setRoles(roles1);
-////
+//
 //            userRepository.save(user1);
 
         }

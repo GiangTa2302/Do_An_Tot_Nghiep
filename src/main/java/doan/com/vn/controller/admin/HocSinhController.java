@@ -78,6 +78,24 @@ public class HocSinhController {
     private List<Lop> getAllLop() {
         return lopRepository.findByDeletedFalse();
     }
+    
+    @GetMapping("")
+    public String list(@RequestParam("khoi") Integer khoi,
+            @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
+            Model model) {
+        Pageable pageable = PageRequest.of(pageIndex - 1, 10);
+        Page<Lop> lopPage = lopRepository.findByTenKhoiAndDeletedFalse(khoi,
+                pageable);
+        List<Lop> lops = lopPage.getContent();
+
+        model.addAttribute("lops", lops);
+        model.addAttribute("currentPage", pageIndex);
+        model.addAttribute("totalPages", lopPage.getTotalPages());
+        model.addAttribute("totalItems", lopPage.getTotalElements());
+
+        model.addAttribute("khoi", khoi);
+        return "admin/hoc-sinh/list-lop";
+    }
 
     @GetMapping("/{tenLop}")
     public String list(@PathVariable String tenLop,
@@ -140,6 +158,10 @@ public class HocSinhController {
         }
         user.setRoles(Set.of(role));
         userRepository.save(user);
+        
+        Lop lop = hocSinh.getLop();
+        lop.setSiSo(lop.getSiSo() + 1);
+        lopRepository.save(lop);
 
         redirectAttributes.addFlashAttribute("msg",
                 "Thêm học sinh thành công!");

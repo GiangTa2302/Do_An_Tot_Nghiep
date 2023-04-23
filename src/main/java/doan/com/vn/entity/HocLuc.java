@@ -27,7 +27,7 @@ public class HocLuc extends Base {
     @Column(name = "ma_hl")
     private Integer maHL;
     
-    @Column(name = "ten_hl")
+    @Column(name = "ten_hl", columnDefinition = "NVARCHAR(100)")
     private String tenHL;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hocLuc")

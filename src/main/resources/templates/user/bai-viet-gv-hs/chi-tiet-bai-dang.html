@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+
 <!-- Basic -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,48 +24,65 @@
 
 <!-- Modernizer for Portfolio -->
 <script th:src="@{/us/js/modernizer.js}"></script>
-</head>
 
+</head>
 <body class="host_version">
 
 	<div th:replace="~{/user/fragments/header :: header}"></div>
+	<!-- End header -->
 
 	<div id="overviews" class="section wb">
+
 		<div class="container">
-			<div class="lead">Home / Bài viết của GV-HS / Đăng bài</div>
+			<div class="lead">Home / Bài viết của GV-HS / Chi tiết</div>
 			<hr class="invis">
 
 			<div class="row">
 				<div class="col-lg blog-post-single">
-					<div class="text-danger" th:if="${msg != null}" th:text="${msg}"></div>
-					<form action="" method="post" th:object="${bvModel}" >
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<input class="form-control" placeholder="Account" th:field="*{account}" type="text" />
+
+					<th:block th:object="${baiVietModel}">
+						<div class="blog-item">
+							<div class="post-content">
+								<div class="meta-info-blog">
+									<span><i class="fa fa-calendar"></i> <a href="#"
+										th:text="${#dates.format(baiVietModel.createdDate, 'dd-MM-yyyy')}"></a>
+									</span>
 								</div>
-							</div>
-							<div class="col-md-8">
-								<div class="form-group">
-									<input class="form-control" placeholder="Tiêu đề bài viết" th:field="*{tieuDe}" type="text" />
+								<div class="blog-title">
+									<h2>
+										<a href="#" th:text="*{tieuDe}">perferendis doloribus
+											asperiores.</a>
+									</h2>
 								</div>
-							</div>
-							<div class="col-md-12">
-								<div class="form-group">
-									<textarea th:field="*{noiDung}" class="form-control" placeholder="Nội dung bài viết"
-										cols="30" rows="20"></textarea>
+								<div class="blog-desc">
+									<p th:text="*{noiDung}"></p>
 								</div>
-							</div>
-							<div class="col-md-12 post-btn">
-								<button type="submit" class="hover-btn-new orange">
-									<span>Gửi bài viết</span>
-								</button>
 							</div>
 						</div>
-					</form>
 
+
+						<div th:if="${user != null}" class="blog-author">
+							<div class="author-bio">
+								<h3 class="author_name">
+									<a href="#" th:text="${user.username}"></a>
+								</h3>
+								<h5>
+									<th:block th:each="role : ${user.roles}">
+										<span th:text="${role.roleName}"></span>
+									</th:block>
+									 tại <a th:href="@{/}">THPT Đông Thụy Anh</a>
+								</h5>
+							</div>
+							<div class="author-desc">
+								<img src="/us/images/author.jpg" alt="about author">
+							</div>
+						</div>
+
+					</th:block>
 				</div>
 			</div>
+			<!-- end row -->
+
 
 		</div>
 		<!-- end container -->
@@ -85,5 +102,4 @@
 	<script th:src="@{/us/js/custom.js}"></script>
 
 </body>
-
 </html>

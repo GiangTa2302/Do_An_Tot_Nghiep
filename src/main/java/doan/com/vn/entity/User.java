@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -66,10 +65,4 @@ public class User extends Base {
         this.password = password;
         this.email = email;
     }
-
-    @OneToOne(mappedBy = "user")
-    private HocSinh hocSinh;
-
-    @OneToOne(mappedBy = "user")
-    private GiaoVien giaoVien;
 }

@@ -25,10 +25,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        
         http.authorizeHttpRequests((authorize) -> authorize
                 .antMatchers("/", "/lien-he", "/thoi-khoa-bieu", "/tin-tuc-1",
                         "/tin-tuc-2", "/tin-tuc-3", "/chi-tiet-tuyen-sinh")
-                .permitAll().antMatchers("/ad/**", "/us/**").permitAll()
+                .permitAll().antMatchers("/ad/**", "/us/**", "images/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name())
                 .antMatchers("/user/**").hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name(), RoleName.STUDENT.name())
                 .anyRequest().authenticated())
@@ -36,7 +37,10 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
 //                        .successHandler(loginSuccessHandler)
                         .defaultSuccessUrl("/admin", true)
-                        .permitAll());
+                        .permitAll())
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/");
 
         return http.build();
     }

@@ -1,5 +1,11 @@
 package doan.com.vn.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,31 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import doan.com.vn.entity.User;
 
-
 @Controller
 public class AuthController {
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//    
-//    @Autowired
-//    private UserRepository userRepository;
-    
-//    @GetMapping("/register")
-//    public String registerUI(Model model) {
-//        model.addAttribute("user", new User());
-//        return "auth/register";
-//    }
-//    
-//    @PostMapping("/register")
-//    public String registerUI(@ModelAttribute("user") User user) {
-//        String encodePass = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(encodePass);
-//        user.setRoleName(RoleName.USER);
-//        
-//        userRepository.save(user);
-//        
-//        return "redirect:/login";
-//    }
     @GetMapping("/admin")
     public String adminPage(Model model) {
         return "admin/index";
@@ -49,4 +32,13 @@ public class AuthController {
         
         return "redirect:/admin/";
     }
+    
+    @GetMapping("/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {  
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
+        if (auth != null){      
+           new SecurityContextLogoutHandler().logout(request, response, auth);  
+        }  
+         return "redirect:/";  
+     }  
 }

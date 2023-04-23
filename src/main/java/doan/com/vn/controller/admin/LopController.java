@@ -80,7 +80,7 @@ public class LopController {
         if (giaoVien.isPresent()) {
             lop.setGiaoVien(giaoVien.get());
         }
-
+        lop.setSiSo(0);
         lopRepository.save(lop);
 
         redirectAttributes.addFlashAttribute("msg", "Thêm lớp thành công!");
@@ -94,7 +94,12 @@ public class LopController {
         Lop lop = lopRepository.findById(tenLop).get();
 
         BeanUtils.copyProperties(lop, lopModel);
-        lopModel.setMaGV(lop.getGiaoVien().getMaGV());
+        if (lop.getGiaoVien() == null) {
+            lopModel.setMaGV("");
+        }else {
+            lopModel.setMaGV(lop.getGiaoVien().getMaGV());
+        }
+        
 
         model.addAttribute("lopModel", lopModel);
 

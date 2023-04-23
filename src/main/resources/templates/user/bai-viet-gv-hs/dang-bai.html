@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<head>
 <!-- Basic -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,72 +24,50 @@
 
 <!-- Modernizer for Portfolio -->
 <script th:src="@{/us/js/modernizer.js}"></script>
-
 </head>
+
 <body class="host_version">
 
 	<div th:replace="~{/user/fragments/header :: header}"></div>
-	<!-- End header -->
 
 	<div id="overviews" class="section wb">
-
 		<div class="container">
-			<div class="lead">Home / Bài viết của GV-HS / Chi tiết</div>
+			<div class="lead">Home / Bài viết của GV-HS / Đăng bài</div>
 			<hr class="invis">
 
 			<div class="row">
 				<div class="col-lg blog-post-single">
-
-					<th:block th:object="${baiVietModel}">
-						<div class="blog-item">
-							<div class="post-content">
-								<div class="meta-info-blog">
-									<span><i class="fa fa-calendar"></i> <a href="#"
-										th:text="${#dates.format(baiVietModel.createdDate, 'dd-MM-yyyy')}"></a>
-									</span>
+					<div class="text-danger" th:if="${msg != null}" th:text="${msg}"></div>
+					<form
+						th:action="@{/user/tin-tuc-3/dang-bai(username=${#authentication.name})}"
+						method="post" th:object="${bvModel}">
+						<div class="row">
+							<div class="col-md-8">
+								<div class="form-group">
+									<input class="form-control" placeholder="Tiêu đề bài viết"
+										th:field="*{tieuDe}" type="text" /> <small
+										class="text-danger" th:if="${#fields.hasErrors('tieuDe')}"
+										th:errors="*{tieuDe}"></small>
 								</div>
-								<div class="blog-title">
-									<h2>
-										<a href="#" th:text="*{tieuDe}">perferendis doloribus
-											asperiores.</a>
-									</h2>
+							</div>
+							<div class="col-md-12">
+								<div class="form-group">
+									<textarea th:field="*{noiDung}" class="form-control"
+										placeholder="Nội dung bài viết" cols="30" rows="20">
+									</textarea>
+									<small class="text-danger"
+										th:if="${#fields.hasErrors('noiDung')}" th:errors="*{noiDung}"></small>
 								</div>
-								<div class="blog-desc">
-									<p th:text="*{noiDung}"></p>
-								</div>
+							</div>
+							<div class="col-md-12 post-btn">
+								<button type="submit" class="hover-btn-new orange">
+									<span>Gửi bài viết</span>
+								</button>
 							</div>
 						</div>
-
-
-						<div class="blog-author">
-							<div class="author-bio">
-								<h3 class="author_name">
-									<a href="#" th:text="*{account}"></a>
-								</h3>
-								<h5>
-									CEO at <a href="#">SmartEDU</a>
-								</h5>
-								<p class="author_det">Lorem ipsum dolor sit amet,
-									consectetur adip, sed do eiusmod tempor incididunt ut aut
-									reiciendise voluptat maiores alias consequaturs aut perferendis
-									doloribus omnis saperet docendi nec, eos ea alii molestiae
-									aliquand.</p>
-							</div>
-							<div class="author-desc">
-								<img src="/user/images/author.jpg" alt="about author">
-								<ul class="author-social">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-skype"></i></a></li>
-								</ul>
-							</div>
-						</div>
-
-					</th:block>
+					</form>
 				</div>
 			</div>
-			<!-- end row -->
-
 
 		</div>
 		<!-- end container -->
@@ -109,4 +87,5 @@
 	<script th:src="@{/us/js/custom.js}"></script>
 
 </body>
+
 </html>

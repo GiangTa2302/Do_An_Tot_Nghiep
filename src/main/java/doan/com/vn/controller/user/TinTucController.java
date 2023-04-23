@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,13 +42,13 @@ public class TinTucController {
     
     @GetMapping("/tin-tuc-2")
     public String tintuc2() {
-        return "user/tin-tuc-2";
+        return "user/tuyen-sinh/tin-tuc-2";
     }
     
     @GetMapping("/chi-tiet-tuyen-sinh")
     public String chitiet() {
         
-        return "user/chi-tiet-tuyen-sinh";
+        return "user/tuyen-sinh/chi-tiet-tuyen-sinh";
     }
     
     @GetMapping("/tin-tuc-3")
@@ -62,7 +65,7 @@ public class TinTucController {
         for(BaiViet bv : baiViets) {
             bvModel = new BaiVietModel();
             BeanUtils.copyProperties(bv, bvModel);
-            bvModel.setAccount(bv.getUser().getUsername());
+            bvModel.setUsername(bv.getUser().getUsername());
             
             bvModels.add(bvModel);
         }
@@ -72,7 +75,7 @@ public class TinTucController {
         model.addAttribute("totalPages", bvPage.getTotalPages());
         model.addAttribute("totalItems", bvPage.getTotalElements());
         
-        return "user/tin-tuc-3";
+        return "user/bai-viet-gv-hs/tin-tuc-3";
     }
     
     @GetMapping("/tin-tuc-3/chi-tiet/{maBV}")
@@ -80,35 +83,36 @@ public class TinTucController {
             @PathVariable Integer maBV,
             Model model) {
         Optional<BaiViet> bvOptional = baiVietRepository.findByMaBVAndTrangThaiTrue(maBV);
+        BaiVietModel baiVietModel = new BaiVietModel();
         if(bvOptional.isPresent()) {
-            BaiVietModel baiVietModel = new BaiVietModel();
             BeanUtils.copyProperties(bvOptional.get(), baiVietModel);
-            baiVietModel.setAccount(bvOptional.get().getUser().getUsername());
-            model.addAttribute("baiVietModel", baiVietModel);
+            baiVietModel.setUsername(bvOptional.get().getUser().getUsername());
+            model.addAttribute("user", bvOptional.get().getUser());
         }else {
-            model.addAttribute("baiVietModel", new BaiVietModel());
             model.addAttribute("msg", "Bài viết không tồn tại");
         }
-        return "user/chi-tiet-bai-dang";
+        model.addAttribute("baiVietModel", baiVietModel);
+        return "user/bai-viet-gv-hs/chi-tiet-bai-dang";
     }
     
     @GetMapping("/user/tin-tuc-3/dang-bai")
     public String dangbai(
             Model model) {
         model.addAttribute("bvModel", new BaiVietModel());
-        return "user/dang-bai";
+        return "user/bai-viet-gv-hs/dang-bai";
     }
     
     @PostMapping("/user/tin-tuc-3/dang-bai")
     public String dangbai(
-            @ModelAttribute BaiVietModel bvModel,
+            @RequestParam String username,
+            @Valid @ModelAttribute("bvModel") BaiVietModel bvModel,
+            BindingResult result,
             Model model) {
-        Optional<User> userOptional = userRepository.findById(bvModel.getAccount());
-        
-        if(!userOptional.isPresent()) {
-            model.addAttribute("msg", "Account không tồn tại.");
-            return "user/dang-bai";
+        if(result.hasErrors()) {
+            return "user/bai-viet-gv-hs/dang-bai";
         }
+        
+        Optional<User> userOptional = userRepository.findById(username);
         
         BaiViet baiViet = new BaiViet();
         BeanUtils.copyProperties(bvModel, baiViet);

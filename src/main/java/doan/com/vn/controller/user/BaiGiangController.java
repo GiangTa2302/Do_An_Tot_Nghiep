@@ -59,7 +59,7 @@ public class BaiGiangController {
         model.addAttribute("totalPages", bgPages.getTotalPages());
         model.addAttribute("totalItems", bgPages.getTotalElements());
         
-        return "user/thu-vien-bai-giang";
+        return "user/thu-vien-bg/thu-vien-bai-giang";
     }
     
     @GetMapping("/danh-sach-video/{maBG}")
@@ -77,7 +77,7 @@ public class BaiGiangController {
         for(BinhLuan bl : binhLuans) {
             blModel = new BinhLuanModel();
             BeanUtils.copyProperties(bl, blModel);
-            blModel.setAccount(bl.getUser().getUsername());
+            blModel.setUsername(bl.getUser().getUsername());
             
             blModels.add(blModel);
         }
@@ -90,6 +90,6 @@ public class BaiGiangController {
         model.addAttribute("totalPages", dsPages.getTotalPages());
         model.addAttribute("totalItems", dsPages.getTotalElements());
         
-        return "user/danh-sach-video";
+        return "user/thu-vien-bg/danh-sach-video";
     }
 }

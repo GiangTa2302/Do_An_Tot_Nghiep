@@ -11,7 +11,5 @@ public class BinhLuanModel {
     @NotEmpty(message = "Nội dung không được để trống.")
     private String noiDung;
     private Date createdDate;
-    
-    @NotEmpty(message = "Account không được để trống.")
-    private String account;
+    private String username;
 }

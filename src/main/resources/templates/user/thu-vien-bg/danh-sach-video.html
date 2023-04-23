@@ -39,7 +39,7 @@
 
 			<div class="row">
 				<th:block th:each="item : ${danhSachVideos}" th:object="${item}">
-					<div class="col-xl col-lg col-md-12 col-sm-12">
+					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
 						<div class="post-media wow fadeIn">
 							<img
 								th:src="@{'https://img.youtube.com/vi/'+*{urlVideo}+'/hqdefault.jpg'}"
@@ -93,12 +93,12 @@
 								<ul class="comment-list">
 									<li class="comment">
 										<div class="avatar">
-											<img alt="" th:src="@{/user/images/avatar-01.jpg}"
+											<img alt="" th:src="@{/us/images/avatar-01.jpg}"
 												class="avatar">
 										</div>
 										<div class="comment-container">
 											<h5 class="comment-author">
-												<a href="#" th:text="*{account}"></a>
+												<a href="#" th:text="*{username}"></a>
 											</h5>
 											<div class="comment-meta">
 												<a href="#" class="comment-date link-style1"
@@ -119,15 +119,12 @@
 					<div class="comments-form">
 						<h4>Để lại bình luận</h4>
 						<div class="comment-form-main">
-							<form th:action="@{/user/binh-luan/{maBG}(maBG=${maBG})}"
+							<form th:action="@{/user/binh-luan/{maBG}(maBG=${maBG}, username=${#authentication.name})}"
 								method="post" th:object="${blModel}">
 								<div class="row">
 									<div class="col-md-4">
 										<div class="form-group">
-											<input class="form-control" placeholder="Account" type="text"
-												th:field="*{account}" /> <small class="text-danger"
-												th:if="${#fields.hasErrors('account')}"
-												th:errors="*{account}"></small>
+											<span class="form-control" th:text="${#authentication.name}"></span>
 										</div>
 									</div>
 									<div class="col-md-12">

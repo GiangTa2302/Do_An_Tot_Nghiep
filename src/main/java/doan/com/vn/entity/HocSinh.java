@@ -48,10 +48,6 @@ public class HocSinh extends Person{
     @Column(name = "ghi_chu", columnDefinition = "TEXT")
     private String ghiChu;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User user;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ma_ph", referencedColumnName = "ma_ph")
     private PhuHuynh phuHuynh;

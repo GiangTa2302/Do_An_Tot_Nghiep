@@ -28,6 +28,6 @@ public class BaiGiang extends Base{
     @Column(name = "tieu_de", columnDefinition = "NVARCHAR(1000)")
     private String tieuDe;
     
-    @Column(name = "mo_ta", columnDefinition = "TEXT")
+    @Column(name = "mo_ta", columnDefinition = "NVARCHAR(1000)")
     private String moTa;
 }

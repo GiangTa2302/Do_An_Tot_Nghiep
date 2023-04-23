@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -62,22 +61,9 @@
 				<div class="content-wrapper">
 					<!-- Content -->
 					<div class="container-xxl flex-grow-1 container-p-y">
-						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">Môn học </span>
-						</h4>
 						<th:block th:if="${msg != null}">
-							<div class="alert alert-success" role="alert" th:text="${msg}"></div>
+							<div class="alert alert-warning" role="alert" th:text="${msg}"></div>
 						</th:block>
-
-						<!-- Thêm mới -->
-						<div sec:authorize="hasAuthority('ADMIN')"
-							class="col-lg-4 col-md-6 mb-3">
-							<!-- Button trigger modal -->
-							<form th:action="@{/admin/mon-hoc/add}" method="get">
-								<button type="submit" class="btn btn-info">Thêm mới</button>
-							</form>
-						</div>
-						<!-- /Thêm mới -->
 
 						<div class="card">
 							<div class="table-responsive text-nowrap">
@@ -85,52 +71,21 @@
 									<thead>
 										<tr>
 											<th>No.</th>
-											<th>Tên môn học</th>
-											<th>Số tiết lí thuyết</th>
-											<th>Số tiết thực hành</th>
-											<th sec:authorize="hasAuthority('ADMIN')"></th>
+											<th>Tên lớp</th>
+											<th>Sĩ số</th>
+											<th>Năm học</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody class="table-border-bottom-0">
-										<tr th:each="mh, iterStat : ${monHocs}" th:object="${mh}">
+										<tr th:each="lop, iterStat : ${lops}" th:object="${lop}">
 											<td><span th:text="${iterStat.index + 1}"></span></td>
-											<td><span th:text="*{tenMon}"></span></td>
-											<td><span th:text="*{soTietLT}"></span></td>
-											<td><span th:text="*{soTietTH}"></span></td>
-											<td sec:authorize="hasAuthority('ADMIN')">
-												<div class="d-flex">
-													<a
-														th:href="@{/admin/mon-hoc/edit/{maMon}(maMon=${mh.maMon})}">Edit</a>
-													| <a href="" data-bs-toggle="modal"
-														th:attr="data-bs-target='#recordDeleteModal'+${mh.maMon}">
-														Delete </a>
-												</div> <!-- Modal Delete-->
-												<div class="modal fade"
-													th:attr="id='recordDeleteModal'+${mh.maMon}" tabindex="-1"
-													role="dialog" aria-labelledby="recordDeleteModalLabel"
-													aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="recordDeleteModalLabel">Xóa
-																	lớp</h5>
-																<button type="button" class="btn close"
-																	data-bs-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">Bạn có chắc chắn muốn xóa
-																lớp này?</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary"
-																	data-bs-dismiss="modal">Không</button>
-																<a href="" class="btn btn-primary"
-																	th:attr="href='/admin/mon-hoc/delete/'+${mh.maMon}">Có</a>
-															</div>
-														</div>
-													</div>
-												</div> <!-- End Modal Delete -->
-											</td>
+											<td><span th:text="*{tenLop}"></span></td>
+											<td><span th:text="*{siSo}"></span></td>
+											<td><span th:text="*{namHoc}"></span></td>
+											<td><a
+												th:href="@{/admin/diem/xem-diem/{tenLop}(tenLop=*{tenLop},username=${#authentication.name})}">Xem
+													điểm</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -144,17 +99,17 @@
 							<nav aria-label="Page navigation example">
 								<ul class="pagination">
 									<li class="page-item"><a
-										th:href="${currentPage == 1} ? '' : @{'/admin/mon-hoc/'+${tenLop}+'?pageIndex='+${currentPage-1}}"
+										th:href="${currentPage == 1} ? '' : @{'/admin/diem/quan-ly-lop?username='+${#authentication.name}+'&pageIndex='+${currentPage-1}}"
 										class="page-link" aria-label="Previous"> <span
 											aria-hidden="true">&laquo;</span>
 									</a></li>
 									<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
 										<li class="page-item"><a class="page-link"
-											th:href="@{'/admin/mon-hoc/'+${tenLop}+'?pageIndex='+${index}}"
+											th:href="@{'/admin/diem/quan-ly-lop?username='+${#authentication.name}+'&pageIndex='+${index}}"
 											th:text="${index}"></a></li>
 									</th:block>
 									<li class="page-item"><a class="page-link"
-										th:href="${currentPage == totalPages} ? '' : @{'/admin/mon-hoc/'+${tenLop}+'?pageIndex='+${currentPage+1}}"
+										th:href="${currentPage == totalPages} ? '' : @{'/admin/lop/diem/quan-ly-lop?username='+${#authentication.name}+'&pageIndex='+${currentPage+1}}"
 										aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 									</a></li>
 								</ul>

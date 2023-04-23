@@ -62,7 +62,9 @@
 					<!-- Content -->
 					<div class="container-xxl flex-grow-1 container-p-y">
 						<h4 class="fw-bold py-3 mb-4">
-							<span class="text-muted fw-light">Điểm </span>
+							<span class="text-muted fw-light">Điểm /</span> Xem điểm lớp <span
+								th:text="${tenLop}"></span> <input type="hidden" id="selectLop"
+								th:value="${tenLop}" />
 						</h4>
 						<th:block th:if="${msg != null}">
 							<div class="alert alert-success" role="alert" th:text="${msg}"></div>
@@ -74,19 +76,12 @@
 									<div class="card-body">
 										<div class="row mb-3">
 											<div class="col mb-0">
-												<label for="defaultSelect" class="form-label">lớp</label> <select
-													id="selectLop" class="form-select">
-													<option value="">Chọn lớp</option>
-													<option th:each="lop : ${lops}" th:value="${lop.tenLop}"
-														th:text="${lop.tenLop}"
-														th:selected="${lop.tenLop == tenLop}"></option>
-												</select>
-											</div>
-											<div class="col mb-0">
 												<label for="defaultSelect" class="form-label">Môn
-													học</label> <input class="form-control" th:if="${monHoc != null}"
-													th:value="${monHoc.tenMon}" disabled> <input
-													type="hidden" class="form-control" id="username"
+													học</label> <select id="selectMon" class="form-select">
+													<option value="">Chọn môn học</option>
+													<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+														th:text="${mh.tenMon}" th:selected="${mh.maMon == maMon}"></option>
+												</select> <input type="hidden" class="form-control" id="username"
 													th:value="${#authentication.name}" disabled>
 											</div>
 											<div class="col mb-0">
@@ -104,65 +99,61 @@
 							</div>
 						</div>
 
-						<th:block th:if="${tenLop != null && monHoc != null}">
-							<form
-								th:action="@{'/admin/diem/saveOrUpdate/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}}"
-								method="post" th:object="${diemDTO}">
-								<div class="card">
-									<div class="table-responsive text-nowrap">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<th>No.</th>
-													<th>Họ tên</th>
-													<th>Điểm miệng</th>
-													<th>Điểm 15'</th>
-													<th>Điểm giữa kỳ</th>
-													<th>Điểm cuối kỳ</th>
-													<th>Điểm TB</th>
-												</tr>
-											</thead>
-											<tbody class="table-border-bottom-0">
-												<tr th:each="item, itemStat : *{diemModels}">
-													<td><span th:text="${itemStat.index + 1}"></span> <input
-														type="hidden"
-														th:field="*{diemModels[__${itemStat.index}__].maHS}"
-														class="form-control" /> <input type="hidden"
-														th:field="*{diemModels[__${itemStat.index}__].hocKy}"
-														class="form-control" />
-													<td><span
-														th:text="*{diemModels[__${itemStat.index}__].hoTen}">
-													</span> <input type="hidden"
-														th:field="*{diemModels[__${itemStat.index}__].hoTen}"
-														class="form-control" /></td>
-													<td><input type="text"
-														th:field="*{diemModels[__${itemStat.index}__].diemMieng}"
-														class="form-control" /></td>
-													<td><input type="text"
-														th:field="*{diemModels[__${itemStat.index}__].diemTX1}"
-														class="form-control" /></td>
-													<td><input type="text"
-														th:field="*{diemModels[__${itemStat.index}__].diemTX2}"
-														class="form-control" /></td>
-													<td><input type="text"
-														th:field="*{diemModels[__${itemStat.index}__].diemThi}"
-														class="form-control" /></td>
-													<td><input
-														th:value="${#numbers.formatDecimal(diemDTO.diemModels[__${itemStat.index}__].diemTB,1,2,'POINT')}"
-														class="form-control" disabled /></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+						<th:block th:if="${maMon != null}" th:object="${diemDTO}">
+							<div class="card">
+								<div class="table-responsive text-nowrap">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Họ tên</th>
+												<th>Điểm miệng</th>
+												<th>Điểm 15'</th>
+												<th>Điểm giữa kỳ</th>
+												<th>Điểm cuối kỳ</th>
+												<th>Điểm TB</th>
+												<th>Xếp loại</th>
+											</tr>
+										</thead>
+										<tbody class="table-border-bottom-0">
+											<tr th:each="item, itemStat : *{diemModels}">
+												<td><span th:text="${itemStat.index + 1}"></span>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].hoTen}">
+												</span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemMieng}">
+												</span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemTX1}"></span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemTX2}"></span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemThi}"></span></td>
+												<td><span
+													th:text="${#numbers.formatDecimal(diemDTO.diemModels[__${itemStat.index}__].diemTB,1,2,'POINT')}"></span></td>
+												<td><span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 1}">Giỏi</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 2}">Khá</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 3}">TB</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 4}">Yếu</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 5}">Kém</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
-								<button type="submit" class="btn btn-info mt-3">Nhập
-									điểm</button>
-								<a class=""
-									th:href="@{/admin/diem/thong-ke/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${monHoc.maMon})}">Thống
-									kê điểm</a>
-								<a class=""
-									th:href="@{/admin/diem/export-to-excel/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${monHoc.maMon})}">Xuất file</a>
-							</form>
+							</div>
+							<a class=""
+								th:href="@{/admin/diem/thong-ke/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Thống
+								kê điểm</a>
+								
+							<a class=""
+								th:href="@{/admin/diem/export-to-excel/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Xuất file</a>
 
 							<!-- Contextual Classes -->
 
@@ -172,17 +163,17 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item"><a
-											th:href="${currentPage == 1} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage-1}}"
+											th:href="${currentPage == 1} ? '' : @{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage-1}}"
 											class="page-link" aria-label="Previous"> <span
 												aria-hidden="true">&laquo;</span>
 										</a></li>
 										<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
 											<li class="page-item"><a class="page-link"
-												th:href="@{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${index}}"
+												th:href="@{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${index}}"
 												th:text="${index}"></a></li>
 										</th:block>
 										<li class="page-item"><a class="page-link"
-											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage+1}}"
+											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage+1}}"
 											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 										</a></li>
 									</ul>
@@ -235,13 +226,16 @@
 		$(document)
 				.ready(
 						function() {
-							$('#selectLop')
+							$('#selectMon')
 									.change(
 											function() {
-												if ($('#selectLop').val() != ""
+												if ($('#selectMon').val() != ""
 														&& $('#selectHK').val() != "") {
-													location.href = "http://localhost:8088/admin/diem/"
+													location.href = "http://localhost:8088/admin/diem/xem-diem/"
 															+ $('#selectLop')
+																	.val()
+															+ "/"
+															+ $('#selectMon')
 																	.val()
 															+ "/"
 															+ $('#selectHK')
@@ -250,14 +244,18 @@
 															+ $('#username')
 																	.val();
 												}
+
 											});
 							$('#selectHK')
 									.change(
 											function() {
-												if ($('#selectLop').val() != ""
+												if ($('#selectMon').val() != ""
 														&& $('#selectHK').val() != "") {
-													location.href = "http://localhost:8088/admin/diem/"
+													location.href = "http://localhost:8088/admin/diem/xem-diem/"
 															+ $('#selectLop')
+																	.val()
+															+ "/"
+															+ $('#selectMon')
 																	.val()
 															+ "/"
 															+ $('#selectHK')

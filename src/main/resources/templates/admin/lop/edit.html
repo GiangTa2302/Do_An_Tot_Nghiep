@@ -77,7 +77,10 @@
 											<div class="row mb-3">
 												<div class="col mb-0">
 													<label class="mt-1">Tên lớp</label> <input type="text"
-														class="form-control" th:field="*{tenLop}" /> <small
+														class="form-control" th:field="*{tenLop}" disabled />
+														<input type="hidden"
+														class="form-control" th:field="*{tenLop}" />
+														<small
 														class="text-danger" th:if="${#fields.hasErrors('tenLop')}"
 														th:errors="*{tenLop}"></small>
 												</div>
@@ -94,6 +97,8 @@
 												<div class="col mb-0">
 													<label class="mt-1">Năm học</label> <input type="text"
 														class="form-control" th:field="*{namHoc}" />
+														<input type="hidden"
+														class="form-control" th:field="*{siSo}" />
 													<small class="text-danger"
 														th:if="${#fields.hasErrors('namHoc')}"
 														th:errors="*{namHoc}"></small>

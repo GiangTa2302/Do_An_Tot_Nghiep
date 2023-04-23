@@ -494,7 +494,9 @@
     incomeChartConfig = {
       series: [
         {
-          data: [5, 38],
+          name: 'Số lượng',
+          //data: [0, 10, 15, 5, 1, 0, 0],
+          data: soLuong,
         }
       ],
       chart: {
@@ -558,7 +560,7 @@
         }
       },
       xaxis: {
-        categories: thangDiem,
+        categories: ["", "Giỏi", "Khá", "Trung bình", "Yếu", "Kém", ""],
         axisBorder: {
           show: false
         },
@@ -577,9 +579,9 @@
         labels: {
           show: false
         },
-        min: 10,
-        max: 50,
-        tickAmount: 4
+        min: 0,
+        max: 30,
+        tickAmount: 2
       }
     };
   if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {

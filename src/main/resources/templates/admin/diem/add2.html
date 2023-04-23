@@ -84,10 +84,11 @@
 											</div>
 											<div class="col mb-0">
 												<label for="defaultSelect" class="form-label">Môn
-													học</label> <input class="form-control" th:if="${monHoc != null}"
-													th:value="${monHoc.tenMon}" disabled> <input
-													type="hidden" class="form-control" id="username"
-													th:value="${#authentication.name}" disabled>
+													học</label> <select id="selectMon" class="form-select">
+													<option value="">Chọn môn học</option>
+													<option th:each="mh : ${monHocs}" th:value="${mh.maMon}"
+														th:text="${mh.tenMon}" th:selected="${mh.maMon == maMon}"></option>
+												</select>
 											</div>
 											<div class="col mb-0">
 												<label for="defaultSelect" class="form-label">Học kỳ</label>
@@ -104,9 +105,9 @@
 							</div>
 						</div>
 
-						<th:block th:if="${tenLop != null && monHoc != null}">
+						<th:block th:if="${tenLop != null && maMon != null}">
 							<form
-								th:action="@{'/admin/diem/saveOrUpdate/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}}"
+								th:action="@{/admin/diem/saveOrUpdate/{tenLop}/{maMon}/{hocKy}(tenLop=${tenLop},maMon=${maMon},hocKy=${hocKy})}"
 								method="post" th:object="${diemDTO}">
 								<div class="card">
 									<div class="table-responsive text-nowrap">
@@ -128,8 +129,8 @@
 														type="hidden"
 														th:field="*{diemModels[__${itemStat.index}__].maHS}"
 														class="form-control" /> <input type="hidden"
-														th:field="*{diemModels[__${itemStat.index}__].hocKy}"
-														class="form-control" />
+														th:field="*{diemModels[__${itemStat.index}__].maMon}"
+														class="form-control" /></td>
 													<td><span
 														th:text="*{diemModels[__${itemStat.index}__].hoTen}">
 													</span> <input type="hidden"
@@ -158,10 +159,10 @@
 								<button type="submit" class="btn btn-info mt-3">Nhập
 									điểm</button>
 								<a class=""
-									th:href="@{/admin/diem/thong-ke/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${monHoc.maMon})}">Thống
+									th:href="@{/admin/diem/thong-ke/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Thống
 									kê điểm</a>
 								<a class=""
-									th:href="@{/admin/diem/export-to-excel/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${monHoc.maMon})}">Xuất file</a>
+								th:href="@{/admin/diem/export-to-excel/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Xuất file</a>
 							</form>
 
 							<!-- Contextual Classes -->
@@ -172,17 +173,17 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item"><a
-											th:href="${currentPage == 1} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage-1}}"
+											th:href="${currentPage == 1} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${currentPage-1}}"
 											class="page-link" aria-label="Previous"> <span
 												aria-hidden="true">&laquo;</span>
 										</a></li>
 										<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
 											<li class="page-item"><a class="page-link"
-												th:href="@{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${index}}"
+												th:href="@{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${index}}"
 												th:text="${index}"></a></li>
 										</th:block>
 										<li class="page-item"><a class="page-link"
-											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage+1}}"
+											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/'+${tenLop}+'/'+${maMon}+'?pageIndex='+${currentPage+1}}"
 											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 										</a></li>
 									</ul>
@@ -239,15 +240,35 @@
 									.change(
 											function() {
 												if ($('#selectLop').val() != ""
+														&& $('#selectMon')
+																.val() != ""
 														&& $('#selectHK').val() != "") {
 													location.href = "http://localhost:8088/admin/diem/"
 															+ $('#selectLop')
 																	.val()
 															+ "/"
-															+ $('#selectHK')
+															+ $('#selectMon')
 																	.val()
-															+ "?username="
-															+ $('#username')
+															+ "/"
+															+ $('#selectHK')
+																	.val();
+												}
+											});
+							$('#selectMon')
+									.change(
+											function() {
+												if ($('#selectLop').val() != ""
+														&& $('#selectMon')
+																.val() != ""
+														&& $('#selectHK').val() != "") {
+													location.href = "http://localhost:8088/admin/diem/"
+															+ $('#selectLop')
+																	.val()
+															+ "/"
+															+ $('#selectMon')
+																	.val()
+															+ "/"
+															+ $('#selectHK')
 																	.val();
 												}
 											});
@@ -255,15 +276,17 @@
 									.change(
 											function() {
 												if ($('#selectLop').val() != ""
+														&& $('#selectMon')
+																.val() != ""
 														&& $('#selectHK').val() != "") {
 													location.href = "http://localhost:8088/admin/diem/"
 															+ $('#selectLop')
 																	.val()
 															+ "/"
-															+ $('#selectHK')
+															+ $('#selectMon')
 																	.val()
-															+ "?username="
-															+ $('#username')
+															+ "/"
+															+ $('#selectHK')
 																	.val();
 												}
 
