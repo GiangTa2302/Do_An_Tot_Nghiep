@@ -65,6 +65,21 @@
 								</div></li>
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/lien-he}">Liên hệ</a></li>
+							<li sec:authorize="isAuthenticated()" class="nav-item">
+								<input type="hidden" id="hodem"
+								th:value="${#authentication.principal.hodem}" />
+								<input type="hidden" id="ten"
+								th:value="${#authentication.principal.ten}" />
+								<input type="hidden" id="nameImg"
+								th:value="${#authentication.name}" />
+								<div  data-toggle="dropdown"
+									id="profileImage"></div>
+								<div class="dropdown-menu" aria-labelledby="profileImage">
+									<a sec:authorize="hasAnyAuthority('ADMIN', 'TEACHER')"
+										class="dropdown-item" th:href="@{/admin}">Quản lý</a> <a
+										class="dropdown-item" th:href="@{/logout}">Đăng xuất</a>
+								</div>
+							</li>
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li><a class="hover-btn-new log orange"

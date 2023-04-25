@@ -11,30 +11,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 import doan.com.vn.entity.Role;
 import doan.com.vn.entity.User;
 
+
 public class CustomUserDetail implements UserDetails {
     private static final long serialVersionUID = 1L;
     private User user;
-    
-    public CustomUserDetail(){
+
+    public CustomUserDetail() {
     }
-    
-    public CustomUserDetail(User user){
+
+    public CustomUserDetail(User user) {
         this.user = user;
     }
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
         Set<GrantedAuthority> authorities = new HashSet<>();
-        for(Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));
+        for (Role role : roles) {
+            authorities
+                    .add(new SimpleGrantedAuthority(role.getRoleName().name()));
         }
-        
+
         return authorities;
-    }
-    
-    public boolean hasRole(String roleName) {
-        return this.user.hasRole(roleName);
     }
 
     @Override
@@ -66,5 +64,12 @@ public class CustomUserDetail implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
+    
+    public String getHodem() {
+        return user.getHodem();
+    }
+    
+    public String getTen() {
+        return user.getTen();
+    }
 }

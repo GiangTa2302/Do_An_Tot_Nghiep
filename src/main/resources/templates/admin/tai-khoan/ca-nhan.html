@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/css/core.css}"
+	class="template-customizer-core-css" />
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/css/theme-default.css}"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" th:href="@{/ad/assets/css/demo.css}" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+<!-- Helpers -->
+<script th:src="@{/ad/assets/vendor/js/helpers.js}"></script>
+
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script th:src="@{/ad/assets/js/config.js}"></script>
+</head>
+
+<body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+
+			<div th:replace="~{/admin/fragments/menu :: menu}"></div>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
+
+				<div th:replace="~{/admin/fragments/navbar :: navbar}"></div>
+
+				<!-- / Navbar -->
+
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
+					<!-- Content -->
+
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">Tài khoản /</span>
+						</h4>
+
+						<div class="row">
+							<div class="col-md-12">
+								<div class="card mb-4">
+									<h5 class="card-header">Thông tin cá nhân</h5>
+									<!-- Account -->
+									<form th:action="@{/admin/ca-nhan(username=${#authentication.name})}"
+										method="post" th:object="${gvModel}"
+										enctype="multipart/form-data">
+										<div class="card-body">
+											<div
+												class="d-flex align-items-start align-items-sm-center gap-4">
+												<img th:src="@{/ad/images/266237316_266441305546771_5323057467314774506_n.jpg}" alt="user-avatar"
+													class="d-block rounded" height="100" width="100"
+													 />
+													
+												<div class="button-wrapper">
+													<label for="upload" class="btn btn-primary me-2 mb-4"
+														tabindex="0"> <span class="d-none d-sm-block">Upload
+															ảnh</span> <i class="bx bx-upload d-block d-sm-none"></i> <input
+														type="file" class="form-control" name="image"
+														accept="image/png, image/jpg" />
+													</label>
+													<button type="button"
+														class="btn btn-outline-secondary account-image-reset mb-4">
+														<i class="bx bx-reset d-block d-sm-none"></i> <span
+															class="d-none d-sm-block">Reset</span>
+													</button>
+
+													<p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max
+														size of 800K</p>
+												</div>
+											</div>
+										</div>
+										<hr class="my-0" />
+										<div class="card-body">
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Họ đệm</label> <input type="text"
+														class="form-control" th:field="*{hodem}" /> <small
+														class="text-danger" th:if="${#fields.hasErrors('hodem')}"
+														th:errors="*{hodem}"></small>
+												</div>
+												<div class="col mb-0">
+													<label class="mt-1">Tên</label> <input type="text"
+														class="form-control" th:field="*{ten}" /> <small
+														class="text-danger" th:if="${#fields.hasErrors('ten')}"
+														th:errors="*{ten}"></small>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Ngày sinh</label> <input type="date"
+														class="form-control" th:field="*{ngaySinh}" /> <small
+														class="text-danger"
+														th:if="${#fields.hasErrors('ngaySinh')}"
+														th:errors="*{ngaySinh}"></small>
+												</div>
+												<div class="col mb-0">
+													<label for="emailBasic" class="mt-1">Giới tính</label> <br />
+													<div class="mt-2">
+														<input class="form-check-input " type="radio" th:value="0"
+															th:field="*{gioiTinh}" /> <label
+															class="form-check-label">Nam</label> &nbsp; &nbsp; <input
+															class="form-check-input " type="radio" th:value="1"
+															th:field="*{gioiTinh}" /> <label
+															class="form-check-label">Nữ</label> <small
+															class="text-danger"
+															th:if="${#fields.hasErrors('gioiTinh')}"
+															th:errors="*{gioiTinh}"></small>
+													</div>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Điện thoại</label> <input type="text"
+														class="form-control" th:field="*{dienThoai}" /> <small
+														class="text-danger"
+														th:if="${#fields.hasErrors('dienThoai')}"
+														th:errors="*{dienThoai}"></small>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label for="emailBasic" class="mt-1">Tỉnh/TP</label> <select
+														id="province" class="form-select">
+														<option value="0">Chọn</option>
+													</select> <input type="hidden" th:field="*{tinh}" id="tinh" value="" />
+													<small class="text-danger"
+														th:if="${#fields.hasErrors('tinh')}" th:errors="*{tinh}"></small>
+												</div>
+												<div class="col mb-0">
+													<label for="emailBasic" class="mt-1">Quận/Huyện</label> <select
+														id="district" class="form-select">
+														<option value="0">Chọn</option>
+													</select> <input type="hidden" th:field="*{quan}" id="quan" /> <small
+														class="text-danger" th:if="${#fields.hasErrors('quan')}"
+														th:errors="*{quan}"></small>
+												</div>
+												<div class="col mb-0">
+													<label for="emailBasic" class="mt-1">Xã/Phường</label> <select
+														id="ward" class="form-select">
+														<option value="0">Chọn</option>
+													</select> <input type="hidden" th:field="*{phuong}" id="phuong" />
+													<small class="text-danger"
+														th:if="${#fields.hasErrors('phuong')}"
+														th:errors="*{phuong}"></small>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Tôn giáo</label> <input type="text"
+														class="form-control" th:field="*{tonGiao}" /> <small
+														class="text-danger"
+														th:if="${#fields.hasErrors('tonGiao')}"
+														th:errors="*{tonGiao}"></small>
+												</div>
+												<div class="col mb-0">
+													<label class="mt-1">Dân tộc</label> <select
+														class="form-select" th:field="*{maDanToc}">
+														<option th:each="item : ${danTocs}"
+															th:value="${item.maDanToc}" th:text="${item.tenDanToc}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="row mb-3">
+												<div class="col mb-0">
+													<label class="mt-1">Học vấn</label> <input type="text"
+														class="form-control" th:field="*{hocVan}" /> <small
+														class="text-danger" th:if="${#fields.hasErrors('hocVan')}"
+														th:errors="*{hocVan}"></small>
+												</div>
+											</div>
+											<button type="submit" class="btn btn-primary">Cập
+												nhật</button>
+
+										</div>
+									</form>
+									<!-- /Account -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- / Content -->
+
+					<!-- Footer -->
+					<div th:replace="~{/admin/fragments/footer :: footer}"></div>
+					<!-- / Footer -->
+
+					<div class="content-backdrop fade"></div>
+				</div>
+				<!-- Content wrapper -->
+			</div>
+			<!-- / Layout page -->
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
+	<!-- / Layout wrapper -->
+
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/core.js -->
+	<script th:src="@{/ad/assets/vendor/libs/jquery/jquery.js}"></script>
+	<script th:src="@{/ad/assets/vendor/libs/popper/popper.js}"></script>
+	<script th:src="@{/ad/assets/vendor/js/bootstrap.js}"></script>
+	<script
+		th:src="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<script th:src="@{/ad/assets/vendor/js/menu.js}"></script>
+	<!-- end build -->
+
+	<!-- Vendors JS -->
+	<script th:src="@{/ad/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+	<!-- Main JS -->
+	<script th:src="@{/ad/assets/js/main.js}"></script>
+
+	<!-- Page JS -->
+	<script th:src="@{/ad/assets/js/dashboards-analytics.js}"></script>
+
+	<!-- Address API -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"
+		integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script th:src="@{/ad/js/address.js}"></script>
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

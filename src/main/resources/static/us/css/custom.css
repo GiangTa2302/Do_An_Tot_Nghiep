@@ -1,2 +1,12 @@
 
 /** ADD YOUR AWESOME CODES HERE **/
+
+#profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgb(105, 108, 255);
+  font-size: 25px;
+  color: #fff;
+  text-align: center;
+}

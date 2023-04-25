@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import doan.com.vn.service.auth.CustomUserDetailService;
-import doan.com.vn.utils.LoginSuccessHandler;
 import doan.com.vn.utils.RoleName;
 
 @Configuration
@@ -20,8 +19,8 @@ public class SecurityConfig {
     @Autowired
     public PasswordEncoder paswordEncoder;
     
-    @Autowired 
-    private LoginSuccessHandler loginSuccessHandler;
+//    @Autowired 
+//    private LoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -36,7 +35,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.loginPage("/login")
                         .loginProcessingUrl("/login")
 //                        .successHandler(loginSuccessHandler)
-                        .defaultSuccessUrl("/admin", true)
+                        .defaultSuccessUrl("/", true)
                         .permitAll())
                 .logout()
                 .logoutUrl("/logout")

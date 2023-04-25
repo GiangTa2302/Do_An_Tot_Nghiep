@@ -49,7 +49,7 @@ import doan.com.vn.utils.RoleName;
 @RequestMapping("admin/giao-vien")
 public class GiaoVienController {
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
-            + "/src/main/resources/static/images";
+            + "/src/main/resources/static/ad/images";
 
     @Autowired
     private GiaoVienRepository giaoVienRepository;

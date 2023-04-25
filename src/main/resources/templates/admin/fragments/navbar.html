@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
 	<nav th:fragment="navbar"
 		class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
@@ -29,7 +30,6 @@
 					class="nav-link dropdown-toggle hide-arrow"
 					href="javascript:void(0);" data-bs-toggle="dropdown">
 						<div class="avatar avatar-online">
-						
 							<img th:src="@{/ad/assets/img/avatars/1.png}"
 								class="w-px-40 h-auto rounded-circle" />
 						</div>
@@ -38,8 +38,11 @@
 						<li><a class="dropdown-item" href="#">
 								<div class="d-flex">
 									<div class="flex-grow-1">
-										<span sec:authorize="isAuthenticated()" class="fw-semibold d-block" sec:authentication="name"></span> <small
-											class="text-muted" th:text="${#authentication.principal.authorities}"></small>
+										<span sec:authorize="isAuthenticated()"
+											class="fw-semibold d-block"
+											th:text="${#authentication.principal.hodem} + ' ' + ${#authentication.principal.ten}"></span>
+										<small class="text-muted"
+											th:text="${#authentication.principal.authorities}"></small>
 									</div>
 								</div>
 						</a></li>
@@ -63,8 +66,9 @@
 						<li>
 							<div class="dropdown-divider"></div>
 						</li>
-						<li><a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{/logout}">
-								<i class="bx bx-power-off me-2"></i> <span class="align-middle">Log
+						<li><a class="dropdown-item"
+							sec:authorize="isAuthenticated()" th:href="@{/logout}"> <i
+								class="bx bx-power-off me-2"></i> <span class="align-middle">Log
 									Out</span>
 						</a></li>
 					</ul></li>

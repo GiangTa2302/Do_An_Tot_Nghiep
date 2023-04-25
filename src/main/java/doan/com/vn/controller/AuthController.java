@@ -16,6 +16,7 @@ import doan.com.vn.entity.User;
 
 @Controller
 public class AuthController {
+    
     @GetMapping("/admin")
     public String adminPage(Model model) {
         return "admin/index";
@@ -29,8 +30,8 @@ public class AuthController {
     
     @PostMapping("/login")
     public String loginUI(@ModelAttribute("user") User user) {
-        
-        return "redirect:/admin/";
+                
+        return "redirect:/";
     }
     
     @GetMapping("/logout")

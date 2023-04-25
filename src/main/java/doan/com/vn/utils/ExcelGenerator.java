@@ -53,7 +53,7 @@ public class ExcelGenerator {
         } else if (valueOfCell instanceof String) {
             cell.setCellValue((String) valueOfCell);
         } else if (valueOfCell instanceof Float) {
-            cell.setCellValue(String.valueOf(valueOfCell));
+            cell.setCellValue((Float) valueOfCell);
         } else {
             cell.setCellValue((Boolean) valueOfCell);
         }
@@ -69,7 +69,7 @@ public class ExcelGenerator {
         for (Diem record : diems) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
-            createCell(row, columnCount++, columnCount++, style);
+            createCell(row, columnCount++, rowCount-1, style);
             createCell(row, columnCount++, record.getHocSinh().getHodem() + " "
                     + record.getHocSinh().getTen(), style);
             createCell(row, columnCount++, record.getDiemMieng(), style);
