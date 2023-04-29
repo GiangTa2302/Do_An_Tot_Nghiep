@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import doan.com.vn.entity.BaiViet;
+import doan.com.vn.entity.Notify;
 import doan.com.vn.entity.User;
 import doan.com.vn.model.BaiVietModel;
 import doan.com.vn.repository.BaiVietRepository;
+import doan.com.vn.repository.NotifyRepository;
 import doan.com.vn.repository.UserRepository;
 
 @Controller
@@ -34,6 +36,9 @@ public class TinTucController {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private NotifyRepository notifyRepository;
     
     @GetMapping("/tin-tuc-1")
     public String tintuc1() {
@@ -119,6 +124,9 @@ public class TinTucController {
         baiViet.setUser(userOptional.get());
         baiViet.setCreatedDate(new Date());
         baiVietRepository.save(baiViet);
+        
+        Notify notify = new Notify(username + " gửi bài đăng", new Date());
+        notifyRepository.save(notify);
         
         return "redirect:/tin-tuc-3";
     }

@@ -33,12 +33,14 @@ import doan.com.vn.entity.GiaoVien;
 import doan.com.vn.entity.HocSinh;
 import doan.com.vn.entity.Lop;
 import doan.com.vn.entity.MonHoc;
+import doan.com.vn.entity.Notify;
 import doan.com.vn.model.DiemModel;
 import doan.com.vn.repository.DiemRepository;
 import doan.com.vn.repository.GiaoVienRepository;
 import doan.com.vn.repository.HocSinhRepository;
 import doan.com.vn.repository.LopRepository;
 import doan.com.vn.repository.MonHocRepository;
+import doan.com.vn.repository.NotifyRepository;
 import doan.com.vn.utils.ExcelGenerator;
 
 @Controller
@@ -59,6 +61,9 @@ public class DiemController {
 
     @Autowired
     private LopRepository lopRepository;
+    
+    @Autowired
+    private NotifyRepository notifyRepository;
 
     @GetMapping({ "/", "/{tenLop}/{maMon}/{hocKy}" })
     public String showDiemAdmin(
@@ -217,6 +222,9 @@ public class DiemController {
 
         diemRepository.saveAll(diems);
         redirectAttributes.addFlashAttribute("msg", "Nhập điểm thành công.");
+        
+        Notify notify = new Notify(username + " nhập điểm lớp " + tenLop, new Date());
+        notifyRepository.save(notify);
 
         return "redirect:/admin/diem/" + tenLop + "/" + hocKy + "?username="
                 + username;
@@ -228,7 +236,7 @@ public class DiemController {
             @PathVariable(value = "maMon", required = false) String maMon,
             Model model) {
 
-        List<Diem> diems = diemRepository.findByLopAndMon(tenLop, maMon);
+        List<Diem> diems = diemRepository.findByLopAndMon(tenLop, maMon, 1);
         List<Integer> soLuong = new ArrayList<Integer>();
         Integer countG = 0;
         Integer countKH = 0;
@@ -354,7 +362,7 @@ public class DiemController {
         response.setHeader(headerKey, headerValue);
 
         List<Diem> listOfStudents = diemRepository.findByLopAndMon(tenLop,
-                maMon);
+                maMon, 1);
         ExcelGenerator generator = new ExcelGenerator(listOfStudents);
         generator.generateExcelFile(response);
     }

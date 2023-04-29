@@ -27,7 +27,7 @@ public class LienHeController {
     public String sendMail(
             @ModelAttribute EmailModel mail,
             RedirectAttributes redirectAttributes) {
-        emailService.sendEmail(mail.getFromEmail(), mail.getSubject(), mail.getBody());
+        emailService.sendEmail(mail.getFromEmail(), "hieugiang2k1@gmail.com", mail.getSubject(), mail.getBody());
         
         redirectAttributes.addFlashAttribute("msg", "Gửi mail thành công!");
         return "redirect:/lien-he";

@@ -116,11 +116,11 @@ public class DeThiController {
         cauHoiRepository.saveAll(cauHois);
         redirectAttributes.addFlashAttribute("msg", "Thành công.");
 
-        if(de.get().isLoaiDe()) {
+        if (de.get().isLoaiDe()) {
             return "redirect:/admin/de?loaiDe=1";
-        }else {
+        } else {
             return "redirect:/admin/de?loaiDe=0";
         }
-        
+
     }
 }

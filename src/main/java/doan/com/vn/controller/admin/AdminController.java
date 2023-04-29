@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +26,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import doan.com.vn.entity.DanToc;
 import doan.com.vn.entity.GiaoVien;
+import doan.com.vn.entity.Notify;
 import doan.com.vn.model.GiaoVienModel;
 import doan.com.vn.repository.DanTocRepository;
 import doan.com.vn.repository.GiaoVienRepository;
+import doan.com.vn.repository.NotifyRepository;
 
 @Controller
 @RequestMapping("/admin")
@@ -37,6 +40,9 @@ public class AdminController {
     
     @Autowired
     private GiaoVienRepository giaoVienRepository;
+    
+    @Autowired
+    private NotifyRepository notifyRepository;
     
     @ModelAttribute("danTocs")
     private List<DanToc> getAllDT() {
@@ -96,7 +102,19 @@ public class AdminController {
         giaoVienRepository.save(giaoVien);
         redirectAttributes.addFlashAttribute("msg",
                 "Cập nhật giáo viên thành công!");
+        
+        Notify notify = new Notify(username + " thay đổi thông tin cá nhân", new Date());
+        notifyRepository.save(notify);
 
         return "redirect:/admin/ca-nhan?username="+username;
+    }
+    
+    @GetMapping("/thong-bao")
+    public String thongBao(
+            Model model) {
+        List<Notify> notifies = notifyRepository.findAll();
+        
+        model.addAttribute("notifies", notifies);
+        return "admin/thong-bao/thong-bao";
     }
 }

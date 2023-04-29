@@ -18,28 +18,29 @@ public class SecurityConfig {
 
     @Autowired
     public PasswordEncoder paswordEncoder;
-    
+
 //    @Autowired 
 //    private LoginSuccessHandler loginSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        
+
         http.authorizeHttpRequests((authorize) -> authorize
-                .antMatchers("/", "/lien-he", "/thoi-khoa-bieu", "/tin-tuc-1",
-                        "/tin-tuc-2", "/tin-tuc-3", "/chi-tiet-tuyen-sinh")
-                .permitAll().antMatchers("/ad/**", "/us/**", "images/**").permitAll()
-                .antMatchers("/admin/**").hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name())
-                .antMatchers("/user/**").hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name(), RoleName.STUDENT.name())
+                .antMatchers("/", "/lien-he", "/tin-tuc-1",
+                        "/tin-tuc-2", "/tin-tuc-3", "/chi-tiet-tuyen-sinh",
+                        "/resetPassword", "/changePassword")
+                .permitAll().antMatchers("/ad/**", "/us/**", "images/**")
+                .permitAll().antMatchers("/admin/**")
+                .hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name())
+                .antMatchers("/user/**", "/thoi-khoa-bieu")
+                .hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name(),
+                        RoleName.STUDENT.name())
                 .anyRequest().authenticated())
                 .formLogin(form -> form.loginPage("/login")
                         .loginProcessingUrl("/login")
 //                        .successHandler(loginSuccessHandler)
-                        .defaultSuccessUrl("/", true)
-                        .permitAll())
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                        .defaultSuccessUrl("/", true).permitAll())
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
 
         return http.build();
     }

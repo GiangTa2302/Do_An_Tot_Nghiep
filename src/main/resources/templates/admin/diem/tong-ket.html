@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+<title>THPT Đông Thụy Anh</title>
+
+<meta name="description" content="" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+	rel="stylesheet" />
+
+<!-- Icons. Uncomment required icon fonts -->
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
+
+<!-- Core CSS -->
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/css/core.css}"
+	class="template-customizer-core-css" />
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/css/theme-default.css}"
+	class="template-customizer-theme-css" />
+<link rel="stylesheet" th:href="@{/ad/assets/css/demo.css}" />
+
+<!-- Vendors CSS -->
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css}" />
+
+<link rel="stylesheet"
+	th:href="@{/ad/assets/vendor/libs/apex-charts/apex-charts.css}" />
+
+<!-- Helpers -->
+<script th:src="@{/ad/assets/vendor/js/helpers.js}"></script>
+
+<!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+<!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<script th:src="@{/ad/assets/js/config.js}"></script>
+</head>
+
+<body>
+	<!-- Layout wrapper -->
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<!-- Menu -->
+			<div th:replace="~{/admin/fragments/menu :: menu}"></div>
+			<!-- / Menu -->
+
+			<!-- Layout container -->
+			<div class="layout-page">
+				<!-- Navbar -->
+				<div th:replace="~{/admin/fragments/navbar :: navbar}"></div>
+				<!-- / Navbar -->
+
+				<!-- Content wrapper -->
+				<div class="content-wrapper">
+					<!-- Content -->
+					<div class="container-xxl flex-grow-1 container-p-y">
+						<h4 class="fw-bold py-3 mb-4">
+							<span class="text-muted fw-light">Điểm /</span> Tổng kết <span
+								th:text="${tenLop}"></span> <input type="hidden" id="selectLop"
+								th:value="${tenLop}" />
+						</h4>
+						<th:block th:if="${msg != null}">
+							<div class="alert alert-success" role="alert" th:text="${msg}"></div>
+						</th:block>
+
+						<th:block th:if="${maMon != null}" th:object="${diemDTO}">
+							<div class="card">
+								<div class="table-responsive text-nowrap">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Họ tên</th>
+												<th>Điểm miệng</th>
+												<th>Điểm 15'</th>
+												<th>Điểm giữa kỳ</th>
+												<th>Điểm cuối kỳ</th>
+												<th>Điểm TB</th>
+												<th>Xếp loại</th>
+											</tr>
+										</thead>
+										<tbody class="table-border-bottom-0">
+											<tr th:each="item, itemStat : *{diemModels}">
+												<td><span th:text="${itemStat.index + 1}"></span>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].hoTen}">
+												</span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemMieng}">
+												</span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemTX1}"></span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemTX2}"></span></td>
+												<td><span
+													th:text="*{diemModels[__${itemStat.index}__].diemThi}"></span></td>
+												<td><span
+													th:text="${#numbers.formatDecimal(diemDTO.diemModels[__${itemStat.index}__].diemTB,1,2,'POINT')}"></span></td>
+												<td><span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 1}">Giỏi</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 2}">Khá</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 3}">TB</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 4}">Yếu</span>
+													<span
+													th:if="*{diemModels[__${itemStat.index}__].xepLoaiHL == 5}">Kém</span>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<a class=""
+								th:href="@{/admin/diem/thong-ke/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Thống
+								kê điểm</a>
+								
+							<a class=""
+								th:href="@{/admin/diem/export-to-excel/{tenLop}/{maMon}(tenLop=${tenLop}, maMon=${maMon})}">Xuất file</a>
+
+							<!-- Contextual Classes -->
+
+
+							<!-- Pagination -->
+							<div class="mt-3 d-flex justify-content-center">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item"><a
+											th:href="${currentPage == 1} ? '' : @{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage-1}}"
+											class="page-link" aria-label="Previous"> <span
+												aria-hidden="true">&laquo;</span>
+										</a></li>
+										<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
+											<li class="page-item"><a class="page-link"
+												th:href="@{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${index}}"
+												th:text="${index}"></a></li>
+										</th:block>
+										<li class="page-item"><a class="page-link"
+											th:href="${currentPage == totalPages} ? '' : @{'/admin/diem/xem-diem/'+${tenLop}+'/'+${maMon}+'/'+${hocKy}+'?username='+${#authentication.name}+'&pageIndex='+${currentPage+1}}"
+											aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+										</a></li>
+									</ul>
+								</nav>
+							</div>
+							<!-- End pagination -->
+						</th:block>
+					</div>
+					<!-- / Content -->
+
+					<!-- Footer -->
+					<div th:replace="~{/admin/fragments/footer :: footer}"></div>
+					<!-- / Footer -->
+
+					<div class="content-backdrop fade"></div>
+				</div>
+				<!-- Content wrapper -->
+			</div>
+			<!-- / Layout page -->
+		</div>
+
+		<!-- Overlay -->
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
+	<!-- / Layout wrapper -->
+
+	<!-- Core JS -->
+	<!-- build:js assets/vendor/js/core.js -->
+	<script th:src="@{/ad/assets/vendor/libs/jquery/jquery.js}"></script>
+	<script th:src="@{/ad/assets/vendor/libs/popper/popper.js}"></script>
+	<script th:src="@{/ad/assets/vendor/js/bootstrap.js}"></script>
+	<script
+		th:src="@{/ad/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+	<script th:src="@{/ad/assets/vendor/js/menu.js}"></script>
+	<!-- end build -->
+
+	<!-- Vendors JS -->
+	<script th:src="@{/ad/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+	<!-- Main JS -->
+	<script th:src="@{/ad/assets/js/main.js}"></script>
+
+	<!-- Page JS -->
+	<script th:src="@{/ad/assets/js/dashboards-analytics.js}"></script>
+
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
+							$('#selectMon')
+									.change(
+											function() {
+												if ($('#selectMon').val() != ""
+														&& $('#selectHK').val() != "") {
+													location.href = "http://localhost:8088/admin/diem/xem-diem/"
+															+ $('#selectLop')
+																	.val()
+															+ "/"
+															+ $('#selectMon')
+																	.val()
+															+ "/"
+															+ $('#selectHK')
+																	.val()
+															+ "?username="
+															+ $('#username')
+																	.val();
+												}
+
+											});
+							$('#selectHK')
+									.change(
+											function() {
+												if ($('#selectMon').val() != ""
+														&& $('#selectHK').val() != "") {
+													location.href = "http://localhost:8088/admin/diem/xem-diem/"
+															+ $('#selectLop')
+																	.val()
+															+ "/"
+															+ $('#selectMon')
+																	.val()
+															+ "/"
+															+ $('#selectHK')
+																	.val()
+															+ "?username="
+															+ $('#username')
+																	.val();
+												}
+
+											});
+						});
+	</script>
+</body>
+</html>

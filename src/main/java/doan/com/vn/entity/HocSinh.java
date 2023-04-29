@@ -1,7 +1,7 @@
 package doan.com.vn.entity;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -72,7 +72,7 @@ public class HocSinh extends Person{
     private TheBHYT theBHYT;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "hocSinh")
-    private Set<Diem> diems;
+    private List<Diem> diems;
 
     @Override
     public boolean equals(Object obj) {
