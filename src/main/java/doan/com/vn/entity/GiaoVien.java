@@ -40,7 +40,7 @@ public class GiaoVien extends Person {
     @Column(name = "hoc_van", columnDefinition = "NVARCHAR(200)")
     private String hocVan;
 
-    @Column(name = "dien_thoai", length = 12)
+    @Column(name = "dien_thoai", length = 10)
     private String dienThoai;
 
     @Column(name = "ton_giao", columnDefinition = "NVARCHAR(200)")

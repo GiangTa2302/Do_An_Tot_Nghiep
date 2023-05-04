@@ -32,7 +32,7 @@ public class CauHoi extends Base{
     @Column(name = "ma_ch")
     private Integer maCH;
     
-    @Column(name = "de_bai", columnDefinition = "NVARCHAR(2000)")
+    @Column(name = "de_bai", columnDefinition = "NTEXT")
     private String deBai;
     
     private String anh;

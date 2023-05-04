@@ -42,7 +42,7 @@ public class PhuHuynh extends Base {
     @Column(name = "nghe_nghiep", columnDefinition = "NVARCHAR(200)")
     private String ngheNghiep;
     
-    @Column(name = "loai_qh", columnDefinition = "NVARCHAR(200)")
+    @Column(name = "loai_qh", columnDefinition = "NTEXT")
     private String loaiQH;
     
     @Column(name = "dien_thoai", length = 10)

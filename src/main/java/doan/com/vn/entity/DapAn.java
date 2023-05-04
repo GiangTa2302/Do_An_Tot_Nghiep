@@ -33,7 +33,7 @@ public class DapAn extends Base implements Serializable {
     @JoinColumn(name = "ma_ch", referencedColumnName = "ma_ch")
     private CauHoi cauHoi;
 
-    @Column(name = "noi_dung", columnDefinition = "NVARCHAR(2000)")
+    @Column(name = "noi_dung", columnDefinition = "NTEXT")
     private String noiDung;
 
     public DapAn(String maDA, CauHoi cauHoi, String noiDung) {

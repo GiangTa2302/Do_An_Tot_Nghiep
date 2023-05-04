@@ -29,7 +29,7 @@ public class DuyetBaiController {
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
             Model model) {
         Pageable pageable = PageRequest.of(pageIndex - 1, 6);
-        Page<BaiViet> bvPage = baiVietRepository.findByTrangThaiTrue(pageable);
+        Page<BaiViet> bvPage = baiVietRepository.findByTrangThaiTrueAndDeletedFalse(pageable);
         List<BaiViet> baiVietsTrue = bvPage.getContent();
         List<BaiViet> baiVietsFalse = baiVietRepository.findByTrangThaiFalseAndDeletedFalse();
         

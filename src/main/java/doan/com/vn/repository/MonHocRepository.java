@@ -14,4 +14,6 @@ public interface MonHocRepository extends JpaRepository<MonHoc, String>{
     Page<MonHoc> findByDeletedFalse(Pageable pageable);
     
     List<MonHoc> findByDeletedFalse();
+    
+    Long countByDeletedFalse();
 }

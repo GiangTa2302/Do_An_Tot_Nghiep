@@ -45,7 +45,7 @@ public class HocSinh extends Person{
     @Column(name = "anh_hs")
     private String anhHS;
     
-    @Column(name = "ghi_chu", columnDefinition = "TEXT")
+    @Column(name = "ghi_chu", columnDefinition = "NTEXT")
     private String ghiChu;
     
     @ManyToOne(fetch = FetchType.LAZY)

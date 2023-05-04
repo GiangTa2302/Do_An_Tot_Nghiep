@@ -71,7 +71,7 @@
 						<div class="card mb-4">
 							<h5 class="card-header">Bootstrap Toasts Styles</h5>
 							<div class="row g-0">
-								<div class="col-md p-4" th:each="item : ${notifies}">
+								<div class="col-md-12 p-4" th:each="item : ${notifies}">
 									<div class="toast-container">
 										<div class="bs-toast toast fade show bg-primary" role="alert"
 											aria-live="assertive" aria-atomic="true">
@@ -132,5 +132,14 @@
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script th:inline="javascript">
+		var header = document.getElementById("myDIV");
+		var btns = header.getElementsByClassName("menu-item");
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active",
+				"");
+		btns[16].className += " active";
+		
+	</script>
 </body>
 </html>

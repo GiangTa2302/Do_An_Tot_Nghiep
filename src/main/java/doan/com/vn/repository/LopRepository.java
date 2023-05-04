@@ -23,5 +23,7 @@ public interface LopRepository extends JpaRepository<Lop, String> {
     
     @Query("SELECT l FROM Lop l JOIN l.giaoVien gv WHERE gv.maGV = ?1")
     List<Lop> findByGiaoVienCN(String maGV);
+    
+    Long countByDeletedFalse();
    
 }

@@ -43,6 +43,9 @@
 				<th:block th:each="item : ${bvModels}" th:object="${item}">
 					<div class="col-lg-4 col-md-6 col-12">
 						<div class="blog-item">
+							<div class="image-blog">
+								<img src="/us/images/blog_1.jpg" alt="" class="img-fluid">
+							</div>
 							<div class="blog-title">
 								<h2>
 									<a th:href="@{/tin-tuc-3/chi-tiet/{maBV}(maBV=*{maBV})}"
@@ -51,9 +54,6 @@
 								<span><i class="fa fa-calendar"></i> <a href="#"
 									th:text="${#dates.format(item.createdDate, 'dd-MM-yyyy')}"></a>
 								</span>
-							</div>
-							<div class="blog-desc">
-								<p class="text-truncate" th:text="*{noiDung}"></p>
 							</div>
 							<div class="blog-button">
 								<a class="hover-btn-new orange"
@@ -77,8 +77,7 @@
 						</a></li>
 						<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
 							<li class="page-item"><a class="page-link"
-								th:href="@{'/tin-tuc-3?pageIndex='+${index}}"
-								th:text="${index}"></a></li>
+								th:href="@{'/tin-tuc-3?pageIndex='+${index}}" th:text="${index}"></a></li>
 						</th:block>
 						<li class="page-item"><a class="page-link"
 							th:href="${currentPage == totalPages} ? '' : @{'/tin-tuc-3?pageIndex='+${currentPage+1}}"

@@ -40,6 +40,9 @@ public class User extends Base {
     
     @Transient
     private String ten;
+    
+    @Transient
+    private String anh;
 
     private String email;
 

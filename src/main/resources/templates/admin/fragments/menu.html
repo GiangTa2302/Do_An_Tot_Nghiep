@@ -17,7 +17,7 @@
 
 		<div class="menu-inner-shadow"></div>
 
-		<ul class="menu-inner py-1">
+		<ul class="menu-inner py-1" id="myDIV">
 			<!-- Trang chủ -->
 			<li class="menu-item active"><a th:href="@{/admin}"
 				class="menu-link"> <i
@@ -29,14 +29,14 @@
 			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
 				th:href="@{/admin/giao-vien}" class="menu-link"> <i
 					class="menu-icon tf-icons bx bx-group"></i>
-					<div data-i18n="Analytics">Quản lý Giáo viên</div>
+					<div data-i18n="Analytics">Quản lý giáo viên</div>
 			</a></li>
 
 			<!-- Học sinh -->
 			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
 				href="javascript:void(0);" class="menu-link menu-toggle"> <i
 					class="menu-icon tf-icons bx bx-data"></i>
-					<div data-i18n="Layouts">Quản lý Học sinh</div>
+					<div data-i18n="Layouts">Quản lý học sinh</div>
 			</a>
 
 				<ul class="menu-sub">
@@ -56,29 +56,29 @@
 
 			<!-- Môn học -->
 			<li class="menu-item"><a th:href="@{/admin/mon-hoc/}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
-					<div data-i18n="Analytics">Môn học</div>
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-notepad"></i>
+					<div data-i18n="Analytics">Quản lý môn học</div>
 			</a></li>
 
 			<!-- Điểm -->
 			<li sec:authorize="hasAuthority('TEACHER')" class="menu-item"><a
 				sec:authorize="isAuthenticated()"
 				th:href="@{/admin/diem(username=${#authentication.name})}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+				class="menu-link"> <i class="menu-icon tf-icons bx bx-edit-alt"></i>
 					<div data-i18n="Analytics">Nhập điểm</div>
 			</a></li>
 
 
 			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
 				th:href="@{/admin/diem/}" class="menu-link"> <i
-					class="menu-icon tf-icons bx bx-group"></i>
+					class="menu-icon tf-icons bx bx-edit-alt"></i>
 					<div data-i18n="Analytics">Nhập điểm</div>
 			</a></li>
 
 			<!-- Lớp -->
 			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
 				href="javascript:void(0);" class="menu-link menu-toggle"> <i
-					class="menu-icon tf-icons bx bx-data"></i>
+					class="menu-icon tf-icons bx bxs-component"></i>
 					<div data-i18n="Layouts">Quản lý lớp</div>
 			</a>
 				<ul class="menu-sub">
@@ -99,7 +99,7 @@
 			<li sec:authorize="hasAuthority('TEACHER')" class="menu-item"><a
 				sec:authorize="isAuthenticated()"
 				th:href="@{/admin/diem/quan-ly-lop(username=${#authentication.name})}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-group"></i>
+				class="menu-link"> <i class="menu-icon tf-icons bx bxs-component"></i>
 					<div data-i18n="Analytics">Quản lý lớp</div>
 			</a></li>
 
@@ -129,8 +129,9 @@
 
 			<li class="menu-header small text-uppercase"><span
 				class="menu-header-text">Cá nhân</span></li>
-			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a th:href="@{/admin/thong-bao}"
-				class="menu-link"> <i class="menu-icon tf-icons bx bx-bell"></i>
+			<li sec:authorize="hasAuthority('ADMIN')" class="menu-item"><a
+				th:href="@{/admin/thong-bao}" class="menu-link"> <i
+					class="menu-icon tf-icons bx bx-bell"></i>
 					<div data-i18n="Account Settings">
 						Thông báo <span
 							class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>

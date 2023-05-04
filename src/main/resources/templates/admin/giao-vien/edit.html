@@ -270,5 +270,15 @@
 	<script>
 		$('.select-lop').selectpicker();
 	</script>
+	
+	<script th:inline="javascript">
+		var header = document.getElementById("myDIV");
+		var btns = header.getElementsByClassName("menu-item");
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active",
+				"");
+		btns[1].className += " active";
+		
+	</script>
 </body>
 </html>

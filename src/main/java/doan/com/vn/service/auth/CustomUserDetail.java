@@ -72,4 +72,8 @@ public class CustomUserDetail implements UserDetails {
     public String getTen() {
         return user.getTen();
     }
+    
+    public String getAnh() {
+        return user.getAnh();
+    }
 }

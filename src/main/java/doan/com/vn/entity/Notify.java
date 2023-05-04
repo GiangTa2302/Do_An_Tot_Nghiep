@@ -23,7 +23,7 @@ public class Notify {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "thong_bao", columnDefinition = "NVARCHAR(1000)")
+    @Column(name = "thong_bao", columnDefinition = "NTEXT")
     private String thongBao;
 
     @Column(name = "thoi_gian")

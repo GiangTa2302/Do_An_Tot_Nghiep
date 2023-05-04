@@ -28,7 +28,7 @@ public class BinhLuan extends Base{
     @Column(name = "ma_bl")
     private Integer maBL;
     
-    @Column(name = "noi_dung", columnDefinition = "NVARCHAR(2000)")
+    @Column(name = "noi_dung", columnDefinition = "NTEXT")
     private String noiDung;
     
     @ManyToOne(fetch = FetchType.LAZY)

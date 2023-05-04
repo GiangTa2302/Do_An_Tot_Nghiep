@@ -17,4 +17,6 @@ public interface GiaoVienRepository extends JpaRepository<GiaoVien, String>{
     
 //    @Query("SELECT gv FROM GiaoVien gv JOIN gv.user u WHERE u.username = ?1")
 //    Optional<GiaoVien> findByUsername(String username);
+    
+    Long countByDeletedFalse();
 }

@@ -30,7 +30,7 @@ public class BaiViet extends Base {
     @Column(name = "tieu_de", columnDefinition = "NVARCHAR(1000)")
     private String tieuDe;
     
-    @Column(name = "noi_dung", columnDefinition = "NVARCHAR(4000)")
+    @Column(name = "noi_dung", columnDefinition = "NTEXT")
     private String noiDung;
     
     @Column(name = "trang_thai")

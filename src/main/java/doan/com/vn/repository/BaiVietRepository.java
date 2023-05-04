@@ -12,9 +12,11 @@ import doan.com.vn.entity.BaiViet;
 
 @Repository
 public interface BaiVietRepository extends JpaRepository<BaiViet, Integer> {
-    Page<BaiViet> findByTrangThaiTrue(Pageable pageable);
+    Page<BaiViet> findByTrangThaiTrueAndDeletedFalse(Pageable pageable);
 
     List<BaiViet> findByTrangThaiFalseAndDeletedFalse();
 
     Optional<BaiViet> findByMaBVAndTrangThaiTrue(Integer maBV);
+    
+    Long countByDeletedFalse();
 }

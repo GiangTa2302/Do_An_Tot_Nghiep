@@ -37,45 +37,42 @@ import doan.com.vn.repository.NotifyRepository;
 public class AdminController {
     @Autowired
     private DanTocRepository danTocRepository;
-    
+
     @Autowired
     private GiaoVienRepository giaoVienRepository;
-    
+
     @Autowired
     private NotifyRepository notifyRepository;
-    
+
     @ModelAttribute("danTocs")
     private List<DanToc> getAllDT() {
         return danTocRepository.findAll();
     }
-    
+
     public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
             + "/src/main/resources/static/ad/images";
-    
+
     @GetMapping("api/dan-toc")
     @ResponseBody
-    public List<DanToc> getAll(){
+    public List<DanToc> getAll() {
         return danTocRepository.findAll();
     }
-    
+
     @GetMapping("/ca-nhan")
-    public String caNhan(
-            @RequestParam String username,
-            Model model) {
+    public String caNhan(@RequestParam String username, Model model) {
         Optional<GiaoVien> gvOptional = giaoVienRepository.findById(username);
         GiaoVienModel gvModel = new GiaoVienModel();
-        if(gvOptional.isPresent()) {
+        if (gvOptional.isPresent()) {
             BeanUtils.copyProperties(gvOptional.get(), gvModel);
             gvModel.setMaDanToc(gvOptional.get().getDanToc().getMaDanToc());
         }
-        
+
         model.addAttribute("gvModel", gvModel);
         return "admin/tai-khoan/ca-nhan";
     }
-    
+
     @PostMapping("/ca-nhan")
-    public String edit(
-            @RequestParam("username") String username,
+    public String edit(@RequestParam("username") String username,
             @Valid @ModelAttribute("gvModel") GiaoVienModel gvModel,
             BindingResult result, RedirectAttributes redirectAttributes,
             @RequestParam("image") MultipartFile file, Model model)
@@ -83,7 +80,13 @@ public class AdminController {
         if (result.hasErrors()) {
             return "admin/giao-vien/edit";
         }
-        GiaoVien giaoVien = giaoVienRepository.findById(username).get();
+        Optional<GiaoVien> gvOptional = giaoVienRepository.findById(username);
+        GiaoVien giaoVien = null;
+        if (gvOptional.isPresent()) {
+            giaoVien = gvOptional.get();
+        } else {
+            giaoVien = new GiaoVien();
+        }
 
         BeanUtils.copyProperties(gvModel, giaoVien);
 
@@ -102,18 +105,18 @@ public class AdminController {
         giaoVienRepository.save(giaoVien);
         redirectAttributes.addFlashAttribute("msg",
                 "Cập nhật giáo viên thành công!");
-        
-        Notify notify = new Notify(username + " thay đổi thông tin cá nhân", new Date());
+
+        Notify notify = new Notify(username + " thay đổi thông tin cá nhân",
+                new Date());
         notifyRepository.save(notify);
 
-        return "redirect:/admin/ca-nhan?username="+username;
+        return "redirect:/admin/ca-nhan?username=" + username;
     }
-    
+
     @GetMapping("/thong-bao")
-    public String thongBao(
-            Model model) {
+    public String thongBao(Model model) {
         List<Notify> notifies = notifyRepository.findAll();
-        
+
         model.addAttribute("notifies", notifies);
         return "admin/thong-bao/thong-bao";
     }

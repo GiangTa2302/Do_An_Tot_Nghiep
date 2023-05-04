@@ -74,11 +74,12 @@
 								<div class="card mb-4">
 									<div class="card-body">
 										<h5 class="card-title" th:text="*{tieuDe}"></h5>
-										<p class="card-text" th:text="*{noiDung}"></p>
+										<p class="card-text" th:utext="*{noiDung}"></p>
 										<th:block th:if="*{trangThai==false}">
 											<a th:href="@{/admin/chi-tiet-bv/duyet/{maBV}(maBV=${maBV})}" class="card-link">Duyệt bài</a>
-											<a th:href="@{/admin/chi-tiet-bv/huy/{maBV}(maBV=${maBV})}" class="card-link">Hủy bỏ</a>
+											
 										</th:block>
+										<a th:href="@{/admin/chi-tiet-bv/huy/{maBV}(maBV=${maBV})}" class="card-link">Hủy bỏ</a>
 									</div>
 								</div>
 							</th:block>
@@ -126,5 +127,6 @@
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	
 </body>
 </html>

@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import doan.com.vn.dto.PasswordDTO;
 import doan.com.vn.entity.PasswordResetToken;
 import doan.com.vn.entity.User;
+import doan.com.vn.repository.BaiVietRepository;
+import doan.com.vn.repository.GiaoVienRepository;
+import doan.com.vn.repository.HocSinhRepository;
+import doan.com.vn.repository.LopRepository;
+import doan.com.vn.repository.MonHocRepository;
 import doan.com.vn.repository.PasswordTokenRepository;
 import doan.com.vn.repository.UserRepository;
 import doan.com.vn.service.EmailSenderService;
@@ -28,7 +33,22 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
-
+    
+    @Autowired
+    private GiaoVienRepository giaoVienRepository;
+    
+    @Autowired
+    private HocSinhRepository hocSinhRepository;
+    
+    @Autowired
+    private MonHocRepository monHocRepository;
+    
+    @Autowired
+    private BaiVietRepository baiVietRepository;
+    
+    @Autowired
+    private LopRepository lopRepository;
+    
     @Autowired
     private PasswordTokenRepository passwordTokenRepository;
 
@@ -37,6 +57,12 @@ public class AuthController {
 
     @GetMapping("/admin")
     public String adminPage(Model model) {
+        
+        model.addAttribute("slGiaoVien", giaoVienRepository.countByDeletedFalse());
+        model.addAttribute("slHocSinh", hocSinhRepository.countByDeletedFalse());
+        model.addAttribute("slLop", lopRepository.countByDeletedFalse());
+        model.addAttribute("slMon", monHocRepository.countByDeletedFalse());
+        model.addAttribute("slBaiViet", baiVietRepository.countByDeletedFalse());
         return "admin/index";
     }
 

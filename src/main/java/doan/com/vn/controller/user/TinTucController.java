@@ -62,7 +62,7 @@ public class TinTucController {
             Model model
             ) {
         Pageable pageable = PageRequest.of(pageIndex - 1, 10);
-        Page<BaiViet> bvPage = baiVietRepository.findByTrangThaiTrue(pageable);
+        Page<BaiViet> bvPage = baiVietRepository.findByTrangThaiTrueAndDeletedFalse(pageable);
         List<BaiViet> baiViets = bvPage.getContent();
         List<BaiVietModel> bvModels = new ArrayList<BaiVietModel>();
         BaiVietModel bvModel = null;

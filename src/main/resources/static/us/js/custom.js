@@ -106,11 +106,15 @@
 	/* ==============================================
 	 Contact -->
 	 =============================================== */
-	
+
 
 })(jQuery);
 
 $(document).ready(function() {
 	var intials = $('#hodem').val().charAt(0) + $('#ten').val().charAt(0);
 	$('#profileImage').text(intials);
+
+	
 });
+
+

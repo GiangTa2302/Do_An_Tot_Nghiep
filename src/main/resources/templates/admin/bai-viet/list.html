@@ -18,8 +18,7 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet"
-	th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
 
 <!-- Core CSS -->
 <link rel="stylesheet" th:href="@{/ad/assets/vendor/css/core.css}"
@@ -70,22 +69,23 @@
 
 						<!-- Examples -->
 						<div class="row mb-5">
-							<div class="col-md-6 col-lg-4 mb-3">
-								<th:block th:each="bvFalse : ${baiVietsFalse}"
-									th:object="${bvFalse}">
+
+							<th:block th:each="bvFalse : ${baiVietsFalse}"
+								th:object="${bvFalse}">
+								<div class="col-md-6 col-lg-4 mb-3">
 									<div class="card h-100">
 										<img class="card-img-top"
 											th:src="@{/ad/assets/img/elements/2.jpg}"
 											alt="Card image cap" />
 										<div class="card-body">
 											<h5 class="card-title" th:text="*{tieuDe}"></h5>
-											<p class="card-text text-truncate" th:text="*{noiDung}"></p>
 											<a th:href="@{/admin/chi-tiet-bv/{maBV}(maBV=*{maBV})}"
 												class="btn btn-outline-primary">Chi tiết</a>
 										</div>
 									</div>
-								</th:block>
-							</div>
+								</div>
+							</th:block>
+
 							<th:block th:if="${baiVietsFalse.size == 0}">
 								<div class="text-center">Không có bài viết nào!!</div>
 							</th:block>
@@ -103,13 +103,11 @@
 										<div class="row g-0">
 											<div class="col-md-4">
 												<img class="card-img card-img-left"
-													th:src="@{/ad/assets/img/elements/12.jpg}"
-													alt="Card image" />
+													th:src="@{/ad/assets/img/elements/12.jpg}" alt="Card image" />
 											</div>
 											<div class="col-md-8">
 												<div class="card-body">
 													<h5 class="card-title" th:text="*{tieuDe}"></h5>
-													<p class="card-text text-truncate" th:text="*{noiDung}"></p>
 													<p class="card-text d-flex justify-content-between">
 														<small class="text-muted"
 															th:text="${#dates.format(bvTrue.createdDate, 'dd-MM-yyyy')}"></small>
@@ -167,5 +165,14 @@
 
 	<!-- Place this tag in your head or just before your close body tag. -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
+	<script th:inline="javascript">
+		var header = document.getElementById("myDIV");
+		var btns = header.getElementsByClassName("menu-item");
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active",
+				"");
+		btns[15].className += " active";
+		
+	</script>
 </body>
 </html>

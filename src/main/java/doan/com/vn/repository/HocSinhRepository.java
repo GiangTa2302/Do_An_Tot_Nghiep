@@ -19,4 +19,6 @@ public interface HocSinhRepository extends JpaRepository<HocSinh, String>{
     List<HocSinh> findAllStudentByClass(String tenLop);
     
     List<HocSinh> findByDeletedFalse();
+    
+    Long countByDeletedFalse();
 }

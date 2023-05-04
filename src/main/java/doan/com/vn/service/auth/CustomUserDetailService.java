@@ -45,9 +45,11 @@ public class CustomUserDetailService implements UserDetailsService {
         if (hsOptional.isPresent()) {
             userLogged.setHodem(hsOptional.get().getHodem());
             userLogged.setTen(hsOptional.get().getTen());
+            userLogged.setAnh(hsOptional.get().getAnhHS());
         } else if (gvOptional.isPresent()) {
             userLogged.setHodem(gvOptional.get().getHodem());
             userLogged.setTen(gvOptional.get().getTen());
+            userLogged.setAnh(gvOptional.get().getAnhGV());
         }
         CustomUserDetail userDetail = new CustomUserDetail(userLogged);
         return userDetail;
