@@ -70,7 +70,7 @@
 											class="fw-semibold d-block mb-1 text-white"><span
 											th:text="${slGiaoVien}"></span> Giáo Viên</span>
 									</div>
-									<a th:href="@{/admin/giao-vien}" class="btn text-primary">Xem
+									<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/giao-vien}" class="btn text-primary">Xem
 										thêm</a>
 								</div>
 							</div>
@@ -81,7 +81,7 @@
 											class="fw-semibold d-block mb-1 text-white"><span
 											th:text="${slHocSinh}"></span> Học Sinh</span>
 									</div>
-									<a th:href="@{/admin/hoc-sinh?khoi=10}"
+									<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/hoc-sinh?khoi=10}"
 										class="btn text-primary">Xem thêm</a>
 								</div>
 							</div>
@@ -92,7 +92,7 @@
 											class="fw-semibold d-block mb-1 text-white"><span
 											th:text="${slMon}"></span> Môn học</span>
 									</div>
-									<a th:href="@{/admin/mon-hoc/}" class="btn text-primary">Xem
+									<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/mon-hoc/}" class="btn text-primary">Xem
 										thêm</a>
 								</div>
 							</div>
@@ -103,7 +103,7 @@
 											class="fw-semibold d-block mb-1 text-white"><span
 											th:text="${slLop}"></span> Lớp</span>
 									</div>
-									<a th:href="@{/admin/lop/10}" class="btn text-primary">Xem
+									<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/lop/10}" class="btn text-primary">Xem
 										thêm</a>
 								</div>
 							</div>
@@ -114,7 +114,7 @@
 											class="fw-semibold d-block mb-1 text-white"><span
 											th:text="${slBaiViet}"></span> Bài viết</span>
 									</div>
-									<a th:href="@{/admin/bai-viet}" class="btn text-primary">Xem
+									<a sec:authorize="hasAuthority('ADMIN')" th:href="@{/admin/bai-viet}" class="btn text-primary">Xem
 										thêm</a>
 								</div>
 							</div>

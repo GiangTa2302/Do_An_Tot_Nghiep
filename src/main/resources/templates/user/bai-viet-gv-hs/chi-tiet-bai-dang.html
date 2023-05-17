@@ -64,7 +64,7 @@
 						<div th:if="${user != null}" class="blog-author">
 							<div class="author-bio">
 								<h3 class="author_name">
-									<a href="#" th:text="${user.username}"></a>
+									<a href="#" th:text="${#authentication.principal.hodem} + ' ' + ${#authentication.principal.ten}"></a>
 								</h3>
 								<h5>
 									<th:block th:each="role : ${user.roles}">
@@ -74,7 +74,7 @@
 								</h5>
 							</div>
 							<div class="author-desc">
-								<img src="/us/images/author.jpg" alt="about author">
+								<img th:src="@{/ad/images/gv4.png}" alt="about author">
 							</div>
 						</div>
 

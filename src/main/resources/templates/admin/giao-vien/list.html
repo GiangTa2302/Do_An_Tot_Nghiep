@@ -18,8 +18,7 @@
 	rel="stylesheet" />
 
 <!-- Icons. Uncomment required icon fonts -->
-<link rel="stylesheet"
-	th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
+<link rel="stylesheet" th:href="@{/ad/assets/vendor/fonts/boxicons.css}" />
 
 <!-- Core CSS -->
 <link rel="stylesheet" th:href="@{/ad/assets/vendor/css/core.css}"
@@ -74,6 +73,12 @@
 							<!-- Button trigger modal -->
 							<form th:action="@{/admin/giao-vien/add}" method="get">
 								<button type="submit" class="btn btn-info">Thêm mới</button>
+							</form>
+
+							<form th:action="@{/admin/giao-vien/upload}" method="post" enctype="multipart/form-data">
+								<input type="file" class="form-control" th:name="file"
+									accept=".xlsx, .xls, .csv" />
+								<button type="submit" class="btn btn-info">Import</button>
 							</form>
 						</div>
 						<!-- /Thêm mới -->
@@ -151,7 +156,9 @@
 											aria-hidden="true">&laquo;</span>
 									</a></li>
 									<th:block th:each="index : ${#numbers.sequence(1,totalPages)}">
-										<li class="page-item"><a class="page-link" th:href="@{'/admin/giao-vien?pageIndex='+${index}}" th:text="${index}"></a></li>
+										<li class="page-item"><a class="page-link"
+											th:href="@{'/admin/giao-vien?pageIndex='+${index}}"
+											th:text="${index}"></a></li>
 									</th:block>
 									<li class="page-item"><a class="page-link"
 										th:href="${currentPage == totalPages} ? '' : @{'/admin/giao-vien?pageIndex='+${currentPage+1}}"
@@ -206,10 +213,8 @@
 		var header = document.getElementById("myDIV");
 		var btns = header.getElementsByClassName("menu-item");
 		var current = document.getElementsByClassName("active");
-		current[0].className = current[0].className.replace(" active",
-				"");
+		current[0].className = current[0].className.replace(" active", "");
 		btns[1].className += " active";
-		
 	</script>
 </body>
 </html>

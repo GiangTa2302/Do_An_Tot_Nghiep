@@ -20,7 +20,7 @@ public class Person extends Base {
     @Column(name = "ho_dem", columnDefinition = "NVARCHAR(200)")
     private String hodem;
     
-    @Column(length = 100)
+    @Column(length = 100, columnDefinition = "NVARCHAR(200)")
     private String ten;
     
     @Column(name = "ngay_sinh")

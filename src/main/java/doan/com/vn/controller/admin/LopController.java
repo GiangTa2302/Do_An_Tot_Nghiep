@@ -1,5 +1,6 @@
 package doan.com.vn.controller.admin;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,7 +47,7 @@ public class LopController {
     public String list(@PathVariable int khoi,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
             Model model) {
-        Pageable pageable = PageRequest.of(pageIndex - 1, 10);
+        Pageable pageable = PageRequest.of(pageIndex - 1, 5, Sort.by(Sort.Direction.ASC, "createdDate"));
         Page<Lop> lopPage = lopRepository.findByTenKhoiAndDeletedFalse(khoi,
                 pageable);
         List<Lop> lops = lopPage.getContent();
@@ -81,6 +83,7 @@ public class LopController {
             lop.setGiaoVien(giaoVien.get());
         }
         lop.setSiSo(0);
+        lop.setCreatedDate(new Date());
         lopRepository.save(lop);
 
         redirectAttributes.addFlashAttribute("msg", "Thêm lớp thành công!");

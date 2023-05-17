@@ -43,6 +43,7 @@ import doan.com.vn.repository.LopRepository;
 import doan.com.vn.repository.MonHocRepository;
 import doan.com.vn.repository.RoleRepository;
 import doan.com.vn.repository.UserRepository;
+import doan.com.vn.utils.ImportExcel;
 import doan.com.vn.utils.RoleName;
 
 @Controller
@@ -62,7 +63,7 @@ public class GiaoVienController {
 
     @Autowired
     private RoleRepository roleRepository;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -111,6 +112,42 @@ public class GiaoVienController {
         return "admin/giao-vien/add";
     }
 
+    @PostMapping("/upload")
+    public String addByFile(
+            @RequestParam("file") MultipartFile file,
+            RedirectAttributes redirectAttributes) {
+        String msg = "";
+
+        try {
+            List<GiaoVienModel> giaoVienModels = ImportExcel
+                    .excelToTeacher(file.getInputStream());
+            GiaoVien gv = null;
+            List<GiaoVien> giaoViens = new ArrayList<GiaoVien>();
+
+            for (GiaoVienModel gvModel : giaoVienModels) {
+                gv = new GiaoVien();
+                BeanUtils.copyProperties(gvModel, gv);
+                DanToc danToc = danTocRepository
+                        .findById(gvModel.getMaDanToc()).get();
+                gv.setDanToc(danToc);
+
+                giaoViens.add(gv);
+            }
+
+            giaoVienRepository.saveAll(giaoViens);
+            msg = "Uploaded the file successfully: "
+                    + file.getOriginalFilename();
+            
+            
+        } catch (Exception e) {
+            msg = "Could not upload the file: " + file.getOriginalFilename()
+                    + "!";
+        }
+        System.gc();
+        redirectAttributes.addFlashAttribute("msg", msg);
+        return "redirect:/admin/giao-vien";
+    }
+
     @PostMapping("/add")
     public String addGV(@Valid @ModelAttribute("gvModel") GiaoVienModel gvModel,
             BindingResult result, RedirectAttributes redirectAttributes,
@@ -153,17 +190,19 @@ public class GiaoVienController {
 
         giaoVienRepository.save(giaoVien);
         giaoVienRepository.flush();
-        
-        String encodePass = passwordEncoder.encode(giaoVien.getMaGV() + "12345@");
+
+        String encodePass = passwordEncoder
+                .encode(giaoVien.getMaGV() + "12345@");
 
         User user = new User(giaoVien.getMaGV(), encodePass,
                 giaoVien.getMaGV() + "@edu.com");
-        Optional<Role> roleOptional = roleRepository.findByRoleName(RoleName.TEACHER);
+        Optional<Role> roleOptional = roleRepository
+                .findByRoleName(RoleName.TEACHER);
         Role role = null;
         if (roleOptional.isPresent()) {
             role = roleOptional.get();
         } else {
-            role = new Role(RoleName.TEACHER);            
+            role = new Role(RoleName.TEACHER);
         }
         user.setRoles(Set.of(role));
         userRepository.save(user);

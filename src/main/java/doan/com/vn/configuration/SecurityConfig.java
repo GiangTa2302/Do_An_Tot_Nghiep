@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .antMatchers("/", "/lien-he", "/tin-tuc-1",
                         "/tin-tuc-2", "/tin-tuc-3", "/chi-tiet-tuyen-sinh",
                         "/resetPassword", "/changePassword")
-                .permitAll().antMatchers("/ad/**", "/us/**", "images/**")
+                .permitAll().antMatchers("/ad/**", "/us/**")
                 .permitAll().antMatchers("/admin/**")
                 .hasAnyAuthority(RoleName.ADMIN.name(), RoleName.TEACHER.name())
                 .antMatchers("/user/**", "/thoi-khoa-bieu")

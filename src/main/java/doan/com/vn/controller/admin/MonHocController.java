@@ -1,5 +1,6 @@
 package doan.com.vn.controller.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,7 +37,7 @@ public class MonHocController {
             @PathVariable(value = "tenLop", required = false) String tenLop,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
             Model model) {
-        Pageable pageable = PageRequest.of(pageIndex - 1, 10);
+        Pageable pageable = PageRequest.of(pageIndex - 1, 5, Sort.by(Sort.Direction.ASC, "createdDate"));
         Page<MonHoc> mhPage = monHocRepository.findByDeletedFalse(pageable);
         List<MonHoc> monHocs = mhPage.getContent();
         
@@ -68,6 +70,7 @@ public class MonHocController {
 
         MonHoc monHoc = new MonHoc();
         BeanUtils.copyProperties(mhModel, monHoc);
+        monHoc.setCreatedDate(new Date());
         monHocRepository.save(monHoc);
 
         redirectAttributes.addFlashAttribute("msg", "Thêm môn học thành công.");

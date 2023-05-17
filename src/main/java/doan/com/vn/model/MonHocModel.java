@@ -11,7 +11,7 @@ public class MonHocModel {
     @NotEmpty(message = "Tên môn không được để trống")
     private String tenMon;
     
-    @Positive(message = "Số tiết lý thuyết > 0")
+    @PositiveOrZero(message = "Số tiết lý thuyết > 0")
     private Integer soTietLT;
     
     @PositiveOrZero(message = "Số tiết thực hành >= 0")

@@ -1,5 +1,8 @@
 package doan.com.vn;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,7 +11,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import doan.com.vn.entity.Role;
+import doan.com.vn.entity.User;
 import doan.com.vn.repository.UserRepository;
+import doan.com.vn.utils.RoleName;
 
 @SpringBootApplication
 public class DoAnApplication {

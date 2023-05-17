@@ -1,5 +1,9 @@
 package doan.com.vn.controller.admin;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import doan.com.vn.entity.DanToc;
@@ -44,6 +49,8 @@ import doan.com.vn.utils.RoleName;
 @Controller
 @RequestMapping("/admin/hoc-sinh")
 public class HocSinhController {
+    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir")
+            + "/src/main/resources/static/ad/images";
 
     @Autowired
     private HocSinhRepository hocSinhRepository;
@@ -83,7 +90,7 @@ public class HocSinhController {
     public String list(@RequestParam("khoi") Integer khoi,
             @RequestParam(value = "pageIndex", required = false, defaultValue = "1") int pageIndex,
             Model model) {
-        Pageable pageable = PageRequest.of(pageIndex - 1, 10);
+        Pageable pageable = PageRequest.of(pageIndex - 1, 5, Sort.by(Sort.Direction.ASC, "createdDate"));
         Page<Lop> lopPage = lopRepository.findByTenKhoiAndDeletedFalse(khoi,
                 pageable);
         List<Lop> lops = lopPage.getContent();
@@ -125,7 +132,8 @@ public class HocSinhController {
     @PostMapping("/add")
     public String addHS(@Valid @ModelAttribute("hsModel") HocSinhModel hsModel,
             BindingResult result, RedirectAttributes redirectAttributes,
-            Model model) {
+            @RequestParam(value = "image", required = false, defaultValue = "") MultipartFile file,
+            Model model) throws IOException {
         if (result.hasErrors()) {
             return "admin/hoc-sinh/add";
         }
@@ -143,6 +151,16 @@ public class HocSinhController {
         hocSinh.setPhuHuynh(phuHuynh);
         hocSinh.setTheBHYT(theBHYT);
         hocSinh.setLop(lopRepository.findById(hsModel.getTenLop()).get());
+        
+        if (!file.isEmpty()) {
+            StringBuilder fileNames = new StringBuilder();
+            Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY,
+                    file.getOriginalFilename());
+            fileNames.append(file.getOriginalFilename());
+            Files.write(fileNameAndPath, file.getBytes());
+            hocSinh.setAnhHS(fileNames.toString());
+        }
+        
         hocSinhRepository.save(hocSinh);        
         hocSinhRepository.flush();
         
